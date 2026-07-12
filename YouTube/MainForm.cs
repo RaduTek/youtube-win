@@ -174,7 +174,11 @@ namespace YouTube
             if (clear) videoResultsBox.Controls.Clear();
 
             if (entries.Count == 0)
+            {
                 SetResultsHintText("No results.");
+                videoResultsBox.ResumeLayout();
+                return;
+            }
 
             foreach (var entry in entries)
             {
