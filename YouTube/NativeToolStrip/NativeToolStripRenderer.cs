@@ -211,6 +211,9 @@ namespace NativeToolStrip {
         }
 
         protected override void OnRenderToolStripBorder(ToolStripRenderEventArgs e) {
+            if (Theme == NativeToolStripTheme.Transparent && !e.ToolStrip.IsDropDown)
+                return;
+
             if (EnsureRenderer()) {
                 renderer.SetParameters(MenuClass, (int)MenuParts.PopupBorders, 0);
                 if (e.ToolStrip.IsDropDown) {
