@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed
+    xmlns="http://www.w3.org/2005/Atom"
+    xmlns:openSearch="http://a9.com/-/spec/opensearchrss/1.0/"
+    xmlns:media="http://search.yahoo.com/mrss/"
+    xmlns:gd="http://schemas.google.com/g/2005"
+    xmlns:yt="http://gdata.youtube.com/schemas/2007">
+    <id>http://gdata.youtube.com/feeds/api/videos</id>
+    <category scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#video'/>
+    <title type='text'>YouTube Videos</title>
+    <logo>http://www.youtube.com/img/pic_youtubelogo_123x63.gif</logo>
+    <link rel='alternate' type='text/html' href='http://www.youtube.com'/>
+    <link rel='http://schemas.google.com/g/2005#feed' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/videos'/>
+    <link rel='http://schemas.google.com/g/2005#batch' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/videos/batch'/>
+    <author>
+      <name>YouTube/yt2009</name>
+      <uri>http://www.youtube.com/</uri>
+    </author>
+    <generator version='2.0' uri='http://gdata.youtube.com/'>YouTube data API</generator>
+    <openSearch:totalResults>16786</openSearch:totalResults>
+    <openSearch:startIndex>1</openSearch:startIndex>
+    <openSearch:itemsPerPage>20</openSearch:itemsPerPage>
+    <link rel='next' type='application/atom+xml' href='http://undefined:8086/feeds/api/videos?q=vwestlife&amp;start-index=20'/>
+
+        <entry>
+            <id>http://undefined:8086/feeds/api/videos/eUaAQtcwJW4?</id>
+            <youTubeId id='eUaAQtcwJW4'>eUaAQtcwJW4</youTubeId>
+            <published>2026-05-07T14:10:06.000Z</published>
+            <updated>2026-05-07T14:10:06.000Z</updated>
+            <category scheme="http://gdata.youtube.com/schemas/2007/categories.cat" label="-" term="-">-</category>
+            <title type='text'>New* Memorex MR2300 cassette player - Definitely not live</title>
+            <content type='text'>*New old stock Memorex MR2300 AM/FM stereo radio cassette player from 1994, never opened or used. Will it give you "live" quality at a bargain price, or was it just a ploy to put a well-known brand on a cheap Walkman knockoff? And how does it compare to the Maxell cassette player sold today?
+
+Time flow:
+0:00 Introduction
+1:51 Overview
+4:37 Radio tuner
+5:51 Cassette playback
+8:19 Replacing the belt
+9:10 Measurements
+10:59 Shake test
+11:38 Conclusion
+
+#cassette #Walkman #RetroTech</content>
+            <link rel="http://gdata.youtube.com/schemas/2007#video.related" href="http://undefined:8086/feeds/api/videos/eUaAQtcwJW4/related?"/>
+            <author>
+                <name>vwestlife</name>
+                <uri>http://undefined:8086/feeds/api/users/vwestlife</uri>
+                <yt:userId>UC1ydE9gDHTdvbNVIgEKIKzw</yt:userId>
+            </author>
+            <gd:comments>
+                <gd:feedLink href='http://undefined:8086/feeds/api/videos/eUaAQtcwJW4/comments' countHint='530'/>
+            </gd:comments>
+            <media:group>
+                <media:title>New* Memorex MR2300 cassette player - Definitely not live</media:title>
+                <media:category label='-' scheme='http://gdata.youtube.com/schemas/2007/categories.cat'>-</media:category>
+                <media:content url='http://undefined:8086/channel_fh264_getvideo?v=eUaAQtcwJW4' type='video/3gpp' medium='video' expression='full' duration='999' yt:format='3'/>
+                <media:description type='plain'>*New old stock Memorex MR2300 AM/FM stereo radio cassette player from 1994, never opened or used. Will it give you "live" quality at a bargain price, or was it just a ploy to put a well-known brand on a cheap Walkman knockoff? And how does it compare to the Maxell cassette player sold today?
+
+Time flow:
+0:00 Introduction
+1:51 Overview
+4:37 Radio tuner
+5:51 Cassette playback
+8:19 Replacing the belt
+9:10 Measurements
+10:59 Shake test
+11:38 Conclusion
+
+#cassette #Walkman #RetroTech</media:description>
+                <media:keywords>-</media:keywords>
+                <media:player url='http://www.youtube.com/watch?v=eUaAQtcwJW4'/>
+                <media:thumbnail yt:name='hqdefault' url='http://i.ytimg.com/vi/eUaAQtcwJW4/hqdefault.jpg' height='240' width='320' time='00:00:00'/>
+                <media:thumbnail yt:name='poster' url='http://i.ytimg.com/vi/eUaAQtcwJW4/0.jpg' height='240' width='320' time='00:00:00'/>
+                <media:thumbnail yt:name='default' url='http://i.ytimg.com/vi/eUaAQtcwJW4/0.jpg' height='240' width='320' time='00:00:00'/>
+                <yt:duration seconds='770'/>
+                <yt:uploaded>2026-05-07T14:10:06.000Z</yt:uploaded>
+                <yt:uploaderId>UC1ydE9gDHTdvbNVIgEKIKzw</yt:uploaderId>
+                <yt:videoid id='eUaAQtcwJW4'>eUaAQtcwJW4</yt:videoid>
+                <media:credit role='uploader' yt:display='vwestlife' name='vwestlife'>vwestlife</media:credit>
+            </media:group>
+            <yt:statistics favoriteCount="102" viewCount="15446"/>
+            <yt:rating numLikes="1029" numDislikes="7"/>
+        </entry>
+</feed>
