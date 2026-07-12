@@ -37,7 +37,8 @@
             this.viewsLabel = new System.Windows.Forms.Label();
             this.channelLink = new System.Windows.Forms.LinkLabel();
             this.thumbnailBox = new System.Windows.Forms.Panel();
-            this.thumbnail = new System.Windows.Forms.PictureBox();
+            this.thumbnail = new System.Windows.Forms.Panel();
+            this.queueButton = new System.Windows.Forms.PictureBox();
             this.ratingStar5 = new System.Windows.Forms.PictureBox();
             this.ratingStar4 = new System.Windows.Forms.PictureBox();
             this.ratingStar3 = new System.Windows.Forms.PictureBox();
@@ -45,11 +46,13 @@
             this.ratingStar1 = new System.Windows.Forms.PictureBox();
             this.contextMenu = new NativeToolStrip.NativeContextMenuStrip();
             this.watchNowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.addToQueueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.downloadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openInBrowserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.thumbnailBox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.thumbnail)).BeginInit();
+            this.thumbnail.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.queueButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ratingStar5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ratingStar4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ratingStar3)).BeginInit();
@@ -63,13 +66,16 @@
             this.durationLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.durationLabel.AutoSize = true;
             this.durationLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
+            this.durationLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.75F);
             this.durationLabel.ForeColor = System.Drawing.Color.White;
-            this.durationLabel.Location = new System.Drawing.Point(93, 55);
+            this.durationLabel.Location = new System.Drawing.Point(98, 55);
             this.durationLabel.Name = "durationLabel";
-            this.durationLabel.Size = new System.Drawing.Size(28, 13);
+            this.durationLabel.Padding = new System.Windows.Forms.Padding(0, 1, 0, 1);
+            this.durationLabel.Size = new System.Drawing.Size(28, 15);
             this.durationLabel.TabIndex = 2;
             this.durationLabel.Text = "0:00";
             this.durationLabel.TextAlign = System.Drawing.ContentAlignment.BottomRight;
+            this.durationLabel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.thumbnail_MouseClick);
             // 
             // descriptionLabel
             // 
@@ -143,7 +149,6 @@
             // 
             this.thumbnailBox.BackColor = System.Drawing.Color.White;
             this.thumbnailBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.thumbnailBox.Controls.Add(this.durationLabel);
             this.thumbnailBox.Controls.Add(this.thumbnail);
             this.thumbnailBox.Location = new System.Drawing.Point(0, 0);
             this.thumbnailBox.Name = "thumbnailBox";
@@ -153,17 +158,31 @@
             // 
             // thumbnail
             // 
+            this.thumbnail.BackColor = System.Drawing.Color.Transparent;
+            this.thumbnail.BackgroundImage = global::YouTube.Properties.Resources.nothumb;
+            this.thumbnail.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.thumbnail.Controls.Add(this.queueButton);
+            this.thumbnail.Controls.Add(this.durationLabel);
             this.thumbnail.Cursor = System.Windows.Forms.Cursors.Hand;
             this.thumbnail.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.thumbnail.Image = global::YouTube.Properties.Resources.nothumb;
             this.thumbnail.Location = new System.Drawing.Point(1, 1);
             this.thumbnail.Name = "thumbnail";
             this.thumbnail.Size = new System.Drawing.Size(126, 70);
-            this.thumbnail.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.thumbnail.TabIndex = 0;
-            this.thumbnail.TabStop = false;
-            this.toolTip.SetToolTip(this.thumbnail, "Watch now");
+            this.thumbnail.TabIndex = 3;
             this.thumbnail.MouseClick += new System.Windows.Forms.MouseEventHandler(this.thumbnail_MouseClick);
+            // 
+            // queueButton
+            // 
+            this.queueButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.queueButton.Image = global::YouTube.Properties.Resources.AddToList;
+            this.queueButton.Location = new System.Drawing.Point(1, 53);
+            this.queueButton.Name = "queueButton";
+            this.queueButton.Size = new System.Drawing.Size(16, 16);
+            this.queueButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.queueButton.TabIndex = 3;
+            this.queueButton.TabStop = false;
+            this.toolTip.SetToolTip(this.queueButton, "Add to Queue");
+            this.queueButton.Click += new System.EventHandler(this.queueButton_Click);
             // 
             // ratingStar5
             // 
@@ -224,21 +243,32 @@
             // 
             this.contextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.watchNowToolStripMenuItem,
+            this.addToQueueToolStripMenuItem,
             this.downloadToolStripMenuItem,
             this.openInBrowserToolStripMenuItem});
             this.contextMenu.Name = "contextMenu";
-            this.contextMenu.Size = new System.Drawing.Size(162, 70);
+            this.contextMenu.Size = new System.Drawing.Size(162, 92);
             this.contextMenu.Theme = NativeToolStrip.NativeToolStripTheme.Toolbar;
             // 
             // watchNowToolStripMenuItem
             // 
+            this.watchNowToolStripMenuItem.Image = global::YouTube.Properties.Resources.control_play_blue;
             this.watchNowToolStripMenuItem.Name = "watchNowToolStripMenuItem";
             this.watchNowToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
             this.watchNowToolStripMenuItem.Text = "&Watch now";
             this.watchNowToolStripMenuItem.Click += new System.EventHandler(this.watchNowToolStripMenuItem_Click);
             // 
+            // addToQueueToolStripMenuItem
+            // 
+            this.addToQueueToolStripMenuItem.Image = global::YouTube.Properties.Resources.AddToList;
+            this.addToQueueToolStripMenuItem.Name = "addToQueueToolStripMenuItem";
+            this.addToQueueToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
+            this.addToQueueToolStripMenuItem.Text = "&Add to queue";
+            this.addToQueueToolStripMenuItem.Click += new System.EventHandler(this.addToQueueToolStripMenuItem_Click);
+            // 
             // downloadToolStripMenuItem
             // 
+            this.downloadToolStripMenuItem.Image = global::YouTube.Properties.Resources.Download;
             this.downloadToolStripMenuItem.Name = "downloadToolStripMenuItem";
             this.downloadToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
             this.downloadToolStripMenuItem.Text = "&Download";
@@ -246,6 +276,7 @@
             // 
             // openInBrowserToolStripMenuItem
             // 
+            this.openInBrowserToolStripMenuItem.Image = global::YouTube.Properties.Resources.link;
             this.openInBrowserToolStripMenuItem.Name = "openInBrowserToolStripMenuItem";
             this.openInBrowserToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
             this.openInBrowserToolStripMenuItem.Text = "&Open in browser";
@@ -277,8 +308,9 @@
             this.Load += new System.EventHandler(this.VideoListEntry_Load);
             this.ParentChanged += new System.EventHandler(this.VideoListEntry_ParentChanged);
             this.thumbnailBox.ResumeLayout(false);
-            this.thumbnailBox.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.thumbnail)).EndInit();
+            this.thumbnail.ResumeLayout(false);
+            this.thumbnail.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.queueButton)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ratingStar5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ratingStar4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ratingStar3)).EndInit();
@@ -304,11 +336,13 @@
         private System.Windows.Forms.Label viewsLabel;
         private System.Windows.Forms.LinkLabel channelLink;
         private System.Windows.Forms.Panel thumbnailBox;
-        private System.Windows.Forms.PictureBox thumbnail;
         private NativeToolStrip.NativeContextMenuStrip contextMenu;
         private System.Windows.Forms.ToolStripMenuItem watchNowToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem downloadToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openInBrowserToolStripMenuItem;
         private System.Windows.Forms.ToolTip toolTip;
+        private System.Windows.Forms.Panel thumbnail;
+        private System.Windows.Forms.PictureBox queueButton;
+        private System.Windows.Forms.ToolStripMenuItem addToQueueToolStripMenuItem;
     }
 }

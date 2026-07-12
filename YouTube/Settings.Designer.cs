@@ -12,7 +12,7 @@ namespace YouTube {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "10.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.14.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -32,18 +32,6 @@ namespace YouTube {
             }
             set {
                 this["InstanceBaseUrl"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string VideoPlayer {
-            get {
-                return ((string)(this["VideoPlayer"]));
-            }
-            set {
-                this["VideoPlayer"] = value;
             }
         }
         
@@ -80,6 +68,54 @@ namespace YouTube {
             }
             set {
                 this["ShowThumbs"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool PlayerCustomEnabled {
+            get {
+                return ((bool)(this["PlayerCustomEnabled"]));
+            }
+            set {
+                this["PlayerCustomEnabled"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string PlayerCustomPath {
+            get {
+                return ((string)(this["PlayerCustomPath"]));
+            }
+            set {
+                this["PlayerCustomPath"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool PlayerWmpFullscreen {
+            get {
+                return ((bool)(this["PlayerWmpFullscreen"]));
+            }
+            set {
+                this["PlayerWmpFullscreen"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool DownloadBeforePlay {
+            get {
+                return ((bool)(this["DownloadBeforePlay"]));
+            }
+            set {
+                this["DownloadBeforePlay"] = value;
             }
         }
     }

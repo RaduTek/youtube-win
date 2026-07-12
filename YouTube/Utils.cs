@@ -1,25 +1,36 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
-using System.Text;
 
 namespace YouTube
 {
     static class Utils
     {
+        public static string GetMyVideosFolder()
+        {
+            bool isWinXP = Environment.OSVersion.Platform == PlatformID.Win32NT &&
+                                 Environment.OSVersion.Version.Major < 6;
+
+            if (isWinXP)
+            {
+                return Path.Combine(
+                    Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
+                    "My Videos");
+            }
+            else
+            {
+                return Path.Combine(
+                    Environment.GetEnvironmentVariable("USERPROFILE"),
+                    "Videos");
+            }
+        }
+
         public static void InitalSettings()
         {
-            if (Settings.Default.VideoPlayer == "")
-                Settings.Default.VideoPlayer = 
-                    Path.Combine(
-                        Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), 
-                        "Windows Media Player\\wmplayer.exe"
-                    );
-
             if (Settings.Default.DownloadFolder == "")
                 Settings.Default.DownloadFolder =
                     Path.Combine(
-                        Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
+                        GetMyVideosFolder(),
                         "YouTube Downloads"
                     );
 
@@ -81,5 +92,61 @@ namespace YouTube
             return years + " year" + (years == 1 ? "" : "s") + " ago";
         }
 
+        public static string FormatFileName(string name)
+        {
+            string invalidChars = new string(Path.GetInvalidFileNameChars()) + new string(Path.GetInvalidPathChars());
+            string sanitizedName = name;
+            foreach (char c in invalidChars)
+            {
+                sanitizedName = sanitizedName.Replace(c.ToString(), "");
+            }
+            return sanitizedName;
+        }
+
+        public static string GetVideoFileName(string videoId, string videoTitle)
+        {
+            return FormatFileName(videoTitle) + " [" + videoId + "].mp4";
+        }
+
+        public static string GetVideoFilePath(string videoId, string videoTitle)
+        {
+            return Path.Combine(Settings.Default.DownloadFolder, GetVideoFileName(videoId, videoTitle));
+        }
+
+        public static void PlayVideo(string location)
+        {
+            var args = "\"" + location + "\"";
+
+            if (Settings.Default.PlayerCustomEnabled)
+            {
+                Process.Start(Settings.Default.PlayerCustomPath, args);
+                return;
+            }
+
+            var wmplayer = Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles),
+                "Windows Media Player\\wmplayer.exe"
+            );
+
+            if (Settings.Default.PlayerWmpFullscreen)
+                args += " /fullscreen";
+
+            Process.Start(wmplayer, args);
+        }
+
+        public static string FormatDurationSeconds(int seconds)
+        {
+            TimeSpan duration = TimeSpan.FromSeconds(seconds);
+
+            if (duration.TotalHours >= 1)
+                return string.Format("{0}:{1:D2}:{2:D2}",
+                    (int)duration.TotalHours,
+                    duration.Minutes,
+                    duration.Seconds);
+            else
+                return string.Format("{0}:{1:D2}",
+                    duration.Minutes,
+                    duration.Seconds);
+        }
     }
 }

@@ -52,13 +52,19 @@ namespace YouTube
         private void WatchNow()
         {
             if (_entry.YouTubeId.Id != null)
-                parent.WatchVideo(_entry.YouTubeId.Id);
+                parent.WatchVideo(_entry.YouTubeId.Id, _entry.Title);
         }
 
         private void DownloadVideo()
         {
             if (_entry.YouTubeId.Id != null)
                 parent.DownloadVideo(_entry.YouTubeId.Id, _entry.Title);
+        }
+
+        private void AddToQueue()
+        {
+            if (_entry.YouTubeId.Id != null)
+                parent.QueueVideo(_entry.YouTubeId.Id, _entry.Title, _entry.Media.Duration.Seconds);
         }
 
         private void OpenInBrowser()
@@ -87,6 +93,7 @@ namespace YouTube
             descriptionLabel.Text = _entry.Content.Replace('\n', ' ').Replace("\r", "");
             toolTip.SetToolTip(descriptionLabel, _entry.Content);
             dateLabel.Text = Utils.FormatRelativeDate(_entry.Published);
+            toolTip.SetToolTip(dateLabel, _entry.Published.ToLongDateString());
 
             if (_entry.Media.Thumbnails.Length >= 1)
                 LoadThumbnailAsync(_entry.Media.Thumbnails[0].Url);
@@ -134,20 +141,9 @@ namespace YouTube
 
         private void SetDurationLabel(int totalSeconds)
         {
-            TimeSpan duration = TimeSpan.FromSeconds(totalSeconds);
-
-            if (duration.TotalHours >= 1)
-                durationLabel.Text = string.Format("{0}:{1:D2}:{2:D2}",
-                    (int)duration.TotalHours,
-                    duration.Minutes,
-                    duration.Seconds);
-            else
-                durationLabel.Text = string.Format("{0}:{1:D2}",
-                    duration.Minutes,
-                    duration.Seconds);
-
-            durationLabel.Left = thumbnailBox.Width - durationLabel.Width - thumbnailBox.Padding.Horizontal - 1;
-            durationLabel.Top = thumbnailBox.Height - durationLabel.Height - thumbnailBox.Padding.Vertical - 1;
+            durationLabel.Text = Utils.FormatDurationSeconds(totalSeconds);
+            durationLabel.Left = thumbnail.Width - durationLabel.Width;
+            durationLabel.Top = thumbnail.Height - durationLabel.Height;
         }
 
         private void LoadThumbnailAsync(string url)
@@ -165,20 +161,19 @@ namespace YouTube
                 {
                     thumbnail.Invoke(new MethodInvoker(delegate
                     {
-                        thumbnail.Image = image;
+                        thumbnail.BackgroundImage = image;
                     }));
                 }
                 else
                 {
-                    thumbnail.Image = image;
+                    thumbnail.BackgroundImage = image;
                 }
             });
         }
-
+        
         private Image LoadThumbnailImage(string url, Size size)
         {
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-
             using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
             using (Stream stream = response.GetResponseStream())
             using (Image source = Image.FromStream(stream))
@@ -190,18 +185,22 @@ namespace YouTube
                     (float)targetWidth / source.Width,
                     (float)targetHeight / source.Height);
 
-                int newWidth = (int)Math.Ceiling(source.Width * scale);
-                int newHeight = (int)Math.Ceiling(source.Height * scale);
+                int scaledWidth = (int)Math.Ceiling(source.Width * scale);
+                int scaledHeight = (int)Math.Ceiling(source.Height * scale);
 
-                Bitmap result = new Bitmap(newWidth, newHeight);
+                int offsetX = (scaledWidth - targetWidth) / 2;
+                int offsetY = (scaledHeight - targetHeight) / 2;
+
+                Bitmap result = new Bitmap(targetWidth, targetHeight);
+                result.SetResolution(source.HorizontalResolution, source.VerticalResolution);
 
                 using (Graphics g = Graphics.FromImage(result))
                 {
-                    g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
-                    g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
-                    g.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.HighQuality;
+                    //g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+                    //g.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.HighQuality;
+                    //g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
 
-                    g.DrawImage(source, 0, 0, newWidth, newHeight);
+                    g.DrawImage(source, -offsetX, -offsetY, scaledWidth, scaledHeight);
                 }
 
                 return result;
@@ -240,6 +239,10 @@ namespace YouTube
             if (e.Button == MouseButtons.Left)
                 WatchNow();
         }
+        private void queueButton_Click(object sender, EventArgs e)
+        {
+            AddToQueue();
+        }
 
         #endregion
 
@@ -259,10 +262,13 @@ namespace YouTube
         {
             OpenInBrowser();
         }
+        private void addToQueueToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AddToQueue();
+        }
 
         #endregion
 
         #endregion
-
     }
 }

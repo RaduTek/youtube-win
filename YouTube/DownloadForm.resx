@@ -117,56 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="toolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>141, 17</value>
+  <metadata name="itemContextMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>122, 17</value>
   </metadata>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="ratingStar5.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        vAAADrwBlbxySQAAAKhJREFUKFONUbsKxCAQ9P8/w9bS0tImhU0asbGwkBwB24AgeMyieXrkBgZ0Z8ed
-        RTZCzrlu21bb9R3LZ6ne+/8N8zzXaZpqKeXdhChaayImtfKBdV2rMWYnGpVSRJzP2h4Th970i4hJzR0h
-        BBKklA8658a7YJIQ4kJEafITyHw3YEKTr8Bncc6JaEK8fk8pPU2IAxHLwYyatZZq+BNqOiPGOHwJ5mNp
-        xr5RFvBFGk0poAAAAABJRU5ErkJggg==
-</value>
-  </data>
-  <data name="ratingStar4.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        vAAADrwBlbxySQAAAKhJREFUKFONUbsKxCAQ9P8/w9bS0tImhU0asbGwkBwB24AgeMyieXrkBgZ0Z8ed
-        RTZCzrlu21bb9R3LZ6ne+/8N8zzXaZpqKeXdhChaayImtfKBdV2rMWYnGpVSRJzP2h4Th970i4hJzR0h
-        BBKklA8658a7YJIQ4kJEafITyHw3YEKTr8Bncc6JaEK8fk8pPU2IAxHLwYyatZZq+BNqOiPGOHwJ5mNp
-        xr5RFvBFGk0poAAAAABJRU5ErkJggg==
-</value>
-  </data>
-  <data name="ratingStar3.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        vAAADrwBlbxySQAAAKhJREFUKFONUbsKxCAQ9P8/w9bS0tImhU0asbGwkBwB24AgeMyieXrkBgZ0Z8ed
-        RTZCzrlu21bb9R3LZ6ne+/8N8zzXaZpqKeXdhChaayImtfKBdV2rMWYnGpVSRJzP2h4Th970i4hJzR0h
-        BBKklA8658a7YJIQ4kJEafITyHw3YEKTr8Bncc6JaEK8fk8pPU2IAxHLwYyatZZq+BNqOiPGOHwJ5mNp
-        xr5RFvBFGk0poAAAAABJRU5ErkJggg==
-</value>
-  </data>
-  <data name="ratingStar2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        vAAADrwBlbxySQAAAKhJREFUKFONUbsKxCAQ9P8/w9bS0tImhU0asbGwkBwB24AgeMyieXrkBgZ0Z8ed
-        RTZCzrlu21bb9R3LZ6ne+/8N8zzXaZpqKeXdhChaayImtfKBdV2rMWYnGpVSRJzP2h4Th970i4hJzR0h
-        BBKklA8658a7YJIQ4kJEafITyHw3YEKTr8Bncc6JaEK8fk8pPU2IAxHLwYyatZZq+BNqOiPGOHwJ5mNp
-        xr5RFvBFGk0poAAAAABJRU5ErkJggg==
-</value>
-  </data>
-  <data name="ratingStar1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        vAAADrwBlbxySQAAAKhJREFUKFONUbsKxCAQ9P8/w9bS0tImhU0asbGwkBwB24AgeMyieXrkBgZ0Z8ed
-        RTZCzrlu21bb9R3LZ6ne+/8N8zzXaZpqKeXdhChaayImtfKBdV2rMWYnGpVSRJzP2h4Th970i4hJzR0h
-        BBKklA8658a7YJIQ4kJEafITyHw3YEKTr8Bncc6JaEK8fk8pPU2IAxHLwYyatZZq+BNqOiPGOHwJ5mNp
-        xr5RFvBFGk0poAAAAABJRU5ErkJggg==
-</value>
-  </data>
-  <metadata name="contextMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <metadata name="imageList.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
+  </metadata>
+  <metadata name="toolStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>273, 17</value>
   </metadata>
 </root>

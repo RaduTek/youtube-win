@@ -31,9 +31,9 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.button1 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -45,7 +45,7 @@
             this.pictureBox1.Location = new System.Drawing.Point(12, 12);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(96, 96);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
@@ -72,14 +72,14 @@
             this.panel1.Size = new System.Drawing.Size(427, 123);
             this.panel1.TabIndex = 2;
             // 
-            // panel2
+            // label2
             // 
-            this.panel2.Controls.Add(this.button1);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(0, 123);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(427, 40);
-            this.panel2.TabIndex = 3;
+            this.label2.Location = new System.Drawing.Point(115, 40);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(300, 68);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "YouTube desktop client for yt2009 or any other YouTube API V2 compatible server.\r" +
+    "\n\r\nCreated by RaduTek.";
             // 
             // label1
             // 
@@ -90,14 +90,14 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "YouTube for Windows";
             // 
-            // label2
+            // panel2
             // 
-            this.label2.Location = new System.Drawing.Point(115, 40);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(300, 68);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "YouTube desktop client for yt2009 or any other YouTube API V2 compatible server.\r" +
-    "\n\r\nCreated by RaduTek.";
+            this.panel2.Controls.Add(this.button1);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel2.Location = new System.Drawing.Point(0, 123);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(427, 40);
+            this.panel2.TabIndex = 3;
             // 
             // AboutDialog
             // 
@@ -116,7 +116,6 @@
             this.Text = "About";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
 

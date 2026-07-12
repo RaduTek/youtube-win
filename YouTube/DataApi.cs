@@ -58,9 +58,14 @@ namespace YouTube
 
         public static string GetVideoUrl(string videoId)
         {
+            return GetVideoUrl(videoId, VideoQuality.Default);
+        }
+
+        public static string GetVideoUrl(string videoId, VideoQuality quality)
+        {
             string url;
 
-            if (Settings.Default.EnableHd)
+            if (quality == VideoQuality.HighDef || (quality == VideoQuality.Default && Settings.Default.EnableHd))
             {
                 url = GetFullUrl("exp_hd?video_id=" + videoId);
             }

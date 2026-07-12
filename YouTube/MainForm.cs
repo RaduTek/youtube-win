@@ -7,6 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Threading;
 using System.Diagnostics;
+using System.IO;
 
 namespace YouTube
 {
@@ -15,24 +16,58 @@ namespace YouTube
         public MainForm()
         {
             InitializeComponent();
+
+            downloadForm = new DownloadForm();
+            downloadForm.DownloadStatusChanged += DownloadForm_DownloadStatusChanged;
+            queueForm = new QueueForm();
         }
 
         #region Variables
 
         private Data.Feed lastFeed;
 
+        private DownloadForm downloadForm;
+        private QueueForm queueForm;
+
+        private DownloadStatus downloadStatus;
+        private bool hasSearchedOnce = false;
+
         #endregion
 
         #region Public Methods
 
-        public void WatchVideo(string videoId)
+        public void WatchVideo(string videoId, string videoTitle)
         {
-            Process.Start(Settings.Default.VideoPlayer, DataApi.GetVideoUrl(videoId));
+            // Queue download if the setting is enabled
+            if (Settings.Default.DownloadBeforePlay)
+            {
+                downloadForm.AddToDownloadList(videoId, videoTitle, true);
+                ShowDownloadList();
+                return;
+            }
+
+            // Play video from local source if possible
+            var videoFilePath = Utils.GetVideoFilePath(videoId, videoTitle);
+            if (File.Exists(videoFilePath))
+            {
+                Utils.PlayVideo(videoFilePath);
+                return;
+            }
+
+            // Play video from the URL
+            Utils.PlayVideo(DataApi.GetVideoUrl(videoId));
         }
 
         public void DownloadVideo(string videoId, string videoTitle)
         {
-            MessageBox.Show("Download not implemented yet! \r\n[" + videoId + "]: " + videoTitle);
+            downloadForm.AddToDownloadList(videoId, videoTitle, false);
+            ShowDownloadList();
+        }
+
+        public void QueueVideo(string videoId, string videoTitle, int videoDuration)
+        {
+            queueForm.QueueVideo(videoId, videoTitle, videoDuration);
+            ShowQueueList();
         }
 
         #endregion
@@ -41,9 +76,22 @@ namespace YouTube
 
         private void MainForm_Load(object sender, EventArgs e)
         {
+            if (hasSearchedOnce)
+                return;
+
             Utils.InitalSettings();
 
             videoResultsBox.Controls.Remove(loadMoreLink);
+
+            if (Settings.Default.InstanceBaseUrl == null || Settings.Default.InstanceBaseUrl == "")
+            {
+                SetResultsHintText("Instance Base URL is not configured.\r\nGo to Menu > Settings to set it up.");
+                searchBox.Enabled = false;
+            } else
+            {
+                SetResultsHintText("Enter a search term and click Search to find videos.");
+                searchBox.Enabled = true;
+            }
         }
 
         private void loadMoreLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -51,11 +99,32 @@ namespace YouTube
             LoadMoreVideos();
         }
 
+        private void DownloadForm_DownloadStatusChanged(object sender, DownloadForm.DownloadEventArgs e)
+        {
+            downloadStatus = e.Status;
+            switch (e.Status)
+            {
+                case DownloadStatus.Downloading:
+                    downloadStatusButton.Image = Properties.Resources.Download_queued;
+                    break;
+                case DownloadStatus.Downloaded:
+                    downloadStatusButton.Image = Properties.Resources.Download_complete;
+                    break;
+                case DownloadStatus.Error:
+                    downloadStatusButton.Image = Properties.Resources.Download_error;
+                    break;
+                default:
+                    downloadStatusButton.Image = Properties.Resources.Download_idle;
+                    break;
+            }
+        }
+
         #region Menu Items
 
         private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             new SettingsDialog().ShowDialog();
+            MainForm_Load(null, null);
         }
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
@@ -70,14 +139,6 @@ namespace YouTube
         private void searchButton_Click(object sender, EventArgs e)
         {
             SearchVideos(searchTextBox.Text);
-        }
-
-        private void searchTextBox_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                searchButton_Click(sender, e);
-            }
         }
 
         #endregion
@@ -166,7 +227,9 @@ namespace YouTube
                     }));
                 }
             });
+
             Application.DoEvents();
+            hasSearchedOnce = true;
         }
 
         private void LoadMoreVideos()
@@ -207,9 +270,51 @@ namespace YouTube
             });
         }
 
+
+
         #endregion
 
+        private void ShowQueueList()
+        {
+            Point buttonBottomRight = queueListButton.Owner.PointToScreen(
+                new Point(queueListButton.Bounds.Right, queueListButton.Bounds.Bottom));
 
+            queueForm.Left = buttonBottomRight.X - queueForm.Width;
+            queueForm.Top = buttonBottomRight.Y + 4;
 
+            queueForm.Show();
+        }
+
+        private void queueListButton_Click(object sender, EventArgs e)
+        {
+            ShowQueueList();
+        }
+
+        private void ShowDownloadList()
+        {
+            Point buttonBottomRight = downloadStatusButton.Owner.PointToScreen(
+                new Point(downloadStatusButton.Bounds.Right, downloadStatusButton.Bounds.Bottom));
+
+            downloadForm.Left = buttonBottomRight.X - downloadForm.Width;
+            downloadForm.Top = buttonBottomRight.Y + 4;
+
+            downloadForm.Show();
+        }
+
+        private void downloadStatusButton_Click(object sender, EventArgs e)
+        {
+            ShowDownloadList();
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.UserClosing && downloadStatus == DownloadStatus.Downloading)
+            {
+                if (MessageBox.Show("Downloads are in progress. Are you sure you want to exit?", Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+                {
+                    e.Cancel = true;
+                }
+            }
+        }
     }
 }
