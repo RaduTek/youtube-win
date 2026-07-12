@@ -65,6 +65,7 @@
             this.queueList.TabIndex = 4;
             this.queueList.UseCompatibleStateImageBehavior = false;
             this.queueList.View = System.Windows.Forms.View.Details;
+            this.queueList.KeyDown += new System.Windows.Forms.KeyEventHandler(this.queueList_KeyDown);
             // 
             // columnHeader1
             // 

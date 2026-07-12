@@ -64,5 +64,16 @@ namespace YouTube
 
             Utils.PlayVideo(filePath);
         }
+
+        private void queueList_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete)
+            {
+                foreach (ListViewItem item in queueList.SelectedItems)
+                {
+                    item.Remove();
+                }
+            }
+        }
     }
 }
