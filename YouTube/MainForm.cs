@@ -94,6 +94,17 @@ namespace YouTube
             }
         }
 
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.UserClosing && downloadStatus == DownloadStatus.Downloading)
+            {
+                if (MessageBox.Show("Downloads are in progress. Are you sure you want to exit?", Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+                {
+                    e.Cancel = true;
+                }
+            }
+        }
+
         private void loadMoreLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             LoadMoreVideos();
@@ -120,6 +131,16 @@ namespace YouTube
         }
 
         #region Menu Items
+
+        private void queueListButton_Click(object sender, EventArgs e)
+        {
+            ShowQueueList();
+        }
+
+        private void downloadStatusButton_Click(object sender, EventArgs e)
+        {
+            ShowDownloadList();
+        }
 
         private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -274,10 +295,6 @@ namespace YouTube
             });
         }
 
-
-
-        #endregion
-
         private void ShowQueueList()
         {
             Point buttonBottomRight = queueListButton.Owner.PointToScreen(
@@ -287,11 +304,6 @@ namespace YouTube
             queueForm.Top = buttonBottomRight.Y + 4;
 
             queueForm.Show();
-        }
-
-        private void queueListButton_Click(object sender, EventArgs e)
-        {
-            ShowQueueList();
         }
 
         private void ShowDownloadList()
@@ -305,20 +317,8 @@ namespace YouTube
             downloadForm.Show();
         }
 
-        private void downloadStatusButton_Click(object sender, EventArgs e)
-        {
-            ShowDownloadList();
-        }
 
-        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (e.CloseReason == CloseReason.UserClosing && downloadStatus == DownloadStatus.Downloading)
-            {
-                if (MessageBox.Show("Downloads are in progress. Are you sure you want to exit?", Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
-                {
-                    e.Cancel = true;
-                }
-            }
-        }
+        #endregion
+
     }
 }
