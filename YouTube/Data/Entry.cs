@@ -66,18 +66,18 @@ namespace YouTube.Data
     public class YtRating
     {
         [XmlAttribute("numLikes")]
-        public int Likes { get; set; }
+        public double Likes { get; set; }
 
         [XmlAttribute("numDislikes")]
-        public int Dislikes { get; set; }
+        public double Dislikes { get; set; }
     }
 
     public class YtStatistics
     {
         [XmlAttribute("favoriteCount")]
-        public int FavoriteCount { get; set; }
+        public double FavoriteCount { get; set; }
 
         [XmlAttribute("viewCount")]
-        public int ViewCount { get; set; }
+        public double ViewCount { get; set; }
     }
 }
