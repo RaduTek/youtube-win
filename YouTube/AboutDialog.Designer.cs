@@ -78,8 +78,8 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(300, 68);
             this.label2.TabIndex = 2;
-            this.label2.Text = "YouTube desktop client for yt2009 or any other YouTube API V2 compatible server.\r" +
-    "\n\r\nCreated by RaduTek.";
+            this.label2.Text = "YouTube desktop client for BackTube, yt2009 and other YouTube Data API V1 servers" +
+    ".\r\n\r\nCreated by RaduTek.";
             // 
             // label1
             // 

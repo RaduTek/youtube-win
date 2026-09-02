@@ -81,6 +81,8 @@
             // 
             this.toolStrip.AutoSize = false;
             this.toolStrip.BackColor = System.Drawing.Color.Transparent;
+            this.toolStrip.BackgroundImage = global::YouTube.Properties.Resources.PopupHeader;
+            this.toolStrip.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.toolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.titleLabel,

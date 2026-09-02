@@ -34,13 +34,13 @@
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.itemContextMenu = new NativeToolStrip.NativeContextMenuStrip();
-            this.playVideoMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.showInFolderMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.retryMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cancelMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.removeMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.imageList = new System.Windows.Forms.ImageList(this.components);
             this.toolStrip = new NativeToolStrip.NativeToolStrip();
+            this.playVideoMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.showInFolderMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cancelMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.removeMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.removeAllButton = new System.Windows.Forms.ToolStripButton();
             this.openDownloadsButton = new System.Windows.Forms.ToolStripButton();
@@ -99,25 +99,9 @@
             this.cancelMenuItem,
             this.removeMenuItem});
             this.itemContextMenu.Name = "itemContextMenu";
-            this.itemContextMenu.Size = new System.Drawing.Size(181, 136);
+            this.itemContextMenu.Size = new System.Drawing.Size(151, 114);
             this.itemContextMenu.Theme = NativeToolStrip.NativeToolStripTheme.Toolbar;
             this.itemContextMenu.Opening += new System.ComponentModel.CancelEventHandler(this.itemContextMenu_Opening);
-            // 
-            // playVideoMenuItem
-            // 
-            this.playVideoMenuItem.Image = global::YouTube.Properties.Resources.control_play_blue;
-            this.playVideoMenuItem.Name = "playVideoMenuItem";
-            this.playVideoMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.playVideoMenuItem.Text = "Play Video";
-            this.playVideoMenuItem.Click += new System.EventHandler(this.playVideoMenuItem_Click);
-            // 
-            // showInFolderMenuItem
-            // 
-            this.showInFolderMenuItem.Image = global::YouTube.Properties.Resources.folder;
-            this.showInFolderMenuItem.Name = "showInFolderMenuItem";
-            this.showInFolderMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.showInFolderMenuItem.Text = "Show in folder";
-            this.showInFolderMenuItem.Click += new System.EventHandler(this.showInFolderMenuItem_Click);
             // 
             // retryMenuItem
             // 
@@ -125,22 +109,6 @@
             this.retryMenuItem.Size = new System.Drawing.Size(150, 22);
             this.retryMenuItem.Text = "Retry";
             this.retryMenuItem.Click += new System.EventHandler(this.retryMenuItem_Click);
-            // 
-            // cancelMenuItem
-            // 
-            this.cancelMenuItem.Image = global::YouTube.Properties.Resources.cross;
-            this.cancelMenuItem.Name = "cancelMenuItem";
-            this.cancelMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.cancelMenuItem.Text = "Cancel";
-            this.cancelMenuItem.Click += new System.EventHandler(this.cancelMenuItem_Click);
-            // 
-            // removeMenuItem
-            // 
-            this.removeMenuItem.Image = global::YouTube.Properties.Resources.bin_closed;
-            this.removeMenuItem.Name = "removeMenuItem";
-            this.removeMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.removeMenuItem.Text = "Remove";
-            this.removeMenuItem.Click += new System.EventHandler(this.removeMenuItem_Click);
             // 
             // imageList
             // 
@@ -152,6 +120,8 @@
             // 
             this.toolStrip.AutoSize = false;
             this.toolStrip.BackColor = System.Drawing.Color.Transparent;
+            this.toolStrip.BackgroundImage = global::YouTube.Properties.Resources.PopupHeader;
+            this.toolStrip.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.toolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripLabel1,
@@ -164,6 +134,38 @@
             this.toolStrip.TabIndex = 2;
             this.toolStrip.Text = "nativeToolStrip1";
             this.toolStrip.Theme = NativeToolStrip.NativeToolStripTheme.Transparent;
+            // 
+            // playVideoMenuItem
+            // 
+            this.playVideoMenuItem.Image = global::YouTube.Properties.Resources.control_play_blue;
+            this.playVideoMenuItem.Name = "playVideoMenuItem";
+            this.playVideoMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.playVideoMenuItem.Text = "Play Video";
+            this.playVideoMenuItem.Click += new System.EventHandler(this.playVideoMenuItem_Click);
+            // 
+            // showInFolderMenuItem
+            // 
+            this.showInFolderMenuItem.Image = global::YouTube.Properties.Resources.folder;
+            this.showInFolderMenuItem.Name = "showInFolderMenuItem";
+            this.showInFolderMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.showInFolderMenuItem.Text = "Show in folder";
+            this.showInFolderMenuItem.Click += new System.EventHandler(this.showInFolderMenuItem_Click);
+            // 
+            // cancelMenuItem
+            // 
+            this.cancelMenuItem.Image = global::YouTube.Properties.Resources.cross;
+            this.cancelMenuItem.Name = "cancelMenuItem";
+            this.cancelMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.cancelMenuItem.Text = "Cancel";
+            this.cancelMenuItem.Click += new System.EventHandler(this.cancelMenuItem_Click);
+            // 
+            // removeMenuItem
+            // 
+            this.removeMenuItem.Image = global::YouTube.Properties.Resources.bin_closed;
+            this.removeMenuItem.Name = "removeMenuItem";
+            this.removeMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.removeMenuItem.Text = "Remove";
+            this.removeMenuItem.Click += new System.EventHandler(this.removeMenuItem_Click);
             // 
             // toolStripLabel1
             // 

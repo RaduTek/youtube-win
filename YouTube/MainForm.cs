@@ -32,6 +32,22 @@ namespace YouTube
         private DownloadStatus downloadStatus;
         private bool hasSearchedOnce = false;
 
+        private bool IsLoading
+        {
+            get { return UseWaitCursor; }
+            set
+            {
+                UseWaitCursor = value;
+                searchBox.Enabled = !value;
+                loadMoreLink.Enabled = !value;
+
+                if (value && !hasSearchedOnce)
+                {
+                    SetResultsHintText("Loading...");
+                }
+            }
+        }
+
         #endregion
 
         #region Public Methods
@@ -89,9 +105,17 @@ namespace YouTube
                 searchBox.Enabled = false;
             } else
             {
+                if (Settings.Default.InstanceType == "Unknown")
+                {
+                    // In case of upgrade from version without Instance Type field
+                    DataApi.UpdateInstanceType();
+                }
+                    
                 SetResultsHintText("Enter a search term and click Search to find videos.");
                 searchBox.Enabled = true;
             }
+
+            loadMoreLink.Width = videoResultsBox.Width - 40;
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -161,6 +185,15 @@ namespace YouTube
         {
             SearchVideos(searchTextBox.Text);
         }
+        private void searchTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter && !IsLoading)
+            {
+                e.SuppressKeyPress = true;
+                e.Handled = true;
+                BeginInvoke(new MethodInvoker(delegate { SearchVideos(searchTextBox.Text); }));
+            }
+        }
 
         #endregion
 
@@ -223,10 +256,8 @@ namespace YouTube
             if (query.Length == 0)
                 return;
 
-            searchBox.Enabled = false;
+            IsLoading = true;
             videoResultsBox.Controls.Clear();
-            SetResultsHintText("Loading...");
-            UseWaitCursor = true;
 
             ThreadPool.QueueUserWorkItem(delegate
             {
@@ -237,8 +268,6 @@ namespace YouTube
                     Invoke(new MethodInvoker(delegate
                     {
                         lastFeed = feed;
-                        UseWaitCursor = false;
-                        searchBox.Enabled = true;
                         ShowListOfEntries(feed.Entries);
                     }));
                 }
@@ -246,10 +275,12 @@ namespace YouTube
                 {
                     Invoke(new MethodInvoker(delegate
                     {
-                        UseWaitCursor = false;
-                        searchBox.Enabled = true;
                         SetResultsHintText("Error: " + ex.Message);
                     }));
+                }
+                finally
+                {
+                    Invoke(new MethodInvoker(delegate { IsLoading = false; }));
                 }
             });
 
@@ -266,8 +297,7 @@ namespace YouTube
 
             var url = Utils.FixUrlDomain(nextLink.Href);
 
-            UseWaitCursor = true;
-            loadMoreLink.Enabled = false;
+            IsLoading = true;
 
             ThreadPool.QueueUserWorkItem(delegate
             {
@@ -278,8 +308,6 @@ namespace YouTube
                     Invoke(new MethodInvoker(delegate
                     {
                         lastFeed = feed;
-                        UseWaitCursor = false;
-                        loadMoreLink.Enabled = true;
                         ShowListOfEntries(feed.Entries, false);
                     }));
                 }
@@ -287,10 +315,12 @@ namespace YouTube
                 {
                     Invoke(new MethodInvoker(delegate
                     {
-                        UseWaitCursor = false;
-                        loadMoreLink.Enabled = true;
                         SetResultsHintText("Error: " + ex.Message);
                     }));
+                }
+                finally
+                {
+                    Invoke(new MethodInvoker(delegate { IsLoading = false; }));
                 }
             });
         }
