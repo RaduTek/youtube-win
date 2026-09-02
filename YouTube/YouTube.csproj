@@ -28,8 +28,8 @@
     <ProductName>YouTube</ProductName>
     <PublisherName>YouTube for Windows</PublisherName>
     <MinimumRequiredVersion>1.1.0.1</MinimumRequiredVersion>
-    <ApplicationRevision>1</ApplicationRevision>
-    <ApplicationVersion>1.1.0.1</ApplicationVersion>
+    <ApplicationRevision>2</ApplicationRevision>
+    <ApplicationVersion>1.1.0.2</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>false</BootstrapperEnabled>
