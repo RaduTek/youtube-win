@@ -1,16 +1,18 @@
 # YouTube for Windows
 
-YouTube desktop client for YT2009 server.
+YouTube desktop client for recreation backends (like [BackTube](https://github.com/RaduTek/BackTube) or [yt2009](https://github.com/ftde0/yt2009))
 
 ![Screenshot of main window](docs/youtube.png)
+
+[Install with ClickOnce](https://pub.radutek.uk/ClickOnce/YouTube.application) (also updates automatically)
 
 [More screenshots](docs/screenshots.md)
 
 ## Why?
 
-On some 2000s low end devices, like UMPCs, the Flash Player is barely able to play videos from YT2009 at normal frame rate. But those same videos play just fine in a desktop video player application, like Windows Media Player with the right codecs installed.
+On some 2000s low end devices, like UMPCs, the Flash Player is barely able to play videos in yt2009 at normal frame rate. But those same videos play just fine in a desktop video player application, like Windows Media Player with the right codecs installed.
 
-So this .NET Framework 2.0 application offers a native frontend for the server, using the YouTube Data API v2.0, that's also used by the mobile applications.
+So this .NET Framework 2.0 application offers a native frontend for the server, using the YouTube Data API v2.0, that's also used by mobile applications.
 
 The application loads the search results for a given query, then for video playback it opens the video player application with the URL to the video file on the server.
 
@@ -23,8 +25,8 @@ The application loads the search results for a given query, then for video playb
 
 ## How to use
 
-- Download or build the application yourself. It's a single EXE, only depending on .NET Framework 2.0
-- Launch it, go to Menu > Settings and type in the address of your yt2009 instance
+- Install with ClickOnce, download a pre-built version or build the application yourself. It's a single EXE, only depending on .NET Framework 2.0
+- Launch it, go to Menu > Settings and type in the address of your instance
 - Enjoy: search for and watch videos
 
 ## Requirements
