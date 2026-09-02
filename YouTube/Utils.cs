@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using System.Net;
 
 namespace YouTube
 {
@@ -147,6 +148,33 @@ namespace YouTube
                 return string.Format("{0}:{1:D2}",
                     duration.Minutes,
                     duration.Seconds);
+        }
+
+        public static bool IsUrlOk(string url)
+        {
+            HttpWebRequest request = null;
+            HttpWebResponse response = null;
+
+            try
+            {
+                request = (HttpWebRequest)WebRequest.Create(url);
+                request.Method = "GET";
+
+                response = (HttpWebResponse)request.GetResponse();
+
+                return response.StatusCode == HttpStatusCode.OK;
+            }
+            catch (WebException)
+            {
+                return false;
+            }
+            finally
+            {
+                if (response != null)
+                {
+                    response.Close();
+                }
+            }
         }
     }
 }

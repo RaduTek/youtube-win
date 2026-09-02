@@ -34,12 +34,6 @@ namespace YouTube.Data
 
         [XmlElement("statistics", Namespace = Xmlns.YouTube)]
         public YtStatistics Statistics { get; set; }
-
-        [XmlElement("yt9full", Namespace = Xmlns.Atom)]
-        public string ChannelName { get; set; }
-
-        [XmlElement("yt9aid", Namespace = Xmlns.Atom)]
-        public string ChannelId { get; set; }
     }
 
     public class Author
@@ -50,7 +44,7 @@ namespace YouTube.Data
         [XmlElement("uri")]
         public string Uri { get; set; }
 
-        [XmlElement("userId")]
+        [XmlElement("userId", Namespace = Xmlns.YouTube)]
         public string UserId { get; set; }
     }
 

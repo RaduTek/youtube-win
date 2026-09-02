@@ -75,8 +75,8 @@ namespace YouTube
 
         private void OpenChannelInBrowser()
         {
-            if (_entry.ChannelId != null)
-                Process.Start(DataApi.GetFullUrl("channel/" + _entry.ChannelId));
+            if (_entry.Author.UserId != null)
+                Process.Start(DataApi.GetFullUrl("channel/" + _entry.Author.UserId));
         }
 
         #endregion
@@ -89,7 +89,7 @@ namespace YouTube
                 return;
 
             titleLink.Text = _entry.Title;
-            channelLink.Text = _entry.ChannelName;
+            channelLink.Text = _entry.Author.Name;
             descriptionLabel.Text = _entry.Content.Replace('\n', ' ').Replace("\r", "");
             toolTip.SetToolTip(descriptionLabel, _entry.Content);
             dateLabel.Text = Utils.FormatRelativeDate(_entry.Published);
@@ -173,37 +173,44 @@ namespace YouTube
         
         private Image LoadThumbnailImage(string url, Size size)
         {
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-            using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
-            using (Stream stream = response.GetResponseStream())
-            using (Image source = Image.FromStream(stream))
+            try
             {
-                int targetWidth = size.Width;
-                int targetHeight = size.Height;
-
-                float scale = Math.Max(
-                    (float)targetWidth / source.Width,
-                    (float)targetHeight / source.Height);
-
-                int scaledWidth = (int)Math.Ceiling(source.Width * scale);
-                int scaledHeight = (int)Math.Ceiling(source.Height * scale);
-
-                int offsetX = (scaledWidth - targetWidth) / 2;
-                int offsetY = (scaledHeight - targetHeight) / 2;
-
-                Bitmap result = new Bitmap(targetWidth, targetHeight);
-                result.SetResolution(source.HorizontalResolution, source.VerticalResolution);
-
-                using (Graphics g = Graphics.FromImage(result))
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+                using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+                using (Stream stream = response.GetResponseStream())
+                using (Image source = Image.FromStream(stream))
                 {
-                    //g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
-                    //g.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.HighQuality;
-                    //g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+                    int targetWidth = size.Width;
+                    int targetHeight = size.Height;
 
-                    g.DrawImage(source, -offsetX, -offsetY, scaledWidth, scaledHeight);
+                    float scale = Math.Max(
+                        (float)targetWidth / source.Width,
+                        (float)targetHeight / source.Height);
+
+                    int scaledWidth = (int)Math.Ceiling(source.Width * scale);
+                    int scaledHeight = (int)Math.Ceiling(source.Height * scale);
+
+                    int offsetX = (scaledWidth - targetWidth) / 2;
+                    int offsetY = (scaledHeight - targetHeight) / 2;
+
+                    Bitmap result = new Bitmap(targetWidth, targetHeight);
+                    result.SetResolution(source.HorizontalResolution, source.VerticalResolution);
+
+                    using (Graphics g = Graphics.FromImage(result))
+                    {
+                        //g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+                        //g.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.HighQuality;
+                        //g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+
+                        g.DrawImage(source, -offsetX, -offsetY, scaledWidth, scaledHeight);
+                    }
+
+                    return result;
                 }
-
-                return result;
+            }
+            catch (Exception) 
+            {
+                return null;
             }
         }
 

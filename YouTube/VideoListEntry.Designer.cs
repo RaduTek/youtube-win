@@ -302,6 +302,7 @@
             this.Controls.Add(this.ratingStar2);
             this.Controls.Add(this.ratingStar1);
             this.Controls.Add(this.descriptionLabel);
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "VideoListEntry";
             this.Size = new System.Drawing.Size(620, 74);

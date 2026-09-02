@@ -38,18 +38,22 @@
             this.downloadFolderText = new System.Windows.Forms.TextBox();
             this.downloadFolderOpenBtn = new System.Windows.Forms.Button();
             this.showThumbsCheck = new System.Windows.Forms.CheckBox();
-            this.enableHdCheck = new System.Windows.Forms.CheckBox();
             this.playerCustomRadio = new System.Windows.Forms.RadioButton();
             this.playerWmpRadio = new System.Windows.Forms.RadioButton();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.generalTab = new System.Windows.Forms.TabPage();
+            this.detectInstanceButton = new System.Windows.Forms.Button();
+            this.instanceTypeLabel = new System.Windows.Forms.Label();
+            this.instanceTypeHintLabel = new System.Windows.Forms.Label();
+            this.downloadBeforePlayCheck = new System.Windows.Forms.CheckBox();
             this.videoPlayerTab = new System.Windows.Forms.TabPage();
+            this.videoQualityLabel = new System.Windows.Forms.Label();
+            this.videoQualityBox = new System.Windows.Forms.ComboBox();
             this.playerWmpGroupBox = new System.Windows.Forms.GroupBox();
             this.playerWmpFullScreenCheck = new System.Windows.Forms.CheckBox();
             this.playerCustomGroup = new System.Windows.Forms.GroupBox();
             this.playerCustomLabel = new System.Windows.Forms.Label();
             this.downloadsTab = new System.Windows.Forms.TabPage();
-            this.downloadBeforePlayCheck = new System.Windows.Forms.CheckBox();
             this.tabControl.SuspendLayout();
             this.generalTab.SuspendLayout();
             this.videoPlayerTab.SuspendLayout();
@@ -150,22 +154,12 @@
             // showThumbsCheck
             // 
             this.showThumbsCheck.AutoSize = true;
-            this.showThumbsCheck.Location = new System.Drawing.Point(10, 65);
+            this.showThumbsCheck.Location = new System.Drawing.Point(10, 89);
             this.showThumbsCheck.Name = "showThumbsCheck";
             this.showThumbsCheck.Size = new System.Drawing.Size(110, 17);
             this.showThumbsCheck.TabIndex = 10;
             this.showThumbsCheck.Text = "Show Thumbnails";
             this.showThumbsCheck.UseVisualStyleBackColor = true;
-            // 
-            // enableHdCheck
-            // 
-            this.enableHdCheck.AutoSize = true;
-            this.enableHdCheck.Location = new System.Drawing.Point(10, 88);
-            this.enableHdCheck.Name = "enableHdCheck";
-            this.enableHdCheck.Size = new System.Drawing.Size(108, 17);
-            this.enableHdCheck.TabIndex = 11;
-            this.enableHdCheck.Text = "Enable HD Video";
-            this.enableHdCheck.UseVisualStyleBackColor = true;
             // 
             // playerCustomRadio
             // 
@@ -182,7 +176,7 @@
             // 
             this.playerWmpRadio.AutoSize = true;
             this.playerWmpRadio.Checked = true;
-            this.playerWmpRadio.Location = new System.Drawing.Point(13, 8);
+            this.playerWmpRadio.Location = new System.Drawing.Point(15, 53);
             this.playerWmpRadio.Name = "playerWmpRadio";
             this.playerWmpRadio.Size = new System.Drawing.Size(133, 17);
             this.playerWmpRadio.TabIndex = 12;
@@ -207,10 +201,12 @@
             // 
             // generalTab
             // 
+            this.generalTab.Controls.Add(this.detectInstanceButton);
+            this.generalTab.Controls.Add(this.instanceTypeLabel);
+            this.generalTab.Controls.Add(this.instanceTypeHintLabel);
             this.generalTab.Controls.Add(this.downloadBeforePlayCheck);
             this.generalTab.Controls.Add(this.instanceUrlLabel);
             this.generalTab.Controls.Add(this.instanceUrlText);
-            this.generalTab.Controls.Add(this.enableHdCheck);
             this.generalTab.Controls.Add(this.showThumbsCheck);
             this.generalTab.Location = new System.Drawing.Point(4, 22);
             this.generalTab.Name = "generalTab";
@@ -220,8 +216,48 @@
             this.generalTab.Text = "General";
             this.generalTab.UseVisualStyleBackColor = true;
             // 
+            // detectInstanceButton
+            // 
+            this.detectInstanceButton.Location = new System.Drawing.Point(235, 53);
+            this.detectInstanceButton.Name = "detectInstanceButton";
+            this.detectInstanceButton.Size = new System.Drawing.Size(75, 23);
+            this.detectInstanceButton.TabIndex = 19;
+            this.detectInstanceButton.Text = "Detect";
+            this.detectInstanceButton.UseVisualStyleBackColor = true;
+            this.detectInstanceButton.Click += new System.EventHandler(this.detectInstanceButton_Click);
+            // 
+            // instanceTypeLabel
+            // 
+            this.instanceTypeLabel.AutoSize = true;
+            this.instanceTypeLabel.Location = new System.Drawing.Point(110, 58);
+            this.instanceTypeLabel.Name = "instanceTypeLabel";
+            this.instanceTypeLabel.Size = new System.Drawing.Size(53, 13);
+            this.instanceTypeLabel.TabIndex = 18;
+            this.instanceTypeLabel.Text = "Unknown";
+            // 
+            // instanceTypeHintLabel
+            // 
+            this.instanceTypeHintLabel.AutoSize = true;
+            this.instanceTypeHintLabel.Location = new System.Drawing.Point(7, 58);
+            this.instanceTypeHintLabel.Name = "instanceTypeHintLabel";
+            this.instanceTypeHintLabel.Size = new System.Drawing.Size(97, 13);
+            this.instanceTypeHintLabel.TabIndex = 17;
+            this.instanceTypeHintLabel.Text = "Instance Backend:";
+            // 
+            // downloadBeforePlayCheck
+            // 
+            this.downloadBeforePlayCheck.AutoSize = true;
+            this.downloadBeforePlayCheck.Location = new System.Drawing.Point(10, 112);
+            this.downloadBeforePlayCheck.Name = "downloadBeforePlayCheck";
+            this.downloadBeforePlayCheck.Size = new System.Drawing.Size(172, 17);
+            this.downloadBeforePlayCheck.TabIndex = 14;
+            this.downloadBeforePlayCheck.Text = "Download video before playing";
+            this.downloadBeforePlayCheck.UseVisualStyleBackColor = true;
+            // 
             // videoPlayerTab
             // 
+            this.videoPlayerTab.Controls.Add(this.videoQualityLabel);
+            this.videoPlayerTab.Controls.Add(this.videoQualityBox);
             this.videoPlayerTab.Controls.Add(this.playerWmpRadio);
             this.videoPlayerTab.Controls.Add(this.playerCustomRadio);
             this.videoPlayerTab.Controls.Add(this.playerWmpGroupBox);
@@ -234,12 +270,35 @@
             this.videoPlayerTab.Text = "Video Player";
             this.videoPlayerTab.UseVisualStyleBackColor = true;
             // 
+            // videoQualityLabel
+            // 
+            this.videoQualityLabel.AutoSize = true;
+            this.videoQualityLabel.Location = new System.Drawing.Point(8, 20);
+            this.videoQualityLabel.Name = "videoQualityLabel";
+            this.videoQualityLabel.Size = new System.Drawing.Size(72, 13);
+            this.videoQualityLabel.TabIndex = 22;
+            this.videoQualityLabel.Text = "Video Quality:";
+            // 
+            // videoQualityBox
+            // 
+            this.videoQualityBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.videoQualityBox.FormattingEnabled = true;
+            this.videoQualityBox.Items.AddRange(new object[] {
+            "360p",
+            "480p",
+            "720p",
+            "1080p"});
+            this.videoQualityBox.Location = new System.Drawing.Point(92, 16);
+            this.videoQualityBox.Name = "videoQualityBox";
+            this.videoQualityBox.Size = new System.Drawing.Size(82, 21);
+            this.videoQualityBox.TabIndex = 21;
+            // 
             // playerWmpGroupBox
             // 
             this.playerWmpGroupBox.Controls.Add(this.playerWmpFullScreenCheck);
-            this.playerWmpGroupBox.Location = new System.Drawing.Point(6, 10);
+            this.playerWmpGroupBox.Location = new System.Drawing.Point(6, 55);
             this.playerWmpGroupBox.Name = "playerWmpGroupBox";
-            this.playerWmpGroupBox.Size = new System.Drawing.Size(304, 96);
+            this.playerWmpGroupBox.Size = new System.Drawing.Size(304, 51);
             this.playerWmpGroupBox.TabIndex = 14;
             this.playerWmpGroupBox.TabStop = false;
             // 
@@ -286,16 +345,6 @@
             this.downloadsTab.Text = "Downloads";
             this.downloadsTab.UseVisualStyleBackColor = true;
             // 
-            // downloadBeforePlayCheck
-            // 
-            this.downloadBeforePlayCheck.AutoSize = true;
-            this.downloadBeforePlayCheck.Location = new System.Drawing.Point(10, 111);
-            this.downloadBeforePlayCheck.Name = "downloadBeforePlayCheck";
-            this.downloadBeforePlayCheck.Size = new System.Drawing.Size(172, 17);
-            this.downloadBeforePlayCheck.TabIndex = 14;
-            this.downloadBeforePlayCheck.Text = "Download video before playing";
-            this.downloadBeforePlayCheck.UseVisualStyleBackColor = true;
-            // 
             // SettingsDialog
             // 
             this.AcceptButton = this.okButton;
@@ -341,7 +390,6 @@
         private System.Windows.Forms.TextBox downloadFolderText;
         private System.Windows.Forms.Button downloadFolderOpenBtn;
         private System.Windows.Forms.CheckBox showThumbsCheck;
-        private System.Windows.Forms.CheckBox enableHdCheck;
         private System.Windows.Forms.RadioButton playerWmpRadio;
         private System.Windows.Forms.RadioButton playerCustomRadio;
         private System.Windows.Forms.TabControl tabControl;
@@ -353,5 +401,10 @@
         private System.Windows.Forms.Label playerCustomLabel;
         private System.Windows.Forms.CheckBox playerWmpFullScreenCheck;
         private System.Windows.Forms.CheckBox downloadBeforePlayCheck;
+        private System.Windows.Forms.Button detectInstanceButton;
+        private System.Windows.Forms.Label instanceTypeLabel;
+        private System.Windows.Forms.Label instanceTypeHintLabel;
+        private System.Windows.Forms.Label videoQualityLabel;
+        private System.Windows.Forms.ComboBox videoQualityBox;
     }
 }

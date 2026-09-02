@@ -10,9 +10,14 @@ namespace YouTube
 {
     static class DataApi
     {
+        public static string MergeUrl(string baseUrl, string path)
+        {
+            return baseUrl.TrimEnd('/') + "/" + path.TrimStart('/');
+        }
+
         public static string GetFullUrl(string path)
         {
-            return Settings.Default.InstanceBaseUrl.TrimEnd('/') + "/" + path.TrimStart('/');
+            return MergeUrl(Settings.Default.InstanceBaseUrl, path);
         }
 
         public static string GetFinalUrl(string url, string method)
@@ -58,23 +63,76 @@ namespace YouTube
 
         public static string GetVideoUrl(string videoId)
         {
-            return GetVideoUrl(videoId, VideoQuality.Default);
+            return GetVideoUrl(videoId, Settings.Default.VideoQuality, Settings.Default.InstanceType);
         }
 
-        public static string GetVideoUrl(string videoId, VideoQuality quality)
+        public static string GetVideoUrl(string videoId, string quality)
         {
-            string url;
+            return GetVideoUrl(videoId, quality, Settings.Default.InstanceType);
+        }
 
-            if (quality == VideoQuality.HighDef || (quality == VideoQuality.Default && Settings.Default.EnableHd))
+        public static string GetVideoUrl(string videoId, string quality, string instanceType)
+        {
+            switch (instanceType)
             {
-                url = GetFullUrl("exp_hd?video_id=" + videoId);
+                case "BackTube":
+                    switch (quality)
+                    {
+                        case "1080p":
+                            return GetFullUrl("get_video?v=" + videoId + "&q=hd1080&fallback=1");
+                        case "720p":
+                            return GetFullUrl("get_video?v=" + videoId + "&q=hd720&fallback=1");
+                        case "480p":
+                            return GetFullUrl("get_video?v=" + videoId + "&q=large&fallback=1");
+                        case "360p":
+                            return GetFullUrl("get_video?v=" + videoId + "&q=medium&fallback=1");
+                        default:
+                            throw new Exception("Invalid quality for BackTube: " + quality);
+                    }
+                case "yt2009":
+                    switch (quality)
+                    {
+                        case "1080p":
+                            return GetFullUrl("exp_hd?video_id=" + videoId);
+                        case "720p":
+                            return GetFullUrl("exp_hd?video_id=" + videoId);
+                        case "480p":
+                            return GetFullUrl("get_video?video_id=" + videoId);
+                        case "360p":
+                            return GetFullUrl("get_video?video_id=" + videoId);
+                        default:
+                            throw new Exception("Invalid quality for yt2009: " + quality);
+                    }
+                default:
+                    throw new Exception("Unsupported instance: " + instanceType);
+            }
+
+        }
+
+        public static string GetInstanceType(string baseUrl)
+        {
+            if (Utils.IsUrlOk(MergeUrl(baseUrl, "/backtube_test")))
+            {
+                return "BackTube";
+            }
+            else if (Utils.IsUrlOk(MergeUrl(baseUrl, "/yt2009_flags.htm")))
+            {
+                return "yt2009";
+            }
+            else if (Utils.IsUrlOk(MergeUrl(baseUrl, "/feeds/api/videos?q=test")))
+            {
+                return "Unknown";
             }
             else
             {
-                url = GetFullUrl("get_video?video_id=" + videoId + "/mp4");
+                return "Bad Instance";
             }
+        }
 
-            return url;
+        public static void UpdateInstanceType()
+        {
+            Settings.Default.InstanceType = GetInstanceType(Settings.Default.InstanceBaseUrl);
+            Settings.Default.Save();
         }
     }
 }

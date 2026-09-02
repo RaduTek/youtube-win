@@ -12,7 +12,7 @@ namespace YouTube {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.14.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.10.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -44,18 +44,6 @@ namespace YouTube {
             }
             set {
                 this["DownloadFolder"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool EnableHd {
-            get {
-                return ((bool)(this["EnableHd"]));
-            }
-            set {
-                this["EnableHd"] = value;
             }
         }
         
@@ -116,6 +104,30 @@ namespace YouTube {
             }
             set {
                 this["DownloadBeforePlay"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Unknown")]
+        public string InstanceType {
+            get {
+                return ((string)(this["InstanceType"]));
+            }
+            set {
+                this["InstanceType"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("360p")]
+        public string VideoQuality {
+            get {
+                return ((string)(this["VideoQuality"]));
+            }
+            set {
+                this["VideoQuality"] = value;
             }
         }
     }

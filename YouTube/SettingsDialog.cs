@@ -28,11 +28,12 @@ namespace YouTube
                 instanceUrlText.Text = "http://";
             else
                 instanceUrlText.Text = Settings.Default.InstanceBaseUrl;
+            instanceTypeLabel.Text = Settings.Default.InstanceType;
             showThumbsCheck.Checked = Settings.Default.ShowThumbs;
-            enableHdCheck.Checked = Settings.Default.EnableHd;
             downloadBeforePlayCheck.Checked = Settings.Default.DownloadBeforePlay;
 
             // Video Player
+            videoQualityBox.SelectedItem = Settings.Default.VideoQuality;
             playerWmpRadio.Checked = !Settings.Default.PlayerCustomEnabled;
             playerWmpFullScreenCheck.Checked = Settings.Default.PlayerWmpFullscreen;
             playerCustomRadio.Checked = Settings.Default.PlayerCustomEnabled;
@@ -53,6 +54,8 @@ namespace YouTube
             {
                 throw new Exception("Instance Base URL is not a valid URL.");
             }
+
+            DetectInstance();
 
             if (playerCustomRadio.Checked)
             {
@@ -87,11 +90,12 @@ namespace YouTube
         {
             // General
             Settings.Default.InstanceBaseUrl = instanceUrlText.Text;
+            Settings.Default.InstanceType = instanceTypeLabel.Text;
             Settings.Default.ShowThumbs = showThumbsCheck.Checked;
-            Settings.Default.EnableHd = enableHdCheck.Checked;
             Settings.Default.DownloadBeforePlay = downloadBeforePlayCheck.Checked;
 
             // Video Player
+            Settings.Default.VideoQuality = (string)videoQualityBox.SelectedItem;
             Settings.Default.PlayerWmpFullscreen = playerWmpFullScreenCheck.Checked;
             Settings.Default.PlayerCustomEnabled = playerCustomRadio.Checked;
             Settings.Default.PlayerCustomPath = playerCustomPathText.Text;
@@ -143,6 +147,25 @@ namespace YouTube
         {
             playerWmpGroupBox.Enabled = playerWmpRadio.Checked;
             playerCustomGroup.Enabled = playerCustomRadio.Checked;
+        }
+
+        private void detectInstanceButton_Click(object sender, EventArgs e)
+        {
+            DetectInstance();
+        }
+
+        private void DetectInstance()
+        { 
+            instanceTypeLabel.Text = DataApi.GetInstanceType(instanceUrlText.Text);
+
+            if (instanceTypeLabel.Text == "Unknown")
+            {
+                MessageBox.Show("Unknown instance type, videos may not play as expected.", "Detect Instance");
+            }
+            else if (instanceTypeLabel.Text == "Bad Instance")
+            {
+                MessageBox.Show("Could not detect instance type, check the URL and network connection.", "Detect Instance");
+            }
         }
     }
 }

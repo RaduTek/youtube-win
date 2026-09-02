@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <ProjectView>ProjectFiles</ProjectView>
-    <PublishUrlHistory>publish\</PublishUrlHistory>
-    <InstallUrlHistory />
+    <PublishUrlHistory>\\raduserver.home.radutek.uk\ServerAppData\wwwroot\pub\ClickOnce\|\\raduserver.home.radutek.uk\ServerAppData\nginx-proxy-manager\data\static\pub\ClickOnce\|\\raduserver.home.radutek.uk\ServerAppData\nginx-proxy-manager\data\static\pub\YouTube\|publish\</PublishUrlHistory>
+    <InstallUrlHistory>http://pub.radutek.uk/ClickOnce/</InstallUrlHistory>
     <SupportUrlHistory />
-    <UpdateUrlHistory />
+    <UpdateUrlHistory>http://pub.radutek.uk/ClickOnce/</UpdateUrlHistory>
     <BootstrapperUrlHistory />
     <ErrorReportUrlHistory />
     <FallbackCulture>en-US</FallbackCulture>
