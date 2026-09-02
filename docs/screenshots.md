@@ -36,16 +36,18 @@ Click the play icon to generate a playlist `.m3u` file and open it in the config
 
 ![Settings General Page](settings1.png)
 
-- Instance URL: This is the URL to the yt2009 server
+- Instance URL: This is the URL to the server
+- Instance Backend: Shows the detected instance type (BackTube, yt2009, Unknown). Click `Detect` to detect type.
 - Show Thumbnails: Show or hide thumbnails in search results, to save loading time and bandwidth
-- Enable HD Video: Enable playback of 720p video (if your hardware copes with it :)
 - Download video before playing: Check to download the video into your downloads folder, and play it locally without streaming
 
 ### Video Player
 
 ![Settings Video Player Page](settings2.png)
 
-Select the default player for watching videos.
+Select the streaming quality and the default player for watching videos.
+
+When using BackTube, all quality levels are available. For yt2009, only 720p and 360p are available, selecting other options will choose the next lowest quality (1080p -> 720p, 480p -> 360p).
 
 If Windows Media Player is selected, it will be launched automatically, optionally in full screen mode.
 
