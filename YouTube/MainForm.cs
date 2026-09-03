@@ -92,6 +92,8 @@ namespace YouTube
 
         private void MainForm_Load(object sender, EventArgs e)
         {
+            SetTheme(Settings.Default.Theme);
+
             if (hasSearchedOnce)
                 return;
 
@@ -250,6 +252,21 @@ namespace YouTube
         #endregion
 
         #region Actions
+
+        private void SetTheme(string theme)
+        {
+            switch (theme)
+            {
+                case "System":
+                    BackColor = SystemColors.Control;
+                    topPanel.BackgroundImage = Properties.Resources.Header;
+                    break;
+                case "Blue":
+                    BackColor = Color.FromArgb(255, 224, 234, 243);
+                    topPanel.BackgroundImage = Properties.Resources.HeaderBlue;
+                    break;
+            }
+        }
 
         private void SearchVideos(string query)
         {

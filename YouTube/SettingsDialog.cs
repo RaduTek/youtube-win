@@ -31,6 +31,7 @@ namespace YouTube
             instanceTypeLabel.Text = Settings.Default.InstanceType;
             showThumbsCheck.Checked = Settings.Default.ShowThumbs;
             downloadBeforePlayCheck.Checked = Settings.Default.DownloadBeforePlay;
+            themeComboBox.SelectedItem = Settings.Default.Theme;
 
             // Video Player
             videoQualityBox.SelectedItem = Settings.Default.VideoQuality;
@@ -93,6 +94,7 @@ namespace YouTube
             Settings.Default.InstanceType = instanceTypeLabel.Text;
             Settings.Default.ShowThumbs = showThumbsCheck.Checked;
             Settings.Default.DownloadBeforePlay = downloadBeforePlayCheck.Checked;
+            Settings.Default.Theme = (string)themeComboBox.SelectedItem;
 
             // Video Player
             Settings.Default.VideoQuality = (string)videoQualityBox.SelectedItem;

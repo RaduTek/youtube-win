@@ -252,6 +252,7 @@
     <None Include="Resources\SearchBoxText.png" />
     <None Include="Resources\HeaderShadow.png" />
     <None Include="Resources\PopupHeader.png" />
+    <None Include="Resources\HeaderBlue.png" />
     <Content Include="Youtube.ico" />
   </ItemGroup>
   <ItemGroup>

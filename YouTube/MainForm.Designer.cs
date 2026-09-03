@@ -32,6 +32,9 @@
             this.resultsSearchHint = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.topPanel = new System.Windows.Forms.Panel();
+            this.topLogo = new System.Windows.Forms.PictureBox();
+            this.videoResultsBox = new YouTube.CustomFlowLayoutPanel();
+            this.loadMoreLink = new System.Windows.Forms.LinkLabel();
             this.searchBox = new ImageControls.ImagePanel();
             this.searchButton = new ImageControls.ImageButton();
             this.searchTextBox = new System.Windows.Forms.TextBox();
@@ -41,14 +44,11 @@
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.queueListButton = new System.Windows.Forms.ToolStripButton();
             this.downloadStatusButton = new System.Windows.Forms.ToolStripButton();
-            this.topLogo = new System.Windows.Forms.PictureBox();
-            this.videoResultsBox = new YouTube.CustomFlowLayoutPanel();
-            this.loadMoreLink = new System.Windows.Forms.LinkLabel();
             this.topPanel.SuspendLayout();
-            this.searchBox.SuspendLayout();
-            this.toolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.topLogo)).BeginInit();
             this.videoResultsBox.SuspendLayout();
+            this.searchBox.SuspendLayout();
+            this.toolStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // resultsSearchHint
@@ -86,6 +86,47 @@
             this.topPanel.Name = "topPanel";
             this.topPanel.Size = new System.Drawing.Size(684, 52);
             this.topPanel.TabIndex = 0;
+            // 
+            // topLogo
+            // 
+            this.topLogo.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.topLogo.BackColor = System.Drawing.Color.Transparent;
+            this.topLogo.Image = ((System.Drawing.Image)(resources.GetObject("topLogo.Image")));
+            this.topLogo.Location = new System.Drawing.Point(12, 8);
+            this.topLogo.Name = "topLogo";
+            this.topLogo.Size = new System.Drawing.Size(86, 36);
+            this.topLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.topLogo.TabIndex = 0;
+            this.topLogo.TabStop = false;
+            // 
+            // videoResultsBox
+            // 
+            this.videoResultsBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.videoResultsBox.AutoScroll = true;
+            this.videoResultsBox.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.videoResultsBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.videoResultsBox.Controls.Add(this.loadMoreLink);
+            this.videoResultsBox.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.videoResultsBox.Location = new System.Drawing.Point(17, 71);
+            this.videoResultsBox.Name = "videoResultsBox";
+            this.videoResultsBox.Padding = new System.Windows.Forms.Padding(2);
+            this.videoResultsBox.Size = new System.Drawing.Size(650, 375);
+            this.videoResultsBox.TabIndex = 1;
+            this.videoResultsBox.WrapContents = false;
+            // 
+            // loadMoreLink
+            // 
+            this.loadMoreLink.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
+            this.loadMoreLink.LinkColor = System.Drawing.SystemColors.HotTrack;
+            this.loadMoreLink.Location = new System.Drawing.Point(5, 2);
+            this.loadMoreLink.Name = "loadMoreLink";
+            this.loadMoreLink.Padding = new System.Windows.Forms.Padding(25, 0, 0, 0);
+            this.loadMoreLink.Size = new System.Drawing.Size(444, 37);
+            this.loadMoreLink.TabIndex = 0;
+            this.loadMoreLink.TabStop = true;
+            this.loadMoreLink.Text = "Load more videos...";
+            this.loadMoreLink.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.loadMoreLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.loadMoreLink_LinkClicked);
             // 
             // searchBox
             // 
@@ -205,51 +246,11 @@
             this.downloadStatusButton.Text = "Downloads";
             this.downloadStatusButton.Click += new System.EventHandler(this.downloadStatusButton_Click);
             // 
-            // topLogo
-            // 
-            this.topLogo.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.topLogo.BackColor = System.Drawing.Color.Transparent;
-            this.topLogo.Image = ((System.Drawing.Image)(resources.GetObject("topLogo.Image")));
-            this.topLogo.Location = new System.Drawing.Point(12, 8);
-            this.topLogo.Name = "topLogo";
-            this.topLogo.Size = new System.Drawing.Size(86, 36);
-            this.topLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.topLogo.TabIndex = 0;
-            this.topLogo.TabStop = false;
-            // 
-            // videoResultsBox
-            // 
-            this.videoResultsBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.videoResultsBox.AutoScroll = true;
-            this.videoResultsBox.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.videoResultsBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.videoResultsBox.Controls.Add(this.loadMoreLink);
-            this.videoResultsBox.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.videoResultsBox.Location = new System.Drawing.Point(17, 71);
-            this.videoResultsBox.Name = "videoResultsBox";
-            this.videoResultsBox.Padding = new System.Windows.Forms.Padding(2);
-            this.videoResultsBox.Size = new System.Drawing.Size(650, 375);
-            this.videoResultsBox.TabIndex = 1;
-            this.videoResultsBox.WrapContents = false;
-            // 
-            // loadMoreLink
-            // 
-            this.loadMoreLink.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
-            this.loadMoreLink.LinkColor = System.Drawing.SystemColors.HotTrack;
-            this.loadMoreLink.Location = new System.Drawing.Point(5, 2);
-            this.loadMoreLink.Name = "loadMoreLink";
-            this.loadMoreLink.Padding = new System.Windows.Forms.Padding(25, 0, 0, 0);
-            this.loadMoreLink.Size = new System.Drawing.Size(444, 37);
-            this.loadMoreLink.TabIndex = 0;
-            this.loadMoreLink.TabStop = true;
-            this.loadMoreLink.Text = "Load more videos...";
-            this.loadMoreLink.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.loadMoreLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.loadMoreLink_LinkClicked);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(684, 462);
             this.Controls.Add(this.resultsSearchHint);
             this.Controls.Add(this.videoResultsBox);
@@ -264,12 +265,12 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.topPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.topLogo)).EndInit();
+            this.videoResultsBox.ResumeLayout(false);
             this.searchBox.ResumeLayout(false);
             this.searchBox.PerformLayout();
             this.toolStrip.ResumeLayout(false);
             this.toolStrip.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.topLogo)).EndInit();
-            this.videoResultsBox.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

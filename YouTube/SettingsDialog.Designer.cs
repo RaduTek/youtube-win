@@ -54,6 +54,8 @@
             this.playerCustomGroup = new System.Windows.Forms.GroupBox();
             this.playerCustomLabel = new System.Windows.Forms.Label();
             this.downloadsTab = new System.Windows.Forms.TabPage();
+            this.themeLabel = new System.Windows.Forms.Label();
+            this.themeComboBox = new System.Windows.Forms.ComboBox();
             this.tabControl.SuspendLayout();
             this.generalTab.SuspendLayout();
             this.videoPlayerTab.SuspendLayout();
@@ -201,6 +203,8 @@
             // 
             // generalTab
             // 
+            this.generalTab.Controls.Add(this.themeComboBox);
+            this.generalTab.Controls.Add(this.themeLabel);
             this.generalTab.Controls.Add(this.detectInstanceButton);
             this.generalTab.Controls.Add(this.instanceTypeLabel);
             this.generalTab.Controls.Add(this.instanceTypeHintLabel);
@@ -345,6 +349,27 @@
             this.downloadsTab.Text = "Downloads";
             this.downloadsTab.UseVisualStyleBackColor = true;
             // 
+            // themeLabel
+            // 
+            this.themeLabel.AutoSize = true;
+            this.themeLabel.Location = new System.Drawing.Point(7, 144);
+            this.themeLabel.Name = "themeLabel";
+            this.themeLabel.Size = new System.Drawing.Size(43, 13);
+            this.themeLabel.TabIndex = 20;
+            this.themeLabel.Text = "Theme:";
+            // 
+            // themeComboBox
+            // 
+            this.themeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.themeComboBox.FormattingEnabled = true;
+            this.themeComboBox.Items.AddRange(new object[] {
+            "System",
+            "Blue"});
+            this.themeComboBox.Location = new System.Drawing.Point(61, 141);
+            this.themeComboBox.Name = "themeComboBox";
+            this.themeComboBox.Size = new System.Drawing.Size(102, 21);
+            this.themeComboBox.TabIndex = 21;
+            // 
             // SettingsDialog
             // 
             this.AcceptButton = this.okButton;
@@ -406,5 +431,7 @@
         private System.Windows.Forms.Label instanceTypeHintLabel;
         private System.Windows.Forms.Label videoQualityLabel;
         private System.Windows.Forms.ComboBox videoQualityBox;
+        private System.Windows.Forms.ComboBox themeComboBox;
+        private System.Windows.Forms.Label themeLabel;
     }
 }

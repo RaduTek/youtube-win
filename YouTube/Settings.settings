@@ -29,5 +29,8 @@
     <Setting Name="VideoQuality" Type="System.String" Scope="User">
       <Value Profile="(Default)">360p</Value>
     </Setting>
+    <Setting Name="Theme" Type="System.String" Scope="User">
+      <Value Profile="(Default)">System</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
