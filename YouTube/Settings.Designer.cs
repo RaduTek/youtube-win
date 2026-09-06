@@ -49,66 +49,6 @@ namespace YouTube {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool ShowThumbs {
-            get {
-                return ((bool)(this["ShowThumbs"]));
-            }
-            set {
-                this["ShowThumbs"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool PlayerCustomEnabled {
-            get {
-                return ((bool)(this["PlayerCustomEnabled"]));
-            }
-            set {
-                this["PlayerCustomEnabled"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string PlayerCustomPath {
-            get {
-                return ((string)(this["PlayerCustomPath"]));
-            }
-            set {
-                this["PlayerCustomPath"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool PlayerWmpFullscreen {
-            get {
-                return ((bool)(this["PlayerWmpFullscreen"]));
-            }
-            set {
-                this["PlayerWmpFullscreen"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool DownloadBeforePlay {
-            get {
-                return ((bool)(this["DownloadBeforePlay"]));
-            }
-            set {
-                this["DownloadBeforePlay"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Unknown")]
         public string InstanceType {
             get {
@@ -133,13 +73,25 @@ namespace YouTube {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("System")]
-        public string Theme {
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool AutoPlayVideo {
             get {
-                return ((string)(this["Theme"]));
+                return ((bool)(this["AutoPlayVideo"]));
             }
             set {
-                this["Theme"] = value;
+                this["AutoPlayVideo"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool LargePlayerControls {
+            get {
+                return ((bool)(this["LargePlayerControls"]));
+            }
+            set {
+                this["LargePlayerControls"] = value;
             }
         }
     }

@@ -1,0 +1,31 @@
+﻿<!<!DOCTYPE html>
+<html>
+
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=8" />
+	<title>Video Cover</title>
+	<link rel="stylesheet" href="__cssfile__" />
+</head>
+
+<body class="videoCover">
+	<div id="cover">
+		<img src="__thumbnailHQ__" id="videoThumb" 
+		/><span class="verticalAlign"></span>
+	</div>
+
+	<div id="startScreen" class="overlay">
+		<a id="playBtn" href="javascript:window.external.ActionClick('videoCover', 'play')">
+		</a><span class="verticalAlign"></span>
+	</div>
+
+	<div id="loadingScreen" class="hidden">
+		<span id="loadingBox"><span id="loadingIcon"></span></span><span class="verticalAlign"></span>
+	</div>
+
+	<div id="endScreen" class="hidden">
+		<a id="replayBtn" href="javascript:window.external.ActionClick('videoCover', 'replay')">
+		</a><span class="verticalAlign"></span>
+	</div>
+</body>
+
+</html>

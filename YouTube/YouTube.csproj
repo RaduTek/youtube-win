@@ -27,9 +27,9 @@
     <UpdateUrl>http://pub.radutek.uk/ClickOnce/</UpdateUrl>
     <ProductName>YouTube</ProductName>
     <PublisherName>YouTube for Windows</PublisherName>
-    <MinimumRequiredVersion>1.1.0.1</MinimumRequiredVersion>
-    <ApplicationRevision>2</ApplicationRevision>
-    <ApplicationVersion>1.1.0.2</ApplicationVersion>
+    <MinimumRequiredVersion>2.0.0.0</MinimumRequiredVersion>
+    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationVersion>2.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>false</BootstrapperEnabled>
@@ -43,6 +43,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -69,6 +70,15 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AxInterop.WMPLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\AxInterop.WMPLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Interop.WMPLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>.\Interop.WMPLib.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
@@ -83,115 +93,73 @@
     <Compile Include="AboutDialog.Designer.cs">
       <DependentUpon>AboutDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="CustomFlowLayoutPanel.cs">
-      <SubType>Component</SubType>
+    <Compile Include="Forms\BrowseForm.cs">
+      <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DataApi.cs" />
+    <Compile Include="Forms\BrowseForm.Designer.cs">
+      <DependentUpon>BrowseForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Utils\DataApi.cs" />
     <Compile Include="Data\Data.cs" />
     <Compile Include="Data\Entry.cs" />
     <Compile Include="Data\Feed.cs" />
     <Compile Include="Data\Media.cs" />
-    <Compile Include="DownloadForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="DownloadForm.Designer.cs">
-      <DependentUpon>DownloadForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="DownloadUtil.cs" />
-    <Compile Include="ImageControls\ImageButton.cs">
+    <Compile Include="Utils\DownloadUtil.cs" />
+    <Compile Include="ExControls\ExButton.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="ImageControls\ImageCheckButton.cs">
+    <Compile Include="ExControls\ExControl.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="ImageControls\ImageForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ImageControls\ImagePanel.cs">
+    <Compile Include="ExControls\ExControlTheme.cs" />
+    <Compile Include="ExControls\ExPanel.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="ImageControls\ImageProgressBar.cs">
+    <Compile Include="ExControls\ExResourceManager.cs" />
+    <Compile Include="ExControls\ExSeekBar.cs" />
+    <Compile Include="ExControls\ExUtils.cs" />
+    <Compile Include="ExControls\ExWebBrowser.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="ImageControls\ImageRadioButton.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="ImageControls\ImageSlice.cs" />
-    <Compile Include="IVideoListParent.cs" />
-    <Compile Include="MainForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="MainForm.Designer.cs">
-      <DependentUpon>MainForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="NativeToolStrip\NativeContextMenuStrip.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="NativeToolStrip\NativeMenuStrip.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="NativeToolStrip\NativeStatusStrip.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="NativeToolStrip\NativeToolStrip.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="NativeToolStrip\NativeToolStripContainer.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="NativeToolStrip\NativeToolStripPanel.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="NativeToolStrip\NativeToolStripRenderer.cs" />
-    <Compile Include="PlaylistUtil.cs" />
+    <Compile Include="ExControls\NinePatchImage.cs" />
+    <Compile Include="Utils\PlaylistUtil.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="QueueForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="QueueForm.Designer.cs">
-      <DependentUpon>QueueForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="SettingsDialog.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="SettingsDialog.Designer.cs">
       <DependentUpon>SettingsDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Utils.cs" />
-    <Compile Include="VideoListEntry.cs">
-      <SubType>UserControl</SubType>
+    <Compile Include="Utils\Utils.cs" />
+    <Compile Include="Forms\WatchForm.cs">
+      <SubType>Form</SubType>
     </Compile>
-    <Compile Include="VideoListEntry.Designer.cs">
-      <DependentUpon>VideoListEntry.cs</DependentUpon>
+    <Compile Include="Forms\WatchForm.Designer.cs">
+      <DependentUpon>WatchForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Utils\WebFrameConnector.cs" />
     <EmbeddedResource Include="AboutDialog.resx">
       <DependentUpon>AboutDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DownloadForm.resx">
-      <DependentUpon>DownloadForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="MainForm.resx">
-      <DependentUpon>MainForm.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\BrowseForm.resx">
+      <DependentUpon>BrowseForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <EmbeddedResource Include="QueueForm.resx">
-      <DependentUpon>QueueForm.cs</DependentUpon>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="SettingsDialog.resx">
       <DependentUpon>SettingsDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="VideoListEntry.resx">
-      <DependentUpon>VideoListEntry.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\WatchForm.resx">
+      <DependentUpon>WatchForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
     <None Include="Settings.settings">
@@ -206,53 +174,130 @@
     <None Include="YouTube_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\YouTube_logo_top.png" />
-    <None Include="Resources\star_half.png" />
-    <None Include="Resources\star_off.png" />
-    <None Include="Resources\star_on.png" />
-    <None Include="Resources\nothumb.png" />
+    <Content Include="Res\nothumb.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="Resources\About_logo.png" />
     <None Include="Resources\AddToList.png" />
-    <None Include="Resources\Download.png" />
-    <None Include="Resources\Download_complete.png" />
-    <None Include="Resources\Download_error.png" />
-    <None Include="Resources\Download_idle.png" />
-    <None Include="Resources\Download_queued.png" />
-    <None Include="Resources\List_empty.png" />
-    <None Include="Resources\List_not_empty.png" />
-    <None Include="Resources\error.png" />
-    <None Include="Resources\accept.png" />
-    <None Include="Resources\time.png" />
-    <None Include="Resources\folder.png" />
-    <None Include="Resources\delete.png" />
-    <None Include="Resources\bin_closed.png" />
-    <None Include="Resources\cog.png" />
-    <None Include="Resources\comment.png" />
-    <None Include="Resources\comments.png" />
-    <None Include="Resources\cross.png" />
-    <None Include="Resources\control_play.png" />
-    <None Include="Resources\control_play_blue.png" />
-    <None Include="Resources\email.png" />
-    <None Include="Resources\film.png" />
-    <None Include="Resources\link.png" />
-    <None Include="Resources\information.png" />
-    <None Include="Resources\ipod.png" />
-    <None Include="Resources\hourglass.png" />
-    <None Include="Resources\help.png" />
-    <None Include="Resources\world.png" />
-    <None Include="Resources\tick.png" />
-    <None Include="Resources\thumb_down.png" />
-    <None Include="Resources\thumb_up.png" />
-    <None Include="Resources\magnifier.png" />
-    <None Include="Resources\Header.png" />
     <None Include="Resources\SearchButton_Normal.png" />
     <None Include="Resources\SearchButton_Disabled.png" />
     <None Include="Resources\SearchButton_Hover.png" />
     <None Include="Resources\SearchButton_Press.png" />
     <None Include="Resources\SearchBoxText.png" />
-    <None Include="Resources\HeaderShadow.png" />
     <None Include="Resources\PopupHeader.png" />
-    <None Include="Resources\HeaderBlue.png" />
+    <Content Include="AxInterop.WMPLib.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Interop.WMPLib.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="Resources\WatchHeader.png" />
+    <None Include="Resources\WatchHeaderLogo.png" />
+    <None Include="Resources\PlayerControlsBack.png" />
+    <Content Include="Res\RelatedBack.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="Resources\PlayerPause.png" />
+    <None Include="Resources\PlayerPlay.png" />
+    <None Include="Resources\PlayerButton_Hover.png" />
+    <None Include="Resources\PlayerButton_Normal.png" />
+    <None Include="Resources\PlayerButton_Pressed.png" />
+    <None Include="Resources\PlayerExitFullscreen.png" />
+    <None Include="Resources\PlayerFullscreen.png" />
+    <None Include="Resources\PlayerLarge.png" />
+    <None Include="Resources\PlayerNormal.png" />
+    <Content Include="Res\PlayerThumbPlay.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="Resources\PlayerVolumeMax.png" />
+    <None Include="Resources\PlayerVolumeMed.png" />
+    <None Include="Resources\PlayerVolumeMin.png" />
+    <None Include="Resources\PlayerMute.png" />
+    <Content Include="Res\Loading16.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Res\Loading32.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Res\LoadingDark16.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Res\LoadingDark32.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="Resources\BrowseHeader.png" />
+    <None Include="Resources\BrowseHeaderLogo.png" />
+    <None Include="Resources\PlayerExitFullscreen_Hover.png" />
+    <None Include="Resources\PlayerFullscreen_Hover.png" />
+    <None Include="Resources\PlayerLarge_Hover.png" />
+    <Content Include="Res\GuideSelected.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Res\GuideHover.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Res\FeedIcons.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="Resources\BrowseToWatch_Pressed.png" />
+    <None Include="Resources\BrowseToWatch.png" />
+    <None Include="Resources\BrowseToWatch_Hover.png" />
+    <None Include="Resources\BrowseToWatch_Disabled.png" />
+    <None Include="Templates\browseError.html" />
+    <Content Include="Res\PlayerLoadingShade.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="Resources\PlayerPlay_Hover.png" />
+    <None Include="Resources\PlayerVolumeMax_Hover.png" />
+    <None Include="Resources\PlayerVolumeMed_Hover.png" />
+    <None Include="Resources\PlayerVolumeMin_Hover.png" />
+    <None Include="Resources\PlayerMute_Hover.png" />
+    <None Include="Resources\PlayerNormal_Hover.png" />
+    <None Include="Resources\PlayerPause_Hover.png" />
+    <Content Include="Res\PlayerThumbReplay.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Res\ratings.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Res\RelatedItemBack.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="Resources\SeekBarThumb_Hover.png" />
+    <None Include="Resources\SeekBarThumb_Normal.png" />
+    <None Include="Resources\SeekBar_Buffer.png" />
+    <None Include="Resources\SeekBar_Fill.png" />
+    <None Include="Resources\SeekBar_Track.png" />
+    <None Include="Resources\SeekBarThumb_Pressed.png" />
+    <None Include="Templates\guide.html" />
+    <None Include="Resources\SettingsDark.png" />
+    <None Include="Resources\SettingsDark_Hover.png" />
+    <None Include="Resources\SettingsDark_Pressed.png" />
+    <None Include="Resources\SettingsLight.png" />
+    <None Include="Resources\SettingsLight_Hover.png" />
+    <None Include="Resources\SettingsLight_Pressed.png" />
+    <Content Include="Res\styles.css">
+      <SubType>Component</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="Templates\videoCover.html" />
+    <None Include="Templates\browseResultsItem.html" />
+    <None Include="Templates\videoItem.html" />
+    <None Include="Templates\browseResults.html" />
+    <None Include="Templates\videoRelated.html" />
+    <None Include="Templates\videoDescription.html" />
+    <None Include="Resources\WatchVideoLarge.png" />
+    <None Include="Resources\WatchVideoLarge_Disabled.png" />
+    <None Include="Resources\WatchVideoLarge_Hover.png" />
+    <None Include="Resources\WatchVideoLarge_Pressed.png" />
+    <None Include="Resources\WatchVideoNormal.png" />
+    <None Include="Resources\WatchVideoNormal_Disabled.png" />
+    <None Include="Resources\WatchVideoNormal_Hover.png" />
+    <None Include="Resources\WatchVideoNormal_Pressed.png" />
+    <None Include="Resources\WatchToBrowse_Pressed.png" />
+    <None Include="Resources\WatchToBrowse.png" />
+    <None Include="Resources\WatchToBrowse_Hover.png" />
+    <None Include="Resources\WatchToBrowse_Disabled.png" />
     <Content Include="Youtube.ico" />
   </ItemGroup>
   <ItemGroup>
@@ -272,6 +317,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

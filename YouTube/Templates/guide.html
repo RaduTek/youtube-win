@@ -1,0 +1,75 @@
+﻿<!<!DOCTYPE html>
+<html>
+
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=8" />
+	<title>Guide</title>
+	<link rel="stylesheet" href="__cssfile__" />
+	<script>
+		function SelectFeed(name) {
+			var anchors = document.getElementsByTagName('a');
+			for (var i=0; i < anchors.length; i++) {
+				anchors[i].className = "";
+			}
+
+			var selAnchor = document.getElementById(name);
+			
+			if (selAnchor) {
+				selAnchor.className = "selected";
+				window.external.ActionClick('selectFeed', name);
+			}
+		}
+	</script>
+</head>
+
+<body class="guide">
+	
+	<div class="guideItems">
+	
+		<p>Explore</p>
+		<div id="guideStandardFeeds">
+			<a id="most_popular" href="javascript:SelectFeed('most_popular')">
+				<span class="feedicon favorites"></span><span class="text">Most Popular</span>
+			</a>
+			<a id="recently_featured" href="javascript:SelectFeed('recently_featured')">
+				<span class="feedicon trending"></span><span class="text">Recently Featured</span>
+			</a>
+		</div>
+
+		<p>Categories</p>
+		<div id="guideCategories">
+			<a id="most_popular_Music" href="javascript:SelectFeed('most_popular_Music')">
+				<span class="feedicon music"></span><span class="text">Music</span>
+			</a>
+			<a id="most_popular_Film" href="javascript:SelectFeed('most_popular_Film')">
+				<span class="feedicon film"></span><span class="text">Films and Animation</span>
+			</a>
+			<a id="most_popular_Games" href="javascript:SelectFeed('most_popular_Games')">
+				<span class="feedicon gadgets"></span><span class="text">Gaming</span>
+			</a>
+			<a id="most_popular_Animals" href="javascript:SelectFeed('most_popular_Animals')">
+				<span class="feedicon pets"></span><span class="text">Pets &amp; Animals</span>
+			</a>
+		</div>
+
+		<p>My YouTube</p>
+		<div id="guideInternalFeeds">
+			<a id="internal_favorites" href="javascript:SelectFeed('internal_favorites')">
+				<span class="feedicon favorites"></span><span class="text">Favorites</span>
+			</a>
+			<a id="internal_downloads" href="javascript:SelectFeed('internal_downloads')">
+				<span class="feedicon downloads"></span><span class="text">Downloads</span>
+			</a>
+		</div>
+
+		<!--<p>Subscriptions</p>
+		<div id="guideSubscriptions">
+
+		</div>-->
+
+	</div>
+
+	<div id="loading" class="hidden"></div>
+</body>
+
+</html>

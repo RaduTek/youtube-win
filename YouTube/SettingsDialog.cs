@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.IO;
 using System.Windows.Forms;
 
@@ -29,17 +24,10 @@ namespace YouTube
             else
                 instanceUrlText.Text = Settings.Default.InstanceBaseUrl;
             instanceTypeLabel.Text = Settings.Default.InstanceType;
-            showThumbsCheck.Checked = Settings.Default.ShowThumbs;
-            downloadBeforePlayCheck.Checked = Settings.Default.DownloadBeforePlay;
-            themeComboBox.SelectedItem = Settings.Default.Theme;
 
             // Video Player
             videoQualityBox.SelectedItem = Settings.Default.VideoQuality;
-            playerWmpRadio.Checked = !Settings.Default.PlayerCustomEnabled;
-            playerWmpFullScreenCheck.Checked = Settings.Default.PlayerWmpFullscreen;
-            playerCustomRadio.Checked = Settings.Default.PlayerCustomEnabled;
-            playerCustomPathText.Text = Settings.Default.PlayerCustomPath;
-            PlayerTypeSelected(null, null);
+            largeControlsCheck.Checked = Settings.Default.LargePlayerControls;
 
             // Downloads
             downloadFolderText.Text = Settings.Default.DownloadFolder;
@@ -57,18 +45,6 @@ namespace YouTube
             }
 
             DetectInstance();
-
-            if (playerCustomRadio.Checked)
-            {
-                if (playerCustomPathText.Text == null || playerCustomPathText.Text == "")
-                {
-                    throw new Exception("Custom Player Path cannot be empty.");
-                }
-                else if (!File.Exists(playerCustomPathText.Text))
-                {
-                    throw new Exception("Custom Player Path does not exist.");
-                }
-            }
 
             if (downloadFolderText.Text == null || downloadFolderText.Text == "")
             {
@@ -92,15 +68,10 @@ namespace YouTube
             // General
             Settings.Default.InstanceBaseUrl = instanceUrlText.Text;
             Settings.Default.InstanceType = instanceTypeLabel.Text;
-            Settings.Default.ShowThumbs = showThumbsCheck.Checked;
-            Settings.Default.DownloadBeforePlay = downloadBeforePlayCheck.Checked;
-            Settings.Default.Theme = (string)themeComboBox.SelectedItem;
 
             // Video Player
             Settings.Default.VideoQuality = (string)videoQualityBox.SelectedItem;
-            Settings.Default.PlayerWmpFullscreen = playerWmpFullScreenCheck.Checked;
-            Settings.Default.PlayerCustomEnabled = playerCustomRadio.Checked;
-            Settings.Default.PlayerCustomPath = playerCustomPathText.Text;
+            Settings.Default.LargePlayerControls = largeControlsCheck.Checked;
 
             // Downloads
             Settings.Default.DownloadFolder = downloadFolderText.Text;
@@ -124,17 +95,6 @@ namespace YouTube
             Close();
         }
 
-        private void videoPlayerOpenBtn_Click(object sender, EventArgs e)
-        {
-            var fd = new OpenFileDialog();
-            fd.Filter = "Executable Files (*.exe)|*.exe";
-
-            if (fd.ShowDialog() == DialogResult.OK)
-            {
-                playerCustomPathText.Text = fd.FileName;
-            }
-        }
-
         private void downloadFolderOpenBtn_Click(object sender, EventArgs e)
         {
             var dd = new FolderBrowserDialog();
@@ -143,12 +103,6 @@ namespace YouTube
             {
                 downloadFolderText.Text = "\"" + dd.SelectedPath + "\" %1";
             }
-        }
-
-        private void PlayerTypeSelected(object sender, EventArgs e)
-        {
-            playerWmpGroupBox.Enabled = playerWmpRadio.Checked;
-            playerCustomGroup.Enabled = playerCustomRadio.Checked;
         }
 
         private void detectInstanceButton_Click(object sender, EventArgs e)

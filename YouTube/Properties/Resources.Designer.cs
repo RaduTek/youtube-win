@@ -73,16 +73,6 @@ namespace YouTube.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap accept {
-            get {
-                object obj = ResourceManager.GetObject("accept", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap AddToList {
             get {
                 object obj = ResourceManager.GetObject("AddToList", resourceCulture);
@@ -91,11 +81,38 @@ namespace YouTube.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &lt;!&lt;!DOCTYPE html&gt;
+        ///&lt;html&gt;
+        ///
+        ///&lt;head&gt;
+        ///	&lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=8&quot; /&gt;
+        ///	&lt;title&gt;Browse Error&lt;/title&gt;
+        ///	&lt;link rel=&quot;stylesheet&quot; href=&quot;__cssfile__&quot; /&gt;
+        ///&lt;/head&gt;
+        ///
+        ///&lt;body class=&quot;browsePage&quot;&gt;
+        ///
+        ///	&lt;div id=&quot;browseError&quot;&gt;
+        ///		&lt;span id=&quot;browseErrorText&quot;&gt;__error_text__&lt;/span&gt;
+        ///		&lt;span class=&quot;verticalAlign&quot;&gt;&lt;/span&gt;
+        ///	&lt;/div&gt;
+        ///
+        ///&lt;/body&gt;
+        ///
+        ///&lt;/html&gt;.
+        /// </summary>
+        internal static string browseError {
+            get {
+                return ResourceManager.GetString("browseError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap bin_closed {
+        internal static System.Drawing.Bitmap BrowseHeader {
             get {
-                object obj = ResourceManager.GetObject("bin_closed", resourceCulture);
+                object obj = ResourceManager.GetObject("BrowseHeader", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -103,9 +120,68 @@ namespace YouTube.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap cog {
+        internal static System.Drawing.Bitmap BrowseHeaderLogo {
             get {
-                object obj = ResourceManager.GetObject("cog", resourceCulture);
+                object obj = ResourceManager.GetObject("BrowseHeaderLogo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;!&lt;!DOCTYPE html&gt;
+        ///&lt;html&gt;
+        ///
+        ///&lt;head&gt;
+        ///	&lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=8&quot; /&gt;
+        ///	&lt;title&gt;Browse results&lt;/title&gt;
+        ///	&lt;link rel=&quot;stylesheet&quot; href=&quot;__cssfile__&quot; /&gt;
+        ///&lt;/head&gt;
+        ///
+        ///&lt;body class=&quot;browsePage&quot;&gt;
+        ///	
+        ///	&lt;div class=&quot;browseResultsBox&quot;&gt;
+        ///
+        ///		&lt;p id=&quot;browseStatusText&quot;&gt;__status__&lt;/p&gt;
+        ///
+        ///		&lt;div id=&quot;browseResultsItems&quot;&gt;
+        ///		&lt;/div&gt;
+        ///
+        ///		&lt;div id=&quot;browseResultsMore&quot; class=&quot;hidden&quot;&gt;
+        ///			&lt;a href=&quot;javascript:window.external.ActionClick(&apos;loadMore&apos;,&apos;&apos;)&quot;&gt;Load more videos&lt;/a&gt;
+        ///		&lt;/div&gt;
+        ///
+        ///	&lt;/div&gt;
+        ///	&lt;div id=&quot;loading&quot; [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string browseResults {
+            get {
+                return ResourceManager.GetString("browseResults", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;div class=&quot;videoItem&quot;&gt;
+        ///	&lt;div class=&quot;thumbnail&quot;&gt;
+        ///		&lt;img src=&quot;__thumbnail__&quot; /&gt;
+        ///		&lt;span class=&quot;videoDuration&quot;&gt;__duration__&lt;/span&gt;
+        ///	&lt;/div&gt;
+        ///	&lt;div class=&quot;videoTitle&quot;&gt;&lt;a href=&quot;javascript:window.external.VideoClick(__index__,&apos;title&apos;)&quot; title=&quot;__title__&quot;&gt;__title__&lt;/a&gt;&lt;/div&gt;
+        ///	&lt;div class=&quot;videoDescription&quot;&gt;__description__&lt;/div&gt;
+        ///	&lt;div class=&quot;videoInfo&quot;&gt;By &lt;a href=&quot;javascript:window.external.VideoClick(__index__,&apos;author&apos;)&quot;&gt;__author__&lt;/a&gt; | __viewcount__ views | __upload_date__&lt;/div&gt;
+        ///&lt;/div&gt;.
+        /// </summary>
+        internal static string browseResultsItem {
+            get {
+                return ResourceManager.GetString("browseResultsItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap BrowseToWatch {
+            get {
+                object obj = ResourceManager.GetObject("BrowseToWatch", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -113,9 +189,9 @@ namespace YouTube.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap comment {
+        internal static System.Drawing.Bitmap BrowseToWatch_Disabled {
             get {
-                object obj = ResourceManager.GetObject("comment", resourceCulture);
+                object obj = ResourceManager.GetObject("BrowseToWatch_Disabled", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -123,9 +199,9 @@ namespace YouTube.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap comments {
+        internal static System.Drawing.Bitmap BrowseToWatch_Hover {
             get {
-                object obj = ResourceManager.GetObject("comments", resourceCulture);
+                object obj = ResourceManager.GetObject("BrowseToWatch_Hover", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -133,9 +209,46 @@ namespace YouTube.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap control_play {
+        internal static System.Drawing.Bitmap BrowseToWatch_Pressed {
             get {
-                object obj = ResourceManager.GetObject("control_play", resourceCulture);
+                object obj = ResourceManager.GetObject("BrowseToWatch_Pressed", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;!&lt;!DOCTYPE html&gt;
+        ///&lt;html&gt;
+        ///
+        ///&lt;head&gt;
+        ///	&lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=8&quot; /&gt;
+        ///	&lt;title&gt;Guide&lt;/title&gt;
+        ///	&lt;link rel=&quot;stylesheet&quot; href=&quot;__cssfile__&quot; /&gt;
+        ///	&lt;script&gt;
+        ///		function SelectFeed(name) {
+        ///			var anchors = document.getElementsByTagName(&apos;a&apos;);
+        ///			for (var i=0; i &lt; anchors.length; i++) {
+        ///				anchors[i].className = &quot;&quot;;
+        ///			}
+        ///
+        ///			var selAnchor = document.getElementById(name);
+        ///			
+        ///			if (selAnchor) {
+        ///				selAnchor.className = &quot;selected&quot;;
+        ///				window.external.ActionClick(&apos;selectFeed&apos;, name);        /// [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string guide {
+            get {
+                return ResourceManager.GetString("guide", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap PlayerButton_Hover {
+            get {
+                object obj = ResourceManager.GetObject("PlayerButton_Hover", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -143,9 +256,9 @@ namespace YouTube.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap control_play_blue {
+        internal static System.Drawing.Bitmap PlayerButton_Normal {
             get {
-                object obj = ResourceManager.GetObject("control_play_blue", resourceCulture);
+                object obj = ResourceManager.GetObject("PlayerButton_Normal", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -153,9 +266,9 @@ namespace YouTube.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap cross {
+        internal static System.Drawing.Bitmap PlayerButton_Pressed {
             get {
-                object obj = ResourceManager.GetObject("cross", resourceCulture);
+                object obj = ResourceManager.GetObject("PlayerButton_Pressed", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -163,9 +276,9 @@ namespace YouTube.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap delete {
+        internal static System.Drawing.Bitmap PlayerControlsBack {
             get {
-                object obj = ResourceManager.GetObject("delete", resourceCulture);
+                object obj = ResourceManager.GetObject("PlayerControlsBack", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -173,9 +286,9 @@ namespace YouTube.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Download {
+        internal static System.Drawing.Bitmap PlayerExitFullscreen {
             get {
-                object obj = ResourceManager.GetObject("Download", resourceCulture);
+                object obj = ResourceManager.GetObject("PlayerExitFullscreen", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -183,9 +296,9 @@ namespace YouTube.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Download_complete {
+        internal static System.Drawing.Bitmap PlayerExitFullscreen_Hover {
             get {
-                object obj = ResourceManager.GetObject("Download_complete", resourceCulture);
+                object obj = ResourceManager.GetObject("PlayerExitFullscreen_Hover", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -193,9 +306,9 @@ namespace YouTube.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Download_error {
+        internal static System.Drawing.Bitmap PlayerFullscreen {
             get {
-                object obj = ResourceManager.GetObject("Download_error", resourceCulture);
+                object obj = ResourceManager.GetObject("PlayerFullscreen", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -203,9 +316,9 @@ namespace YouTube.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Download_idle {
+        internal static System.Drawing.Bitmap PlayerFullscreen_Hover {
             get {
-                object obj = ResourceManager.GetObject("Download_idle", resourceCulture);
+                object obj = ResourceManager.GetObject("PlayerFullscreen_Hover", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -213,9 +326,9 @@ namespace YouTube.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Download_queued {
+        internal static System.Drawing.Bitmap PlayerLarge {
             get {
-                object obj = ResourceManager.GetObject("Download_queued", resourceCulture);
+                object obj = ResourceManager.GetObject("PlayerLarge", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -223,9 +336,9 @@ namespace YouTube.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap email {
+        internal static System.Drawing.Bitmap PlayerLarge_Hover {
             get {
-                object obj = ResourceManager.GetObject("email", resourceCulture);
+                object obj = ResourceManager.GetObject("PlayerLarge_Hover", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -233,9 +346,9 @@ namespace YouTube.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap error {
+        internal static System.Drawing.Bitmap PlayerMute {
             get {
-                object obj = ResourceManager.GetObject("error", resourceCulture);
+                object obj = ResourceManager.GetObject("PlayerMute", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -243,9 +356,9 @@ namespace YouTube.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap film {
+        internal static System.Drawing.Bitmap PlayerMute_Hover {
             get {
-                object obj = ResourceManager.GetObject("film", resourceCulture);
+                object obj = ResourceManager.GetObject("PlayerMute_Hover", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -253,9 +366,9 @@ namespace YouTube.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap folder {
+        internal static System.Drawing.Bitmap PlayerNormal {
             get {
-                object obj = ResourceManager.GetObject("folder", resourceCulture);
+                object obj = ResourceManager.GetObject("PlayerNormal", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -263,9 +376,9 @@ namespace YouTube.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Header {
+        internal static System.Drawing.Bitmap PlayerNormal_Hover {
             get {
-                object obj = ResourceManager.GetObject("Header", resourceCulture);
+                object obj = ResourceManager.GetObject("PlayerNormal_Hover", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -273,9 +386,9 @@ namespace YouTube.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap HeaderBlue {
+        internal static System.Drawing.Bitmap PlayerPause {
             get {
-                object obj = ResourceManager.GetObject("HeaderBlue", resourceCulture);
+                object obj = ResourceManager.GetObject("PlayerPause", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -283,9 +396,9 @@ namespace YouTube.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap HeaderShadow {
+        internal static System.Drawing.Bitmap PlayerPause_Hover {
             get {
-                object obj = ResourceManager.GetObject("HeaderShadow", resourceCulture);
+                object obj = ResourceManager.GetObject("PlayerPause_Hover", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -293,9 +406,9 @@ namespace YouTube.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap help {
+        internal static System.Drawing.Bitmap PlayerPlay {
             get {
-                object obj = ResourceManager.GetObject("help", resourceCulture);
+                object obj = ResourceManager.GetObject("PlayerPlay", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -303,9 +416,9 @@ namespace YouTube.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap hourglass {
+        internal static System.Drawing.Bitmap PlayerPlay_Hover {
             get {
-                object obj = ResourceManager.GetObject("hourglass", resourceCulture);
+                object obj = ResourceManager.GetObject("PlayerPlay_Hover", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -313,9 +426,9 @@ namespace YouTube.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap information {
+        internal static System.Drawing.Bitmap PlayerVolumeMax {
             get {
-                object obj = ResourceManager.GetObject("information", resourceCulture);
+                object obj = ResourceManager.GetObject("PlayerVolumeMax", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -323,9 +436,9 @@ namespace YouTube.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap ipod {
+        internal static System.Drawing.Bitmap PlayerVolumeMax_Hover {
             get {
-                object obj = ResourceManager.GetObject("ipod", resourceCulture);
+                object obj = ResourceManager.GetObject("PlayerVolumeMax_Hover", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -333,9 +446,9 @@ namespace YouTube.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap link {
+        internal static System.Drawing.Bitmap PlayerVolumeMed {
             get {
-                object obj = ResourceManager.GetObject("link", resourceCulture);
+                object obj = ResourceManager.GetObject("PlayerVolumeMed", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -343,9 +456,9 @@ namespace YouTube.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap List_empty {
+        internal static System.Drawing.Bitmap PlayerVolumeMed_Hover {
             get {
-                object obj = ResourceManager.GetObject("List_empty", resourceCulture);
+                object obj = ResourceManager.GetObject("PlayerVolumeMed_Hover", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -353,9 +466,9 @@ namespace YouTube.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap List_not_empty {
+        internal static System.Drawing.Bitmap PlayerVolumeMin {
             get {
-                object obj = ResourceManager.GetObject("List_not_empty", resourceCulture);
+                object obj = ResourceManager.GetObject("PlayerVolumeMin", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -363,19 +476,9 @@ namespace YouTube.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap magnifier {
+        internal static System.Drawing.Bitmap PlayerVolumeMin_Hover {
             get {
-                object obj = ResourceManager.GetObject("magnifier", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap nothumb {
-            get {
-                object obj = ResourceManager.GetObject("nothumb", resourceCulture);
+                object obj = ResourceManager.GetObject("PlayerVolumeMin_Hover", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -443,9 +546,9 @@ namespace YouTube.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap star_half {
+        internal static System.Drawing.Bitmap SeekBar_Buffer {
             get {
-                object obj = ResourceManager.GetObject("star_half", resourceCulture);
+                object obj = ResourceManager.GetObject("SeekBar_Buffer", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -453,9 +556,9 @@ namespace YouTube.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap star_off {
+        internal static System.Drawing.Bitmap SeekBar_Fill {
             get {
-                object obj = ResourceManager.GetObject("star_off", resourceCulture);
+                object obj = ResourceManager.GetObject("SeekBar_Fill", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -463,9 +566,9 @@ namespace YouTube.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap star_on {
+        internal static System.Drawing.Bitmap SeekBar_Track {
             get {
-                object obj = ResourceManager.GetObject("star_on", resourceCulture);
+                object obj = ResourceManager.GetObject("SeekBar_Track", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -473,9 +576,9 @@ namespace YouTube.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap thumb_down {
+        internal static System.Drawing.Bitmap SeekBarThumb_Hover {
             get {
-                object obj = ResourceManager.GetObject("thumb_down", resourceCulture);
+                object obj = ResourceManager.GetObject("SeekBarThumb_Hover", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -483,9 +586,9 @@ namespace YouTube.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap thumb_up {
+        internal static System.Drawing.Bitmap SeekBarThumb_Normal {
             get {
-                object obj = ResourceManager.GetObject("thumb_up", resourceCulture);
+                object obj = ResourceManager.GetObject("SeekBarThumb_Normal", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -493,9 +596,9 @@ namespace YouTube.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap tick {
+        internal static System.Drawing.Bitmap SeekBarThumb_Pressed {
             get {
-                object obj = ResourceManager.GetObject("tick", resourceCulture);
+                object obj = ResourceManager.GetObject("SeekBarThumb_Pressed", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -503,9 +606,9 @@ namespace YouTube.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap time {
+        internal static System.Drawing.Bitmap SettingsDark {
             get {
-                object obj = ResourceManager.GetObject("time", resourceCulture);
+                object obj = ResourceManager.GetObject("SettingsDark", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -513,9 +616,9 @@ namespace YouTube.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap world {
+        internal static System.Drawing.Bitmap SettingsDark_Hover {
             get {
-                object obj = ResourceManager.GetObject("world", resourceCulture);
+                object obj = ResourceManager.GetObject("SettingsDark_Hover", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -523,9 +626,280 @@ namespace YouTube.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap YouTube_logo_top {
+        internal static System.Drawing.Bitmap SettingsDark_Pressed {
             get {
-                object obj = ResourceManager.GetObject("YouTube_logo_top", resourceCulture);
+                object obj = ResourceManager.GetObject("SettingsDark_Pressed", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap SettingsLight {
+            get {
+                object obj = ResourceManager.GetObject("SettingsLight", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap SettingsLight_Hover {
+            get {
+                object obj = ResourceManager.GetObject("SettingsLight_Hover", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap SettingsLight_Pressed {
+            get {
+                object obj = ResourceManager.GetObject("SettingsLight_Pressed", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;!&lt;!DOCTYPE html&gt;
+        ///&lt;html&gt;
+        ///
+        ///&lt;head&gt;
+        ///	&lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=8&quot; /&gt;
+        ///	&lt;title&gt;Video Cover&lt;/title&gt;
+        ///	&lt;link rel=&quot;stylesheet&quot; href=&quot;__cssfile__&quot; /&gt;
+        ///&lt;/head&gt;
+        ///
+        ///&lt;body class=&quot;videoCover&quot;&gt;
+        ///	&lt;div id=&quot;cover&quot;&gt;
+        ///		&lt;img src=&quot;__thumbnailHQ__&quot; id=&quot;videoThumb&quot; 
+        ///		/&gt;&lt;span class=&quot;verticalAlign&quot;&gt;&lt;/span&gt;
+        ///	&lt;/div&gt;
+        ///
+        ///	&lt;div id=&quot;startScreen&quot; class=&quot;overlay&quot;&gt;
+        ///		&lt;a id=&quot;playBtn&quot; href=&quot;javascript:window.external.ActionClick(&apos;videoCover&apos;, &apos;play&apos;)&quot;&gt;
+        ///		&lt;/a&gt;&lt;span class=&quot;verticalAlign&quot;&gt;&lt;/span&gt;
+        ///	&lt;/div&gt;
+        ///
+        ///	&lt;div [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string videoCover {
+            get {
+                return ResourceManager.GetString("videoCover", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;!&lt;!DOCTYPE html&gt;
+        ///&lt;html&gt;
+        ///
+        ///&lt;head&gt;
+        ///&lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=8&quot; /&gt;
+        ///	&lt;title&gt;Video Description&lt;/title&gt;
+        ///	&lt;link rel=&quot;stylesheet&quot; href=&quot;__cssfile__&quot; /&gt;
+        ///&lt;/head&gt;
+        ///
+        ///&lt;body class=&quot;videoDescriptionPanel&quot;&gt;
+        ///	&lt;div id=&quot;description&quot;&gt;
+        ///		&lt;div id=&quot;videoTitle&quot;&gt;__title__&lt;/div&gt;
+        ///		&lt;div id=&quot;videoMeta&quot;&gt;
+        ///			&lt;span class=&quot;rating r3 half&quot;&gt;&lt;/span&gt;
+        ///			Posted by
+        ///			&lt;a href=&quot;javascript:window.external.VideoClick(-1, &apos;author&apos;)&quot;&gt;__author__&lt;/a&gt;
+        ///			&amp;bull;
+        ///			&lt;span&gt;__upload_date__&lt;/span&gt;
+        ///			&amp;bull;
+        ///			&lt;span&gt;_ [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string videoDescription {
+            get {
+                return ResourceManager.GetString("videoDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;div class=&quot;videoItem&quot;&gt;
+        ///	&lt;div class=&quot;thumbnail&quot;&gt;
+        ///		&lt;img src=&quot;__thumbnail__&quot; /&gt;
+        ///		&lt;span class=&quot;videoDuration&quot;&gt;__duration__&lt;/span&gt;
+        ///	&lt;/div&gt;
+        ///	&lt;div class=&quot;videoTitle&quot;&gt;&lt;a href=&quot;javascript:window.external.VideoClick(__index__,&apos;title&apos;)&quot; title=&quot;__title__&quot;&gt;__title__&lt;/a&gt;&lt;/div&gt;
+        ///	&lt;div class=&quot;videoAuthor&quot;&gt;By &lt;a href=&quot;javascript:window.external.VideoClick(__index__,&apos;author&apos;)&quot;&gt;__author__&lt;/a&gt;&lt;/div&gt;
+        ///	&lt;div class=&quot;videoInfo&quot;&gt;__viewcount__ &amp;bull; __upload_date__&lt;/div&gt;
+        ///&lt;/div&gt;.
+        /// </summary>
+        internal static string videoItem {
+            get {
+                return ResourceManager.GetString("videoItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;!&lt;!DOCTYPE html&gt;
+        ///&lt;html&gt;
+        ///
+        ///&lt;head&gt;
+        ///	&lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=8&quot; /&gt;
+        ///	&lt;title&gt;Related videos&lt;/title&gt;
+        ///	&lt;link rel=&quot;stylesheet&quot; href=&quot;__cssfile__&quot; /&gt;
+        ///&lt;/head&gt;
+        ///
+        ///&lt;body class=&quot;videoRelated&quot;&gt;
+        ///	&lt;p&gt;Related videos&lt;/p&gt;
+        ///
+        ///	&lt;div id=&quot;relatedItems&quot;&gt;
+        ///	&lt;/div&gt;
+        ///
+        ///	&lt;div id=&quot;loading&quot;&gt;&lt;/div&gt;
+        ///&lt;/body&gt;
+        ///
+        ///&lt;/html&gt;.
+        /// </summary>
+        internal static string videoRelated {
+            get {
+                return ResourceManager.GetString("videoRelated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap WatchHeader {
+            get {
+                object obj = ResourceManager.GetObject("WatchHeader", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap WatchHeaderLogo {
+            get {
+                object obj = ResourceManager.GetObject("WatchHeaderLogo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap WatchToBrowse {
+            get {
+                object obj = ResourceManager.GetObject("WatchToBrowse", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap WatchToBrowse_Disabled {
+            get {
+                object obj = ResourceManager.GetObject("WatchToBrowse_Disabled", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap WatchToBrowse_Hover {
+            get {
+                object obj = ResourceManager.GetObject("WatchToBrowse_Hover", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap WatchToBrowse_Pressed {
+            get {
+                object obj = ResourceManager.GetObject("WatchToBrowse_Pressed", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap WatchVideoLarge {
+            get {
+                object obj = ResourceManager.GetObject("WatchVideoLarge", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap WatchVideoLarge_Disabled {
+            get {
+                object obj = ResourceManager.GetObject("WatchVideoLarge_Disabled", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap WatchVideoLarge_Hover {
+            get {
+                object obj = ResourceManager.GetObject("WatchVideoLarge_Hover", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap WatchVideoLarge_Pressed {
+            get {
+                object obj = ResourceManager.GetObject("WatchVideoLarge_Pressed", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap WatchVideoNormal {
+            get {
+                object obj = ResourceManager.GetObject("WatchVideoNormal", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap WatchVideoNormal_Disabled {
+            get {
+                object obj = ResourceManager.GetObject("WatchVideoNormal_Disabled", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap WatchVideoNormal_Hover {
+            get {
+                object obj = ResourceManager.GetObject("WatchVideoNormal_Hover", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap WatchVideoNormal_Pressed {
+            get {
+                object obj = ResourceManager.GetObject("WatchVideoNormal_Pressed", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

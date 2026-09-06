@@ -118,145 +118,220 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="SearchButton_Normal" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\SearchButton_Normal.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="PlayerVolumeMax" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\PlayerVolumeMax.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="email" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\email.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="YouTube_logo_top" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\youtube_logo_top.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="comment" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\comment.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="control_play_blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\control_play_blue.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="star_off" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\star_off.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="hourglass" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\hourglass.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Download_complete" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Download_complete.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="List_empty" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\List_empty.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="thumb_up" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\thumb_up.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="folder" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\folder.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Download_queued" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Download_queued.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="cross" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\cross.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="help" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\help.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="error" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\error.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="thumb_down" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\thumb_down.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="SearchBoxText" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\SearchBoxText.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Download_idle" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Download_idle.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="AddToList" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\AddToList.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="About_logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\About_logo.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="bin_closed" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\bin_closed.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="link" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\link.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="star_on" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\star_on.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="accept" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\accept.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="SearchButton_Disabled" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\SearchButton_Disabled.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="time" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\time.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="tick" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\tick.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="delete" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\delete.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Download" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Download.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="nothumb" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\nothumb.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="magnifier" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\magnifier.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="film" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\film.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="SearchButton_Hover" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\SearchButton_Hover.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ipod" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ipod.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="SeekBarThumb_Pressed" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\seekbarthumb_pressed.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="SearchButton_Press" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\SearchButton_Press.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="star_half" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\star_half.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="SeekBar_Fill" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SeekBar_Fill.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="world" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\world.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="SeekBar_Track" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SeekBar_Track.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="List_not_empty" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\List_not_empty.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="SearchBoxText" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SearchBoxText.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="comments" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\comments.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="SearchButton_Disabled" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SearchButton_Disabled.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="cog" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\cog.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="PlayerNormal" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\PlayerNormal.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="control_play" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\control_play.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Header" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Header.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Download_error" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Download_error.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="information" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\information.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="HeaderShadow" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\HeaderShadow.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="SearchButton_Normal" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SearchButton_Normal.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="PopupHeader" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\popupheader.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="HeaderBlue" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\headerblue.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="BrowseHeader" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BrowseHeader.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PlayerExitFullscreen" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\PlayerExitFullscreen.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="WatchHeaderLogo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WatchHeaderLogo.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PlayerVolumeMin" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\PlayerVolumeMin.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PlayerLarge" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\PlayerLarge.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="WatchHeader" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WatchHeader.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PlayerButton_Normal" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\playerbutton_normal.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PlayerVolumeMed" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\PlayerVolumeMed.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PlayerControlsBack" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\PlayerControlsBack.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PlayerPause" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\PlayerPause.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PlayerMute" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\PlayerMute.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PlayerButton_Hover" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\playerbutton_hover.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SearchButton_Hover" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SearchButton_Hover.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PlayerFullscreen" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\PlayerFullscreen.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AddToList" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AddToList.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SeekBar_Buffer" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SeekBar_Buffer.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PlayerButton_Pressed" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\playerbutton_pressed.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SeekBarThumb_Hover" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SeekBarThumb_Hover.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PlayerPlay" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\PlayerPlay.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SeekBarThumb_Normal" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SeekBarThumb_Normal.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="About_logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\About_logo.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BrowseHeaderLogo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BrowseHeaderLogo.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PlayerExitFullscreen_Hover" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\PlayerExitFullscreen_Hover.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PlayerFullscreen_Hover" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\PlayerFullscreen_Hover.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PlayerLarge_Hover" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\PlayerLarge_Hover.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PlayerMute_Hover" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\PlayerMute_Hover.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PlayerNormal_Hover" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\PlayerNormal_Hover.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PlayerPause_Hover" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\PlayerPause_Hover.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PlayerPlay_Hover" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\PlayerPlay_Hover.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PlayerVolumeMax_Hover" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\PlayerVolumeMax_Hover.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PlayerVolumeMed_Hover" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\PlayerVolumeMed_Hover.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PlayerVolumeMin_Hover" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\PlayerVolumeMin_Hover.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="WatchVideoLarge" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WatchVideoLarge.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="WatchVideoLarge_Disabled" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WatchVideoLarge_Disabled.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="WatchVideoLarge_Hover" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WatchVideoLarge_Hover.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="WatchVideoLarge_Pressed" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WatchVideoLarge_Pressed.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="WatchVideoNormal" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WatchVideoNormal.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="WatchVideoNormal_Disabled" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WatchVideoNormal_Disabled.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="WatchVideoNormal_Hover" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WatchVideoNormal_Hover.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="WatchVideoNormal_Pressed" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WatchVideoNormal_Pressed.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BrowseToWatch" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BrowseToWatch.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BrowseToWatch_Disabled" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BrowseToWatch_Disabled.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BrowseToWatch_Hover" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BrowseToWatch_Hover.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BrowseToWatch_Pressed" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BrowseToWatch_Pressed.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SettingsDark" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SettingsDark.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SettingsDark_Hover" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SettingsDark_Hover.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SettingsDark_Pressed" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SettingsDark_Pressed.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SettingsLight" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SettingsLight.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SettingsLight_Hover" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SettingsLight_Hover.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SettingsLight_Pressed" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SettingsLight_Pressed.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="WatchToBrowse" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WatchToBrowse.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="WatchToBrowse_Disabled" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WatchToBrowse_Disabled.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="WatchToBrowse_Hover" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WatchToBrowse_Hover.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="WatchToBrowse_Pressed" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WatchToBrowse_Pressed.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="browseError" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\templates\browseerror.html;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="browseResults" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\templates\browseresults.html;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="browseResultsItem" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\templates\browseresultsitem.html;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="guide" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\templates\guide.html;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="videoCover" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\templates\videocover.html;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="videoDescription" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\templates\videodescription.html;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="videoItem" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\templates\videoitem.html;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="videoRelated" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\templates\videorelated.html;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
 </root>
