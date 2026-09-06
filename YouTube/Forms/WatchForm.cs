@@ -20,14 +20,22 @@ namespace YouTube.Forms
             detailsFrame.ObjectForScripting = frameConn;
             relatedFrame.ObjectForScripting = frameConn;
 
+            // dummy control to capture key inputs for the player
+            playerInputCapture = new Control();
+            playerInputCapture.PreviewKeyDown += playerInputCapture_PreviewKeyDown;
+            playerInputCapture.KeyDown += playerInputCapture_KeyDown;
+
+            Controls.Add(playerInputCapture);
+
             player = new AxWMPLib.AxWindowsMediaPlayer();
             player.Dock = DockStyle.Fill;
+            player.TabStop = false;
             player.PlayStateChange += Wmp_PlayStateChange;
             player.ClickEvent += Wmp_ClickEvent;
             player.StatusChange += Wmp_StatusChange;
             player.PositionChange += Wmp_PositionChange;
             player.MouseMoveEvent += Player_MouseMoveEvent;
-            player.KeyDownEvent += Player_KeyDownEvent;
+            player.GotFocus += Player_GotFocus; // Fix for ugly focus border on player
 
             videoPanel.Controls.Add(player);
             player.BringToFront();
@@ -40,6 +48,7 @@ namespace YouTube.Forms
 
         #region Variables
 
+        private Control playerInputCapture;
         private AxWMPLib.AxWindowsMediaPlayer player;
         private System.Windows.Forms.Timer playerTimer;
         private Data.Entry video;
@@ -221,7 +230,7 @@ namespace YouTube.Forms
                 WindowState = FormWindowState.Maximized;
 
                 player.SendToBack();
-                player.Focus();
+                playerInputCapture.Focus();
             }
             else
             {
@@ -234,6 +243,9 @@ namespace YouTube.Forms
                 WindowState = prevWindowState;
 
                 LargeVideoLayout = prevLargeLayout;
+
+                ShowPlayerControls();
+
                 player.BringToFront();
             }
 
@@ -302,6 +314,11 @@ namespace YouTube.Forms
             if (DateTime.UtcNow < suppressMouseUntil)
                 return;
 
+            ShowPlayerControls();
+        }
+
+        private void ShowPlayerControls()
+        {
             controlsAutoHideCounter = CONTROLS_AUTO_HIDE_TIMEOUT;
             if (!videoControlsPanel.Visible)
             {
@@ -310,53 +327,10 @@ namespace YouTube.Forms
             }
         }
 
-        private void Player_KeyDownEvent(object sender, AxWMPLib._WMPOCXEvents_KeyDownEvent e)
+        private void Player_GotFocus(object sender, EventArgs e)
         {
-            //System.Diagnostics.Debug.WriteLine("key press: " + e.nKeyCode);
-            bool shift = (e.nShiftState & 1) == 1;
-            bool alt = (e.nShiftState & 4) > 0;
-
-            if (48 <= e.nKeyCode && e.nKeyCode <= 57) // '0' - '9'
-            {
-                var number = e.nKeyCode - 48;
-                player.Ctlcontrols.currentPosition = player.currentMedia.duration * (number / 10.0);
-                return;
-            }
-
-            switch (e.nKeyCode)
-            {
-                case 32: // space
-                case 75: // 'K'
-                    PlayPause();
-                    break;
-
-                case 27: // esc
-                    if (isFullscreen)
-                        SetFullScreen(false);
-                    break;
-
-                case 37: // arrow left
-                case 74: // 'J'
-                    player.Ctlcontrols.currentPosition -= shift ? 1 : 10;
-                    break;
-
-                case 39: // arrow right
-                case 76: // 'L'
-                    player.Ctlcontrols.currentPosition += shift ? 1 : 10;
-                    break;
-
-                case 122: // F11
-                case 70: // 'F'
-                case 13: // Enter
-                    if (e.nKeyCode == 13 && !alt) break; // check Alt + Enter
-                    SetFullScreen(!isFullscreen);
-                    break;
-
-                case 77: // 'M'
-                    player.settings.mute = !player.settings.mute;
-                    UpdatePlayerControls();
-                    break;
-            }
+            // Fix for ugly focus border on player
+            playerInputCapture.Focus();
         }
 
         private void Wmp_PositionChange(object sender, AxWMPLib._WMPOCXEvents_PositionChangeEvent e)
@@ -479,6 +453,7 @@ namespace YouTube.Forms
 
         private void WatchForm_Shown(object sender, EventArgs e)
         {
+            playerInputCapture.Focus();
         }
 
         private void playerSizeToggle_Click(object sender, EventArgs e)
@@ -523,6 +498,68 @@ namespace YouTube.Forms
             {
                 player.Ctlcontrols.pause();
             }
+        }
+
+        private void playerInputCapture_KeyDown(object sender, KeyEventArgs e)
+        {
+            //System.Diagnostics.Debug.WriteLine("key press: " + e.KeyCode + " " + e.KeyValue);
+
+            ShowPlayerControls();
+
+            if (48 <= e.KeyValue && e.KeyValue <= 57) // '0' - '9'
+            {
+                var number = e.KeyValue - 48;
+                player.Ctlcontrols.currentPosition = player.currentMedia.duration * (number / 10.0);
+                return;
+            }
+
+            switch (e.KeyCode)
+            {
+                case Keys.Space:
+                case Keys.K:
+                    PlayPause();
+                    break;
+
+                case Keys.Escape:
+                    if (isFullscreen)
+                        SetFullScreen(false);
+                    break;
+
+                case Keys.Left:
+                case Keys.J:
+                    player.Ctlcontrols.currentPosition -= e.Shift ? 1 : 10;
+                    break;
+
+                case Keys.Right:
+                case Keys.L:
+                    player.Ctlcontrols.currentPosition += e.Shift ? 1 : 10;
+                    break;
+
+                case Keys.F11:
+                case Keys.F:
+                case Keys.Enter: 
+                    if (e.KeyCode == Keys.Enter && !e.Alt) break;
+                    SetFullScreen(!isFullscreen);
+                    break;
+
+                case Keys.M:
+                    player.settings.mute = !player.settings.mute;
+                    UpdatePlayerControls();
+                    break;
+
+                case Keys.Up:
+                    player.settings.volume = Math.Min(100, player.settings.volume + 10);
+                    break;
+
+                case Keys.Down:
+                    player.settings.volume = Math.Max(0, player.settings.volume - 10);
+                    break;
+            }
+        }
+
+        private void playerInputCapture_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            e.IsInputKey = true; // allow direction keys to raise KeyDown events
         }
 
         private void watchToBrowseButton_Click(object sender, EventArgs e)
