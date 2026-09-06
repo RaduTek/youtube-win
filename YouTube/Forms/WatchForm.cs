@@ -286,7 +286,7 @@ namespace YouTube.Forms
             player.stretchToFit = true;
             player.enableContextMenu = false;
             player.settings.enableErrorDialogs = false;
-            player.settings.autoStart = false;
+            player.settings.autoStart = Settings.Default.AutoPlayVideo;
             player.settings.volume = 100;
         }
 
@@ -350,10 +350,13 @@ namespace YouTube.Forms
 
         private void Wmp_PlayStateChange(object sender, AxWMPLib._WMPOCXEvents_PlayStateChangeEvent e)
         {
+            //System.Diagnostics.Debug.WriteLine("Play state changed: " + player.playState);
+            
             UpdatePlayerControls();
 
             switch (player.playState)
             {
+                //case WMPLib.WMPPlayState.wmppsBuffering:
                 case WMPLib.WMPPlayState.wmppsTransitioning:
                     ShowCoverScreen("loadingScreen");
                     break;
@@ -490,6 +493,9 @@ namespace YouTube.Forms
         private void settingsButton_Click(object sender, EventArgs e)
         {
             new SettingsDialog().ShowDialog();
+
+            // reload settings
+            player.settings.autoStart = Settings.Default.AutoPlayVideo;
         }
 
         private void WatchForm_VisibleChanged(object sender, EventArgs e)
@@ -560,6 +566,14 @@ namespace YouTube.Forms
         private void playerInputCapture_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
             e.IsInputKey = true; // allow direction keys to raise KeyDown events
+        }
+
+        private void videoFrame_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        {
+            if (Settings.Default.AutoPlayVideo)
+            {
+                ShowCoverScreen("loadingScreen");
+            }
         }
 
         private void watchToBrowseButton_Click(object sender, EventArgs e)

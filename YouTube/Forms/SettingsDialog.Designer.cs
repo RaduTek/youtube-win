@@ -41,10 +41,11 @@
             this.instanceTypeLabel = new System.Windows.Forms.Label();
             this.instanceTypeHintLabel = new System.Windows.Forms.Label();
             this.videoPlayerTab = new System.Windows.Forms.TabPage();
+            this.largeControlsCheck = new System.Windows.Forms.CheckBox();
             this.videoQualityLabel = new System.Windows.Forms.Label();
             this.videoQualityBox = new System.Windows.Forms.ComboBox();
             this.downloadsTab = new System.Windows.Forms.TabPage();
-            this.largeControlsCheck = new System.Windows.Forms.CheckBox();
+            this.autoPlayCheck = new System.Windows.Forms.CheckBox();
             this.tabControl.SuspendLayout();
             this.generalTab.SuspendLayout();
             this.videoPlayerTab.SuspendLayout();
@@ -180,6 +181,7 @@
             // videoPlayerTab
             // 
             this.videoPlayerTab.Controls.Add(this.largeControlsCheck);
+            this.videoPlayerTab.Controls.Add(this.autoPlayCheck);
             this.videoPlayerTab.Controls.Add(this.videoQualityLabel);
             this.videoPlayerTab.Controls.Add(this.videoQualityBox);
             this.videoPlayerTab.Location = new System.Drawing.Point(4, 22);
@@ -189,6 +191,16 @@
             this.videoPlayerTab.TabIndex = 1;
             this.videoPlayerTab.Text = "Video Player";
             this.videoPlayerTab.UseVisualStyleBackColor = true;
+            // 
+            // largeControlsCheck
+            // 
+            this.largeControlsCheck.AutoSize = true;
+            this.largeControlsCheck.Location = new System.Drawing.Point(11, 75);
+            this.largeControlsCheck.Name = "largeControlsCheck";
+            this.largeControlsCheck.Size = new System.Drawing.Size(228, 17);
+            this.largeControlsCheck.TabIndex = 23;
+            this.largeControlsCheck.Text = "Use large controls in full screen (for tablets)";
+            this.largeControlsCheck.UseVisualStyleBackColor = true;
             // 
             // videoQualityLabel
             // 
@@ -226,15 +238,15 @@
             this.downloadsTab.Text = "Downloads";
             this.downloadsTab.UseVisualStyleBackColor = true;
             // 
-            // largeControlsCheck
+            // autoPlayCheck
             // 
-            this.largeControlsCheck.AutoSize = true;
-            this.largeControlsCheck.Location = new System.Drawing.Point(11, 55);
-            this.largeControlsCheck.Name = "largeControlsCheck";
-            this.largeControlsCheck.Size = new System.Drawing.Size(228, 17);
-            this.largeControlsCheck.TabIndex = 23;
-            this.largeControlsCheck.Text = "Use large controls in full screen (for tablets)";
-            this.largeControlsCheck.UseVisualStyleBackColor = true;
+            this.autoPlayCheck.AutoSize = true;
+            this.autoPlayCheck.Location = new System.Drawing.Point(11, 52);
+            this.autoPlayCheck.Name = "autoPlayCheck";
+            this.autoPlayCheck.Size = new System.Drawing.Size(104, 17);
+            this.autoPlayCheck.TabIndex = 24;
+            this.autoPlayCheck.Text = "Auto play videos";
+            this.autoPlayCheck.UseVisualStyleBackColor = true;
             // 
             // SettingsDialog
             // 
@@ -284,5 +296,6 @@
         private System.Windows.Forms.Label videoQualityLabel;
         private System.Windows.Forms.ComboBox videoQualityBox;
         private System.Windows.Forms.CheckBox largeControlsCheck;
+        private System.Windows.Forms.CheckBox autoPlayCheck;
     }
 }

@@ -27,6 +27,7 @@ namespace YouTube
 
             // Video Player
             videoQualityBox.SelectedItem = Settings.Default.VideoQuality;
+            autoPlayCheck.Checked = Settings.Default.AutoPlayVideo;
             largeControlsCheck.Checked = Settings.Default.LargePlayerControls;
 
             // Downloads
@@ -71,6 +72,7 @@ namespace YouTube
 
             // Video Player
             Settings.Default.VideoQuality = (string)videoQualityBox.SelectedItem;
+            Settings.Default.AutoPlayVideo = autoPlayCheck.Checked;
             Settings.Default.LargePlayerControls = largeControlsCheck.Checked;
 
             // Downloads

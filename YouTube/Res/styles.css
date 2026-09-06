@@ -252,9 +252,10 @@ p {
 
 .videoCover #loadingBox {
 	display: inline-block;
-	width: 64px;
-	height: 64px;
+	width: 74px;
+	height: 50px;
 	vertical-align: middle;
+	text-align: center;
 	background-image: url(PlayerLoadingShade.png);
 	background-position: center;
 	background-repeat: no-repeat;
@@ -262,8 +263,8 @@ p {
 
 .videoCover #loadingIcon {
 	display: block;
-	width: 64px;
-	height: 64px;
+	width: 74px;
+	height: 50px;
 	background-image: url(LoadingDark32.gif);
 	background-position: center;
 	background-repeat: no-repeat;

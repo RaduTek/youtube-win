@@ -84,6 +84,7 @@ namespace YouTube.Forms
             this.videoFrame.TabIndex = 1;
             this.videoFrame.Visible = false;
             this.videoFrame.WebBrowserShortcutsEnabled = false;
+            this.videoFrame.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.videoFrame_DocumentCompleted);
             // 
             // videoControlsPanel
             // 
