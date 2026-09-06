@@ -264,6 +264,7 @@ namespace YouTube.Forms
             videoFrame.Document.GetElementById("startScreen").SetAttribute("className", "hidden");
             videoFrame.Document.GetElementById("loadingScreen").SetAttribute("className", "hidden");
             videoFrame.Document.GetElementById("endScreen").SetAttribute("className", "hidden");
+            videoFrame.Document.GetElementById("helpScreen").SetAttribute("className", "hidden");
 
             videoFrame.Document.GetElementById(screenId).SetAttribute("className", "overlay");
             videoFrame.Visible = true;
@@ -560,6 +561,13 @@ namespace YouTube.Forms
                 case Keys.Down:
                     player.settings.volume = Math.Max(0, player.settings.volume - 10);
                     break;
+
+                case Keys.F1:
+                    if (videoFrame.Visible)
+                        ShowVideoPlayer();
+                    else
+                        ShowCoverScreen("helpScreen");
+                    break;
             }
         }
 
@@ -594,6 +602,10 @@ namespace YouTube.Forms
                     break;
 
                 case "author":
+                    break;
+
+                case "focusControls":
+                    playerInputCapture.Focus();
                     break;
             }
             return;

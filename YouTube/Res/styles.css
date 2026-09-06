@@ -270,6 +270,19 @@ p {
 	background-repeat: no-repeat;
 }
 
+.videoCover #helpScreen {
+	text-align: left;
+}
+.videoCover #helpScreen .content {
+	display: inline-block;
+	text-align: left;
+	margin: 4px;
+	padding: 4px;
+	width: auto;
+	background: #000;
+	filter: alpha(opacity=80);
+}
+
 
 .browsePage {
 	background-color: #f8f8f8;

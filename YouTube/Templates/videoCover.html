@@ -7,7 +7,7 @@
 	<link rel="stylesheet" href="__cssfile__" />
 </head>
 
-<body class="videoCover">
+<body class="videoCover" onclick="window.external.ActionClick('videoCover', 'focusControls')">
 	<div id="cover">
 		<img src="__thumbnailHQ__" id="videoThumb" 
 		/><span class="verticalAlign"></span>
@@ -25,6 +25,19 @@
 	<div id="endScreen" class="hidden">
 		<a id="replayBtn" href="javascript:window.external.ActionClick('videoCover', 'replay')">
 		</a><span class="verticalAlign"></span>
+	</div>
+
+	<div id="helpScreen" class="hidden">
+		<div class="content">
+			<p><b>Keyboard shortcuts:</b></p>
+			<p>
+			Space/K - Play/Pause<br>
+			Left/J - Seek back, Right/L - Seek forward (10 seconds, hold Shift for 1 second)<br>
+			0 - 9 - Seek through the video<br>
+			M - Mute, Up - Increase Volume, Down - Decrease Volume<br>
+			F/F11/Alt+Enter - Toggle Full Screen<br>
+			F1 - Toggle Help</p>
+		</div>
 	</div>
 </body>
 
