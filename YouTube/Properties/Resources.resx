@@ -124,9 +124,6 @@
   <data name="SeekBarThumb_Pressed" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\seekbarthumb_pressed.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="SearchButton_Press" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\SearchButton_Press.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="SeekBar_Fill" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\SeekBar_Fill.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -333,5 +330,8 @@
   </data>
   <data name="videoRelated" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\templates\videorelated.html;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="SearchButton_Pressed" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\searchbutton_pressed.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

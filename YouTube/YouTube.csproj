@@ -185,7 +185,7 @@
     <None Include="Resources\SearchButton_Normal.png" />
     <None Include="Resources\SearchButton_Disabled.png" />
     <None Include="Resources\SearchButton_Hover.png" />
-    <None Include="Resources\SearchButton_Press.png" />
+    <None Include="Resources\SearchButton_Pressed.png" />
     <None Include="Resources\SearchBoxText.png" />
     <None Include="Resources\PopupHeader.png" />
     <None Include="AxInterop.WMPLib.dll" />

@@ -12,7 +12,7 @@ namespace YouTube.ExControls
 
         public ExControlTheme(Color normal)
         {
-            _Normal = normal;
+            _Normal = _Hover = _Disabled = _Pressed = _Focused = normal;
         }
 
         private void DispatchEvent()
@@ -21,12 +21,12 @@ namespace YouTube.ExControls
                 ColorsUpdated.Invoke(this, new EventArgs());
         }
 
-        private Color _Normal, _Disabled, _Pressed, _Focused;
+        private Color _Normal, _Hover, _Disabled, _Pressed, _Focused;
 
-        public Color Normal 
+        public Color Normal
         {
-            get { return _Normal; }
-            set 
+            get => _Normal;
+            set
             {
                 if (_Normal != value)
                 {
@@ -35,16 +35,22 @@ namespace YouTube.ExControls
                 }
             }
         }
-        
+        public Color Hover
+        {
+            get => _Hover;
+            set
+            {
+                if (_Hover != value)
+                {
+                    _Hover = value;
+                    DispatchEvent();
+                }
+            }
+        }
+
         public Color Disabled
         {
-            get 
-            {
-                if (_Disabled == null) 
-                    return _Normal;
-
-                return _Disabled; 
-            }
+            get => _Disabled;
             set
             {
                 if (_Disabled != value)
@@ -57,13 +63,7 @@ namespace YouTube.ExControls
 
         public Color Pressed
         {
-            get
-            {
-                if (_Pressed == null)
-                    return _Normal;
-
-                return _Pressed;
-            }
+            get => _Pressed;
             set
             {
                 if (_Pressed != value)
@@ -76,13 +76,7 @@ namespace YouTube.ExControls
 
         public Color Focused
         {
-            get
-            {
-                if (_Focused == null)
-                    return _Normal;
-
-                return _Focused;
-            }
+            get => _Focused;
             set
             {
                 if (_Focused != value)
@@ -103,6 +97,8 @@ namespace YouTube.ExControls
                     return Focused;
                 case ExControlState.Pressed:
                     return Pressed;
+                case ExControlState.Hover:
+                    return Hover;
                 default:
                     return Normal;
             }

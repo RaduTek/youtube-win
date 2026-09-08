@@ -536,9 +536,9 @@ namespace YouTube.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap SearchButton_Press {
+        internal static System.Drawing.Bitmap SearchButton_Pressed {
             get {
-                object obj = ResourceManager.GetObject("SearchButton_Press", resourceCulture);
+                object obj = ResourceManager.GetObject("SearchButton_Pressed", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -673,18 +673,14 @@ namespace YouTube.Properties {
         ///	&lt;link rel=&quot;stylesheet&quot; href=&quot;__cssfile__&quot; /&gt;
         ///&lt;/head&gt;
         ///
-        ///&lt;body class=&quot;videoCover&quot;&gt;
+        ///&lt;body class=&quot;videoCover&quot; onclick=&quot;window.external.ActionClick(&apos;videoCover&apos;, &apos;focusControls&apos;)&quot;&gt;
         ///	&lt;div id=&quot;cover&quot;&gt;
         ///		&lt;img src=&quot;__thumbnailHQ__&quot; id=&quot;videoThumb&quot; 
         ///		/&gt;&lt;span class=&quot;verticalAlign&quot;&gt;&lt;/span&gt;
         ///	&lt;/div&gt;
         ///
         ///	&lt;div id=&quot;startScreen&quot; class=&quot;overlay&quot;&gt;
-        ///		&lt;a id=&quot;playBtn&quot; href=&quot;javascript:window.external.ActionClick(&apos;videoCover&apos;, &apos;play&apos;)&quot;&gt;
-        ///		&lt;/a&gt;&lt;span class=&quot;verticalAlign&quot;&gt;&lt;/span&gt;
-        ///	&lt;/div&gt;
-        ///
-        ///	&lt;div [rest of string was truncated]&quot;;.
+        ///		&lt;a id=&quot;playBtn&quot; href=&quot;javascript:window.external.ActionClick(&apos;videoCover&apos;, &apos; [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string videoCover {
             get {
