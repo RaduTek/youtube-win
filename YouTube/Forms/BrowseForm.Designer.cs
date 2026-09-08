@@ -32,11 +32,9 @@ namespace YouTube.Forms
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BrowseForm));
             this.header = new System.Windows.Forms.Panel();
+            this.searchBox = new YouTube.Controls.SearchBox();
             this.settingsButton = new YouTube.ExControls.ExButton();
             this.switchToWatchButton = new YouTube.ExControls.ExButton();
-            this.searchBox = new YouTube.ExControls.ExPanel();
-            this.searchButton = new YouTube.ExControls.ExButton();
-            this.searchTextBox = new System.Windows.Forms.TextBox();
             this.topLogo = new System.Windows.Forms.PictureBox();
             this.leftPanel = new System.Windows.Forms.Panel();
             this.guideFrame = new YouTube.ExControls.ExWebBrowser();
@@ -48,7 +46,6 @@ namespace YouTube.Forms
             this.rightSplitter = new System.Windows.Forms.Splitter();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.header.SuspendLayout();
-            this.searchBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.topLogo)).BeginInit();
             this.leftPanel.SuspendLayout();
             this.middlePanel.SuspendLayout();
@@ -59,15 +56,27 @@ namespace YouTube.Forms
             // 
             this.header.BackgroundImage = global::YouTube.Properties.Resources.BrowseHeader;
             this.header.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.header.Controls.Add(this.searchBox);
             this.header.Controls.Add(this.settingsButton);
             this.header.Controls.Add(this.switchToWatchButton);
-            this.header.Controls.Add(this.searchBox);
             this.header.Controls.Add(this.topLogo);
             this.header.Dock = System.Windows.Forms.DockStyle.Top;
             this.header.Location = new System.Drawing.Point(0, 0);
             this.header.Name = "header";
             this.header.Size = new System.Drawing.Size(784, 48);
             this.header.TabIndex = 1;
+            // 
+            // searchBox
+            // 
+            this.searchBox.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.searchBox.BackColor = System.Drawing.Color.Transparent;
+            this.searchBox.ButtonText = "Search";
+            this.searchBox.DarkTheme = false;
+            this.searchBox.Location = new System.Drawing.Point(242, 12);
+            this.searchBox.Name = "searchBox";
+            this.searchBox.Size = new System.Drawing.Size(300, 24);
+            this.searchBox.TabIndex = 7;
+            this.searchBox.Search += new System.EventHandler<YouTube.Controls.SearchBoxEventArgs>(this.searchBox_Search);
             // 
             // settingsButton
             // 
@@ -105,46 +114,6 @@ namespace YouTube.Forms
             this.switchToWatchButton.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.toolTip.SetToolTip(this.switchToWatchButton, "Switch to Watch");
             this.switchToWatchButton.Click += new System.EventHandler(this.browseToWatchButton_Click);
-            // 
-            // searchBox
-            // 
-            this.searchBox.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.searchBox.BackColor = System.Drawing.Color.Transparent;
-            this.searchBox.BackKey = "SearchBoxText";
-            this.searchBox.BackMargins = new System.Windows.Forms.Padding(4);
-            this.searchBox.Controls.Add(this.searchButton);
-            this.searchBox.Controls.Add(this.searchTextBox);
-            this.searchBox.Location = new System.Drawing.Point(259, 12);
-            this.searchBox.Name = "searchBox";
-            this.searchBox.Size = new System.Drawing.Size(267, 23);
-            this.searchBox.TabIndex = 2;
-            // 
-            // searchButton
-            // 
-            this.searchButton.BackKey = "SearchButton";
-            this.searchButton.BackMargins = new System.Windows.Forms.Padding(4);
-            this.searchButton.Dock = System.Windows.Forms.DockStyle.Right;
-            this.searchButton.EnableTransparency = true;
-            this.searchButton.Icon = null;
-            this.searchButton.IconKey = "";
-            this.searchButton.IconTransparencyKey = System.Drawing.Color.Magenta;
-            this.searchButton.Location = new System.Drawing.Point(207, 0);
-            this.searchButton.Name = "searchButton";
-            this.searchButton.Size = new System.Drawing.Size(60, 23);
-            this.searchButton.TabIndex = 1;
-            this.searchButton.Text = "Search";
-            this.searchButton.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.searchButton.Click += new System.EventHandler(this.searchButton_Click);
-            // 
-            // searchTextBox
-            // 
-            this.searchTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.searchTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.searchTextBox.Location = new System.Drawing.Point(5, 5);
-            this.searchTextBox.Name = "searchTextBox";
-            this.searchTextBox.Size = new System.Drawing.Size(199, 13);
-            this.searchTextBox.TabIndex = 0;
-            this.searchTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.searchTextBox_KeyDown);
             // 
             // topLogo
             // 
@@ -262,8 +231,6 @@ namespace YouTube.Forms
             this.Load += new System.EventHandler(this.BrowseForm_Load);
             this.Shown += new System.EventHandler(this.BrowseForm_Shown);
             this.header.ResumeLayout(false);
-            this.searchBox.ResumeLayout(false);
-            this.searchBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.topLogo)).EndInit();
             this.leftPanel.ResumeLayout(false);
             this.middlePanel.ResumeLayout(false);
@@ -280,14 +247,12 @@ namespace YouTube.Forms
         private System.Windows.Forms.Panel middlePanel;
         private System.Windows.Forms.Panel rightPanel;
         private System.Windows.Forms.Splitter rightSplitter;
-        private ExControls.ExPanel searchBox;
         private ExControls.ExWebBrowser guideFrame;
         private ExControls.ExWebBrowser browseFrame;
         private ExControls.ExWebBrowser queueFrame;
-        private System.Windows.Forms.TextBox searchTextBox;
-        private ExControls.ExButton searchButton;
         private ExControls.ExButton switchToWatchButton;
         private System.Windows.Forms.ToolTip toolTip;
         private ExControls.ExButton settingsButton;
+        private Controls.SearchBox searchBox;
     }
 }

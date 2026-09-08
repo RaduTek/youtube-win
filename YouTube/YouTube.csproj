@@ -89,6 +89,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\SearchBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\SearchBox.Designer.cs">
+      <DependentUpon>SearchBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\AboutDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -146,6 +152,9 @@
       <DependentUpon>WatchForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Utils\WebFrameConnector.cs" />
+    <EmbeddedResource Include="Controls\SearchBox.resx">
+      <DependentUpon>SearchBox.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\AboutDialog.resx">
       <DependentUpon>AboutDialog.cs</DependentUpon>
     </EmbeddedResource>
@@ -177,6 +186,13 @@
     <None Include="YouTube_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\SearchTextBoxDark.png" />
+    <None Include="Resources\SearchButtonDark_Hover.png" />
+    <None Include="Resources\SearchButtonDark_Normal.png" />
+    <None Include="Resources\SearchButtonDark_Pressed.png" />
+    <None Include="Resources\SearchButtonDark_Disabled.png" />
+    <None Include="Resources\SearchTextBox_Focused.png" />
+    <None Include="Resources\SearchTextBoxDark_Focused.png" />
     <Content Include="Res\nothumb.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -186,7 +202,7 @@
     <None Include="Resources\SearchButton_Disabled.png" />
     <None Include="Resources\SearchButton_Hover.png" />
     <None Include="Resources\SearchButton_Pressed.png" />
-    <None Include="Resources\SearchBoxText.png" />
+    <None Include="Resources\SearchTextBox.png" />
     <None Include="Resources\PopupHeader.png" />
     <None Include="AxInterop.WMPLib.dll" />
     <None Include="Interop.WMPLib.dll" />

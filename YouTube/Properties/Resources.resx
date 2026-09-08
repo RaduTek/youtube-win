@@ -130,9 +130,6 @@
   <data name="SeekBar_Track" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\SeekBar_Track.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="SearchBoxText" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\SearchBoxText.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="SearchButton_Disabled" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\SearchButton_Disabled.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -333,5 +330,29 @@
   </data>
   <data name="SearchButton_Pressed" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\searchbutton_pressed.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SearchButtonDark_Disabled" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\searchbuttondark_disabled.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SearchButtonDark_Hover" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SearchButtonDark_Hover.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SearchButtonDark_Normal" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SearchButtonDark_Normal.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SearchButtonDark_Pressed" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SearchButtonDark_Pressed.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SearchTextBox" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\searchtextbox.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SearchTextBoxDark" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SearchTextBoxDark.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SearchTextBoxDark_Focused" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SearchTextBoxDark_Focused.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SearchTextBox_Focused" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SearchTextBox_Focused.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

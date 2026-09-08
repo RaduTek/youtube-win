@@ -56,6 +56,15 @@ namespace YouTube.Forms
             LoadFeed(DataApi.StandardFeedUrl(feedName), "");
         }
 
+        public void Search(string query)
+        {
+            if (!Visible)
+                Program.SwitchView();
+
+            searchBox.Text = query;
+            LoadSearchFeed(query);
+        }
+
         private void LoadSearchFeed(string query)
         {
             SelectGuideFeed("search_results");
@@ -188,25 +197,14 @@ namespace YouTube.Forms
             SelectGuideFeed("most_popular");
         }
 
-        private void searchButton_Click(object sender, EventArgs e)
-        {
-            LoadSearchFeed(searchTextBox.Text);
-        }
-
-        private void searchTextBox_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                e.Handled = true;
-                e.SuppressKeyPress = true;
-
-                LoadSearchFeed(searchTextBox.Text);
-            }
-        }
-
         private void browseToWatchButton_Click(object sender, EventArgs e)
         {
             Program.SwitchView();
+        }
+
+        private void searchBox_Search(object sender, Controls.SearchBoxEventArgs e)
+        {
+            LoadSearchFeed(e.Text);
         }
 
         private void settingsButton_Click(object sender, EventArgs e)

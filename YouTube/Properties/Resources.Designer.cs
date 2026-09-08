@@ -496,16 +496,6 @@ namespace YouTube.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap SearchBoxText {
-            get {
-                object obj = ResourceManager.GetObject("SearchBoxText", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap SearchButton_Disabled {
             get {
                 object obj = ResourceManager.GetObject("SearchButton_Disabled", resourceCulture);
@@ -539,6 +529,86 @@ namespace YouTube.Properties {
         internal static System.Drawing.Bitmap SearchButton_Pressed {
             get {
                 object obj = ResourceManager.GetObject("SearchButton_Pressed", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap SearchButtonDark_Disabled {
+            get {
+                object obj = ResourceManager.GetObject("SearchButtonDark_Disabled", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap SearchButtonDark_Hover {
+            get {
+                object obj = ResourceManager.GetObject("SearchButtonDark_Hover", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap SearchButtonDark_Normal {
+            get {
+                object obj = ResourceManager.GetObject("SearchButtonDark_Normal", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap SearchButtonDark_Pressed {
+            get {
+                object obj = ResourceManager.GetObject("SearchButtonDark_Pressed", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap SearchTextBox {
+            get {
+                object obj = ResourceManager.GetObject("SearchTextBox", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap SearchTextBox_Focused {
+            get {
+                object obj = ResourceManager.GetObject("SearchTextBox_Focused", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap SearchTextBoxDark {
+            get {
+                object obj = ResourceManager.GetObject("SearchTextBoxDark", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap SearchTextBoxDark_Focused {
+            get {
+                object obj = ResourceManager.GetObject("SearchTextBoxDark_Focused", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -679,8 +749,8 @@ namespace YouTube.Properties {
         ///		/&gt;&lt;span class=&quot;verticalAlign&quot;&gt;&lt;/span&gt;
         ///	&lt;/div&gt;
         ///
-        ///	&lt;div id=&quot;startScreen&quot; class=&quot;overlay&quot;&gt;
-        ///		&lt;a id=&quot;playBtn&quot; href=&quot;javascript:window.external.ActionClick(&apos;videoCover&apos;, &apos; [rest of string was truncated]&quot;;.
+        ///	&lt;div id=&quot;startScreen&quot; class=&quot;__startScreenClass__&quot;&gt;
+        ///		&lt;a id=&quot;playBtn&quot; href=&quot;javascript:window.external.ActionClick(&apos;v [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string videoCover {
             get {
