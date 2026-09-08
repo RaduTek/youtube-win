@@ -205,5 +205,55 @@ namespace YouTube
 
             browser.Visible = true;
         }
+
+        public static string GetVideoUrlID(string url)
+        {
+            return GetVideoUrlID(url, null);
+        }
+
+        public static string GetVideoUrlID(string url, string fallback)
+        {
+            if (string.IsNullOrEmpty(url))
+                return null;
+
+            Uri uri;
+            try
+            {
+                uri = new Uri(url);
+            }
+            catch (UriFormatException)
+            {
+                return fallback;  // only fallback when it's not a valid URL, may already be a video ID
+            }
+
+            if (!string.Equals(uri.AbsolutePath, "/watch", StringComparison.OrdinalIgnoreCase))
+                return null;
+
+            string query = uri.Query;
+            if (string.IsNullOrEmpty(query))
+                return null;
+
+            if (query.StartsWith("?"))
+                query = query.Substring(1);
+
+            string[] pairs = query.Split('&');
+            for (int i = 0; i < pairs.Length; i++)
+            {
+                string pair = pairs[i];
+                if (pair.Length == 0)
+                    continue;
+
+                int eqIndex = pair.IndexOf('=');
+                string key = eqIndex >= 0 ? pair.Substring(0, eqIndex) : pair;
+                string value = eqIndex >= 0 ? pair.Substring(eqIndex + 1) : string.Empty;
+
+                if (string.Equals(key, "v", StringComparison.OrdinalIgnoreCase))
+                {
+                    return Uri.UnescapeDataString(value.Replace("+", " "));
+                }
+            }
+
+            return null;
+        }
     }
 }

@@ -69,6 +69,8 @@ namespace YouTube.Forms
 
         #region Data Loading
 
+        public string InitialVideoId { get; set; }
+
         public void LoadVideo(string videoId)
         {
             video = DataApi.GetVideo(videoId);
@@ -84,6 +86,8 @@ namespace YouTube.Forms
         private void ShowVideoData()
         {
             if (video == null) return;
+
+            Program.browseForm.EnableWatchButton = true;
 
             if (!Visible)
             {
@@ -474,6 +478,11 @@ namespace YouTube.Forms
         private void WatchForm_Load(object sender, EventArgs e)
         {
             InitVideoPlayer();
+
+            if (InitialVideoId != null)
+            {
+                LoadVideo(InitialVideoId);
+            }
         }
 
         private void seekBar_SeekFinished(object sender, ExControls.SeekEventArgs e)

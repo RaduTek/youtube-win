@@ -26,11 +26,19 @@ namespace YouTube.Forms
         private WebFrameConnector browseConn, guideConn;
         private Data.Feed browseFeed;
 
+        public bool EnableWatchButton
+        {
+            get => switchToWatchButton.Enabled;
+            set
+            {
+                switchToWatchButton.Enabled = value;
+            }
+        }
+
         #region Methods
 
         private void WatchVideo(Data.Entry video)
         {
-            switchToWatchButton.Enabled = true;
             Program.watchForm.LoadVideo(video);
         }
 

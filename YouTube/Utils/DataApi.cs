@@ -53,6 +53,22 @@ namespace YouTube
             }
         }
 
+        public static Entry GetEntry(string url)
+        {
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+
+            request.Method = "GET";
+
+            using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+            using (Stream stream = response.GetResponseStream())
+            {
+                XmlSerializer serializer = new XmlSerializer(typeof(Entry));
+                Entry entry = (Entry)serializer.Deserialize(stream);
+
+                return entry;
+            }
+        }
+
         public static string SearchFeedUrl(string queryText)
         {
             var query = queryText.Replace(' ', '+');
@@ -80,12 +96,7 @@ namespace YouTube
         {
             var url = GetFullUrl("feeds/api/videos/" + videoId);
 
-            var feed = GetFeed(url);
-
-            if (feed != null && feed.Entries.Count >= 1)
-                return feed.Entries[0];
-
-            return null;
+            return GetEntry(url);
         }
 
         public static string GetVideoUrl(string videoId)
