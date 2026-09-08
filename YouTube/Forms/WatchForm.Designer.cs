@@ -215,15 +215,15 @@ namespace YouTube.Forms
             // 
             this.settingsButton.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.settingsButton.BackColor = System.Drawing.Color.Transparent;
-            this.settingsButton.BackKey = "Button";
-            this.settingsButton.BackMargins = new System.Windows.Forms.Padding(0, 0, 0, 0);
+            this.settingsButton.BackKey = "HeaderDarkButton";
+            this.settingsButton.BackMargins = new System.Windows.Forms.Padding(3);
             this.settingsButton.EnableTransparency = true;
             this.settingsButton.Icon = ((System.Drawing.Image)(resources.GetObject("settingsButton.Icon")));
             this.settingsButton.IconKey = "SettingsDark";
             this.settingsButton.IconTransparencyKey = System.Drawing.Color.Magenta;
-            this.settingsButton.Location = new System.Drawing.Point(706, 10);
+            this.settingsButton.Location = new System.Drawing.Point(696, 8);
             this.settingsButton.Name = "settingsButton";
-            this.settingsButton.Size = new System.Drawing.Size(30, 26);
+            this.settingsButton.Size = new System.Drawing.Size(30, 30);
             this.settingsButton.TabIndex = 7;
             this.settingsButton.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.toolTip.SetToolTip(this.settingsButton, "Settings");
@@ -233,15 +233,15 @@ namespace YouTube.Forms
             // 
             this.switchToBrowseButton.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.switchToBrowseButton.BackColor = System.Drawing.Color.Transparent;
-            this.switchToBrowseButton.BackKey = "Button";
-            this.switchToBrowseButton.BackMargins = new System.Windows.Forms.Padding(0, 0, 0, 0);
+            this.switchToBrowseButton.BackKey = "HeaderDarkButton";
+            this.switchToBrowseButton.BackMargins = new System.Windows.Forms.Padding(3);
             this.switchToBrowseButton.EnableTransparency = true;
             this.switchToBrowseButton.Icon = ((System.Drawing.Image)(resources.GetObject("switchToBrowseButton.Icon")));
             this.switchToBrowseButton.IconKey = "WatchToBrowse";
             this.switchToBrowseButton.IconTransparencyKey = System.Drawing.Color.Magenta;
-            this.switchToBrowseButton.Location = new System.Drawing.Point(742, 10);
+            this.switchToBrowseButton.Location = new System.Drawing.Point(732, 8);
             this.switchToBrowseButton.Name = "switchToBrowseButton";
-            this.switchToBrowseButton.Size = new System.Drawing.Size(30, 26);
+            this.switchToBrowseButton.Size = new System.Drawing.Size(30, 30);
             this.switchToBrowseButton.TabIndex = 4;
             this.switchToBrowseButton.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.toolTip.SetToolTip(this.switchToBrowseButton, "Switch to Browse");
@@ -251,15 +251,15 @@ namespace YouTube.Forms
             // 
             this.playerSizeToggle.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.playerSizeToggle.BackColor = System.Drawing.Color.Transparent;
-            this.playerSizeToggle.BackKey = "Button";
-            this.playerSizeToggle.BackMargins = new System.Windows.Forms.Padding(0, 0, 0, 0);
+            this.playerSizeToggle.BackKey = "HeaderDarkButton";
+            this.playerSizeToggle.BackMargins = new System.Windows.Forms.Padding(3);
             this.playerSizeToggle.EnableTransparency = true;
             this.playerSizeToggle.Icon = ((System.Drawing.Image)(resources.GetObject("playerSizeToggle.Icon")));
             this.playerSizeToggle.IconKey = "WatchVideoLarge";
             this.playerSizeToggle.IconTransparencyKey = System.Drawing.Color.Magenta;
-            this.playerSizeToggle.Location = new System.Drawing.Point(670, 10);
+            this.playerSizeToggle.Location = new System.Drawing.Point(654, 8);
             this.playerSizeToggle.Name = "playerSizeToggle";
-            this.playerSizeToggle.Size = new System.Drawing.Size(30, 26);
+            this.playerSizeToggle.Size = new System.Drawing.Size(36, 30);
             this.playerSizeToggle.TabIndex = 3;
             this.playerSizeToggle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.toolTip.SetToolTip(this.playerSizeToggle, "Adjust Player Size");
@@ -333,7 +333,7 @@ namespace YouTube.Forms
             this.topLogo.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.topLogo.BackColor = System.Drawing.Color.Transparent;
             this.topLogo.Image = global::YouTube.Properties.Resources.WatchHeaderLogo;
-            this.topLogo.Location = new System.Drawing.Point(12, 7);
+            this.topLogo.Location = new System.Drawing.Point(30, 7);
             this.topLogo.Name = "topLogo";
             this.topLogo.Size = new System.Drawing.Size(80, 32);
             this.topLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;

@@ -72,7 +72,7 @@ namespace YouTube.Forms
             this.searchBox.BackColor = System.Drawing.Color.Transparent;
             this.searchBox.ButtonText = "Search";
             this.searchBox.DarkTheme = false;
-            this.searchBox.Location = new System.Drawing.Point(242, 12);
+            this.searchBox.Location = new System.Drawing.Point(242, 11);
             this.searchBox.Name = "searchBox";
             this.searchBox.Size = new System.Drawing.Size(300, 24);
             this.searchBox.TabIndex = 7;
@@ -82,15 +82,15 @@ namespace YouTube.Forms
             // 
             this.settingsButton.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.settingsButton.BackColor = System.Drawing.Color.Transparent;
-            this.settingsButton.BackKey = "Button";
-            this.settingsButton.BackMargins = new System.Windows.Forms.Padding(0, 0, 0, 0);
+            this.settingsButton.BackKey = "HeaderButton";
+            this.settingsButton.BackMargins = new System.Windows.Forms.Padding(3);
             this.settingsButton.EnableTransparency = true;
             this.settingsButton.Icon = ((System.Drawing.Image)(resources.GetObject("settingsButton.Icon")));
             this.settingsButton.IconKey = "SettingsLight";
             this.settingsButton.IconTransparencyKey = System.Drawing.Color.Magenta;
-            this.settingsButton.Location = new System.Drawing.Point(706, 10);
+            this.settingsButton.Location = new System.Drawing.Point(696, 8);
             this.settingsButton.Name = "settingsButton";
-            this.settingsButton.Size = new System.Drawing.Size(30, 26);
+            this.settingsButton.Size = new System.Drawing.Size(30, 30);
             this.settingsButton.TabIndex = 6;
             this.settingsButton.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.toolTip.SetToolTip(this.settingsButton, "Settings");
@@ -100,16 +100,16 @@ namespace YouTube.Forms
             // 
             this.switchToWatchButton.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.switchToWatchButton.BackColor = System.Drawing.Color.Transparent;
-            this.switchToWatchButton.BackKey = "Button";
-            this.switchToWatchButton.BackMargins = new System.Windows.Forms.Padding(0, 0, 0, 0);
+            this.switchToWatchButton.BackKey = "HeaderButton";
+            this.switchToWatchButton.BackMargins = new System.Windows.Forms.Padding(3);
             this.switchToWatchButton.Enabled = false;
             this.switchToWatchButton.EnableTransparency = true;
             this.switchToWatchButton.Icon = ((System.Drawing.Image)(resources.GetObject("switchToWatchButton.Icon")));
             this.switchToWatchButton.IconKey = "BrowseToWatch";
             this.switchToWatchButton.IconTransparencyKey = System.Drawing.Color.Magenta;
-            this.switchToWatchButton.Location = new System.Drawing.Point(742, 10);
+            this.switchToWatchButton.Location = new System.Drawing.Point(732, 8);
             this.switchToWatchButton.Name = "switchToWatchButton";
-            this.switchToWatchButton.Size = new System.Drawing.Size(30, 26);
+            this.switchToWatchButton.Size = new System.Drawing.Size(30, 30);
             this.switchToWatchButton.TabIndex = 5;
             this.switchToWatchButton.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.toolTip.SetToolTip(this.switchToWatchButton, "Switch to Watch");
@@ -120,7 +120,7 @@ namespace YouTube.Forms
             this.topLogo.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.topLogo.BackColor = System.Drawing.Color.Transparent;
             this.topLogo.Image = global::YouTube.Properties.Resources.BrowseHeaderLogo;
-            this.topLogo.Location = new System.Drawing.Point(12, 7);
+            this.topLogo.Location = new System.Drawing.Point(30, 7);
             this.topLogo.Name = "topLogo";
             this.topLogo.Size = new System.Drawing.Size(80, 32);
             this.topLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;

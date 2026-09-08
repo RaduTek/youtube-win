@@ -193,6 +193,10 @@
     <None Include="Resources\SearchButtonDark_Disabled.png" />
     <None Include="Resources\SearchTextBox_Focused.png" />
     <None Include="Resources\SearchTextBoxDark_Focused.png" />
+    <None Include="Resources\HeaderButton_Pressed.png" />
+    <None Include="Resources\HeaderButton_Hover.png" />
+    <None Include="Resources\HeaderDarkButton_Hover.png" />
+    <None Include="Resources\HeaderDarkButton_Pressed.png" />
     <Content Include="Res\nothumb.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
