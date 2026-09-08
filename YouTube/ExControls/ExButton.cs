@@ -12,7 +12,7 @@ namespace YouTube.ExControls
         {
             format = new StringFormat();
             npi = new NinePatchImage();
-            foreTheme = new ExControlTheme(Color.Black);
+            //foreTheme = new ExControlTheme(Color.Black);
 
             EnableTransparency = true;
             Size = new Size(70, 30);
@@ -29,7 +29,7 @@ namespace YouTube.ExControls
         protected bool iconNeedsUpdate = false;
         protected Image icon;
 
-        protected ExControlTheme foreTheme;
+        //protected ExControlTheme foreTheme;
 
         /// <summary>
         /// Icon drawn in the center of the button
@@ -96,10 +96,10 @@ namespace YouTube.ExControls
         /// <summary>
         /// Foreground (text) color theme
         /// </summary>
-        public ExControlTheme ForeTheme
-        {
-            get { return foreTheme; }
-        }
+        //public ExControlTheme ForeTheme
+        //{
+        //    get { return foreTheme; }
+        //}
 
         private ImageAttributes imageAttr = new ImageAttributes();
         private Color iconTransparencyKey = Color.Magenta;
@@ -174,7 +174,7 @@ namespace YouTube.ExControls
             // ---- Draw Text ----
             if (!string.IsNullOrEmpty(Text))
             {
-                Brush b = new SolidBrush(foreTheme.GetStateColor(State));
+                Brush b = new SolidBrush(ForeColor);
 
                 e.Graphics.DrawString(
                     Text,

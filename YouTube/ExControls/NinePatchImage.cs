@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.Windows.Forms;
 
@@ -7,112 +8,128 @@ namespace YouTube.ExControls
 {
     public class NinePatchImage
     {
-        private Image _Image = null;
+        private Image image = null;
 
-        private Size _size;
-        private Padding _margins;
+        private Size size;
+        private Padding margins;
 
-        private readonly Rectangle[] _src = new Rectangle[9];
-        private readonly Rectangle[] _dst = new Rectangle[9];
+        private readonly Rectangle[] src = new Rectangle[9];
+        private readonly Rectangle[] dst = new Rectangle[9];
 
-        private int _lastImageWidth = -1;
-        private int _lastImageHeight = -1;
+        private int lastImageWidth = -1;
+        private int lastImageHeight = -1;
 
-        private bool _dirty = true;
-        private bool _drawCenter = true;
+        private bool dirty = true;
+        private bool drawCenter = true;
+
+        private InterpolationMode interpolationMode = InterpolationMode.NearestNeighbor;
 
         public Image Image
         {
-            get { return _Image; }
+            get { return image; }
             set
             {
-                _Image = value;
+                image = value;
 
-                if (_Image != null)
+                if (image != null)
                 {
-                    if (_Image.Width != _lastImageWidth ||
-                        _Image.Height != _lastImageHeight)
+                    if (image.Width != lastImageWidth ||
+                        image.Height != lastImageHeight)
                     {
-                        _lastImageWidth = _Image.Width;
-                        _lastImageHeight = _Image.Height;
-                        _dirty = true;
+                        lastImageWidth = image.Width;
+                        lastImageHeight = image.Height;
+                        dirty = true;
                     }
                 }
             }
         }
 
-        private ImageAttributes _imageAttr = new ImageAttributes();
-        private Color _TransparencyKey = Color.Magenta;
+        private ImageAttributes imageAttrs = new ImageAttributes();
+        private Color transparencyKey = Color.Magenta;
+
         public Color TransparencyKey
         {
-            get { return _TransparencyKey; }
+            get { return transparencyKey; }
             set
             {
-                _TransparencyKey = value;
+                transparencyKey = value;
 
-                _imageAttr.SetColorKey(_TransparencyKey, _TransparencyKey);
+                imageAttrs.SetColorKey(transparencyKey, transparencyKey);
             }
         }
 
         public Size Size
         {
-            get { return _size; }
+            get { return size; }
             set
             {
-                if (_size != value)
+                if (size != value)
                 {
-                    _size = value;
-                    _dirty = true;
+                    size = value;
+                    dirty = true;
                 }
             }
         }
 
         public Padding Margins
         {
-            get { return _margins; }
+            get { return margins; }
             set
             {
-                if (_margins != value)
+                if (margins != value)
                 {
-                    _margins = value;
-                    _dirty = true;
+                    margins = value;
+                    dirty = true;
+                }
+            }
+        }
+
+        public InterpolationMode InterpolationMode
+        {
+            get => interpolationMode;
+            set
+            {
+                if (interpolationMode != value)
+                {
+                    interpolationMode = value;
+                    dirty = true;
                 }
             }
         }
 
         public bool DrawCenter
         {
-            get { return _drawCenter; }
+            get { return drawCenter; }
             set
             {
-                if (_drawCenter != value)
+                if (drawCenter != value)
                 {
-                    _drawCenter = value;
-                    _dirty = true;
+                    drawCenter = value;
+                    dirty = true;
                 }
             }
         }
 
         public void Invalidate()
         {
-            _dirty = true;
+            dirty = true;
         }
 
         private void CalculateSlices()
         {
-            if (_Image == null)
+            if (image == null)
                 return;
 
-            int w = _size.Width;
-            int h = _size.Height;
+            int w = size.Width;
+            int h = size.Height;
 
-            int imgW = _Image.Width;
-            int imgH = _Image.Height;
+            int imgW = image.Width;
+            int imgH = image.Height;
 
-            int left = _margins.Left;
-            int top = _margins.Top;
-            int right = _margins.Right;
-            int bottom = _margins.Bottom;
+            int left = margins.Left;
+            int top = margins.Top;
+            int right = margins.Right;
+            int bottom = margins.Bottom;
 
             int centerW = imgW - left - right;
             int centerH = imgH - top - bottom;
@@ -133,66 +150,71 @@ namespace YouTube.ExControls
             // --- Source rectangles ---
 
             // Top left
-            _src[5] = new Rectangle(0, 0, left, top);
+            src[5] = new Rectangle(0, 0, left, top);
             // Top center
-            _src[1] = new Rectangle(left, 0, centerW, top);
+            src[1] = new Rectangle(left, 0, centerW, top);
             // Top right
-            _src[6] = new Rectangle(imgW - right, 0, right, top);
+            src[6] = new Rectangle(imgW - right, 0, right, top);
 
             // Middle left
-            _src[2] = new Rectangle(0, top, left, centerH);
+            src[2] = new Rectangle(0, top, left, centerH);
             // Middle center
-            _src[0] = new Rectangle(left, top, centerW, centerH);
+            src[0] = new Rectangle(left, top, centerW, centerH);
             // Middle right
-            _src[4] = new Rectangle(imgW - right, top, right, centerH);
+            src[4] = new Rectangle(imgW - right, top, right, centerH);
 
             // Bottom left
-            _src[8] = new Rectangle(0, imgH - bottom, left, bottom);
+            src[8] = new Rectangle(0, imgH - bottom, left, bottom);
             // Bottom center
-            _src[3] = new Rectangle(left, imgH - bottom, centerW, bottom);
+            src[3] = new Rectangle(left, imgH - bottom, centerW, bottom);
             // Bottom right
-            _src[7] = new Rectangle(imgW - right, imgH - bottom, right, bottom);
+            src[7] = new Rectangle(imgW - right, imgH - bottom, right, bottom);
 
             // --- Destination rectangles ---
 
             // Top left
-            _dst[5] = new Rectangle(0, 0, left, top);
+            dst[5] = new Rectangle(0, 0, left, top);
             // Top center
-            _dst[1] = new Rectangle(left, 0, dstCenterW, top);
+            dst[1] = new Rectangle(left, 0, dstCenterW, top);
             // Top right
-            _dst[6] = new Rectangle(left + dstCenterW, 0, right, top);
+            dst[6] = new Rectangle(left + dstCenterW, 0, right, top);
 
             // Middle left
-            _dst[2] = new Rectangle(0, top, left, dstCenterH);
+            dst[2] = new Rectangle(0, top, left, dstCenterH);
             // Middle cener
-            _dst[0] = new Rectangle(left, top, dstCenterW, dstCenterH);
+            dst[0] = new Rectangle(left, top, dstCenterW, dstCenterH);
             // Middle right
-            _dst[4] = new Rectangle(left + dstCenterW, top, right, dstCenterH);
+            dst[4] = new Rectangle(left + dstCenterW, top, right, dstCenterH);
 
             // Bottom left
-            _dst[8] = new Rectangle(0, top + dstCenterH, left, bottom);
+            dst[8] = new Rectangle(0, top + dstCenterH, left, bottom);
             // Bottom center
-            _dst[3] = new Rectangle(left, top + dstCenterH, dstCenterW, bottom);
+            dst[3] = new Rectangle(left, top + dstCenterH, dstCenterW, bottom);
             // Bottom right
-            _dst[7] = new Rectangle(left + dstCenterW, top + dstCenterH, right, bottom);
+            dst[7] = new Rectangle(left + dstCenterW, top + dstCenterH, right, bottom);
 
-            _dirty = false;
+            dirty = false;
         }
 
         public void Draw(Graphics g)
         {
-            if (_Image == null)
+            if (image == null)
                 return;
 
-            if (_dirty)
+            if (dirty)
                 CalculateSlices();
 
-            int i = _drawCenter ? 0 : 1;
+            var prevInterpolationMode = g.InterpolationMode;
+            g.InterpolationMode = InterpolationMode.NearestNeighbor;
+
+            int i = drawCenter ? 0 : 1;
 
             for (; i < 9; i++)
             {
-                g.DrawImage(_Image, _dst[i], _src[i].X, _src[i].Y, _src[i].Width, _src[i].Height, GraphicsUnit.Pixel, _imageAttr);
+                g.DrawImage(image, dst[i], src[i].X, src[i].Y, src[i].Width, src[i].Height, GraphicsUnit.Pixel, imageAttrs);
             }
+
+            g.InterpolationMode = prevInterpolationMode;
         }
     }
 }

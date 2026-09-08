@@ -7,6 +7,10 @@ namespace YouTube.ExControls
     {
         public ExPanel() : base()
         {
+            SetStyle(ControlStyles.OptimizedDoubleBuffer |
+                     ControlStyles.UserPaint |
+                     ControlStyles.AllPaintingInWmPaint, true);
+
             npi = new NinePatchImage();
         }
 
@@ -25,6 +29,7 @@ namespace YouTube.ExControls
                 if (resourceKey != value)
                 {
                     resourceKey = value;
+                    npi.Image = null;
                     Invalidate();
                 }
             }
