@@ -88,6 +88,7 @@ namespace YouTube.Forms
             if (video == null) return;
 
             Program.browseForm.EnableWatchButton = true;
+            playerInputCapture.Focus();
 
             if (!Visible)
             {
