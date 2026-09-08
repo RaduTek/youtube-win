@@ -104,6 +104,10 @@ namespace YouTube.Forms
                 { "author", video.Author.Name },
                 { "thumbnail", "http://i.ytimg.com/vi/" + video.YouTubeId.Id + "/default.jpg" },
                 { "thumbnailHQ", "http://i.ytimg.com/vi/" + video.YouTubeId.Id + "/hqdefault.jpg" },
+
+                // cover screen only - show loading indicator first when auto play is enabled
+                { "startScreenClass", Settings.Default.AutoPlayVideo ? "hidden" : "overlay" },
+                { "loadingScreenClass", Settings.Default.AutoPlayVideo ? "overlay" : "hidden" },
             };
 
             Utils.LoadTemplate("videoCover", description, videoFrame);
