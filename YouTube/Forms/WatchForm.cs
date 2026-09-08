@@ -184,32 +184,39 @@ namespace YouTube.Forms
             set
             {
                 detailsPanel.Visible = detailsSplitter.Visible = relatedPanel.Visible = value;
-            }
-        }
+                enableAutoHide = !value;
 
-        private bool LargePlayerControls
-        {
-            get { return largePlayerControls; }
-            set
-            {
-                if (largePlayerControls != value)
+                if (value)
                 {
-                    largePlayerControls = value;
-
-                    videoControlsPanel.Height = (int)(value ? videoControlsPanel.Height * 1.5 : videoControlsPanel.Height / 1.5);
-
-                    foreach (Control c in videoControlsPanel.Controls)
-                    {
-                        var btn = c as ExControls.ExButton;
-                        if (btn != null)
-                        {
-                            btn.Width = (int)(value ? btn.Width * 1.5 : btn.Width / 1.5);
-                        }
-                    }
+                    header.SendToBack();
+                    player.BringToFront();
+                }
+                else
+                {
+                    header.BringToFront();
+                    player.SendToBack();
                 }
             }
         }
 
+        private void SetLargePlayerControls(bool value)
+        {
+            if (largePlayerControls != value)
+            {
+                largePlayerControls = value;
+
+                videoControlsPanel.Height = (int)(value ? videoControlsPanel.Height * 1.5 : videoControlsPanel.Height / 1.5);
+
+                foreach (Control c in videoControlsPanel.Controls)
+                {
+                    var btn = c as ExControls.ExButton;
+                    if (btn != null)
+                    {
+                        btn.Width = (int)(value ? btn.Width * 1.5 : btn.Width / 1.5);
+                    }
+                }
+            }
+        }
 
         private void SetFullScreen(bool value)
         {
@@ -233,7 +240,6 @@ namespace YouTube.Forms
                 FormBorderStyle = FormBorderStyle.None;
                 WindowState = FormWindowState.Maximized;
 
-                player.SendToBack();
                 playerInputCapture.Focus();
             }
             else
@@ -246,11 +252,9 @@ namespace YouTube.Forms
 
                 WindowState = prevWindowState;
 
-                LargeVideoLayout = prevLargeLayout;
-
                 ShowPlayerControls();
 
-                player.BringToFront();
+                LargeVideoLayout = prevLargeLayout;
             }
 
             header.Visible = !value;
@@ -258,27 +262,27 @@ namespace YouTube.Forms
             fullscreenButton.IconKey = value ? "PlayerNormal" : "PlayerLarge";
 
             if (Settings.Default.LargePlayerControls)
-                LargePlayerControls = value;
+                SetLargePlayerControls(value);
 
             ResumeLayout();
         }
 
         private void ShowCoverScreen(string screenId)
         {
-            videoFrame.Document.GetElementById("startScreen").SetAttribute("className", "hidden");
-            videoFrame.Document.GetElementById("loadingScreen").SetAttribute("className", "hidden");
-            videoFrame.Document.GetElementById("endScreen").SetAttribute("className", "hidden");
-            videoFrame.Document.GetElementById("helpScreen").SetAttribute("className", "hidden");
+            videoFrame.Document.GetElementById("startScreen")?.SetAttribute("className", "hidden");
+            videoFrame.Document.GetElementById("loadingScreen")?.SetAttribute("className", "hidden");
+            videoFrame.Document.GetElementById("endScreen")?.SetAttribute("className", "hidden");
+            videoFrame.Document.GetElementById("helpScreen")?.SetAttribute("className", "hidden");
 
-            videoFrame.Document.GetElementById(screenId).SetAttribute("className", "overlay");
+            videoFrame.Document.GetElementById(screenId)?.SetAttribute("className", "overlay");
+            videoFrame.BringToFront();
             videoFrame.Visible = true;
-            player.Visible = false;
         }
 
         private void ShowVideoPlayer()
         {
             videoFrame.Visible = false;
-            player.Visible = true;
+            videoFrame.SendToBack();
         }
 
         #endregion
@@ -300,13 +304,12 @@ namespace YouTube.Forms
         private void PlayerTimer_Tick(object sender, EventArgs e)
         {
             seekBar.Value = player.Ctlcontrols.currentPosition;
-            if (isFullscreen && enableAutoHide)
+            if (enableAutoHide)
             {
                 controlsAutoHideCounter--;
                 if (controlsAutoHideCounter <= 0 && videoControlsPanel.Visible)
                 {
-                    videoControlsPanel.Visible = false;
-                    Cursor.Hide();
+                    HidePlayerControls();
                     suppressMouseUntil = DateTime.UtcNow.AddMilliseconds(300);
                 }
             }
@@ -314,7 +317,7 @@ namespace YouTube.Forms
 
         private void Player_MouseMoveEvent(object sender, AxWMPLib._WMPOCXEvents_MouseMoveEvent e)
         {
-            if (!isFullscreen || !enableAutoHide) return;
+            if (!enableAutoHide) return;
 
             if (DateTime.UtcNow < suppressMouseUntil)
                 return;
@@ -328,8 +331,16 @@ namespace YouTube.Forms
             if (!videoControlsPanel.Visible)
             {
                 videoControlsPanel.Visible = true;
+                if (!isFullscreen) header.Visible = true;
                 Cursor.Show();
             }
+        }
+
+        private void HidePlayerControls()
+        {
+            videoControlsPanel.Visible = false;
+            if (!isFullscreen) header.Visible = false;
+            Cursor.Hide();
         }
 
         private void Player_GotFocus(object sender, EventArgs e)
