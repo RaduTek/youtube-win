@@ -53,7 +53,7 @@ namespace YouTube.Forms
         private System.Windows.Forms.Timer playerTimer;
         private Data.Entry video;
 
-        private bool prevLargeLayout = true, isFullscreen = false, largePlayerControls = false, enableAutoHide = true;
+        private bool prevLargeLayout = true, isFullscreen = false, largePlayerControls = false, enableAutoHide = false, pauseAutoHide = false;
         private Rectangle prevBounds;
         private FormWindowState prevWindowState;
         private FormBorderStyle prevBorderStyle;
@@ -91,6 +91,7 @@ namespace YouTube.Forms
             }
 
             Text = video.Title + " - YouTube";
+            seekBar.Enabled = false;
             seekBar.Value = seekBar.BufferValue = 0;
             seekBar.MaxValue = video.Media.Duration.Seconds;
 
@@ -180,21 +181,23 @@ namespace YouTube.Forms
 
         private bool LargeVideoLayout
         {
-            get { return detailsPanel.Visible; }
+            get { return !detailsPanel.Visible; }
             set
             {
-                detailsPanel.Visible = detailsSplitter.Visible = relatedPanel.Visible = value;
-                enableAutoHide = !value;
+                playerSizeToggle.IconKey = value ? "WatchVideoNormal" : "WatchVideoLarge";
+                detailsPanel.Visible = detailsSplitter.Visible = relatedPanel.Visible = !value;
+                enableAutoHide = value;
 
                 if (value)
                 {
-                    header.SendToBack();
-                    player.BringToFront();
+                    header.BringToFront();
+                    player.SendToBack();
+                    playerInputCapture.Focus();
                 }
                 else
                 {
-                    header.BringToFront();
-                    player.SendToBack();
+                    header.SendToBack();
+                    player.BringToFront();
                 }
             }
         }
@@ -232,15 +235,13 @@ namespace YouTube.Forms
                     ? DesktopBounds
                     : RestoreBounds;
 
-                LargeVideoLayout = false;
+                LargeVideoLayout = true;
 
                 if (WindowState != FormWindowState.Normal)
                     WindowState = FormWindowState.Normal;
 
                 FormBorderStyle = FormBorderStyle.None;
                 WindowState = FormWindowState.Maximized;
-
-                playerInputCapture.Focus();
             }
             else
             {
@@ -273,8 +274,9 @@ namespace YouTube.Forms
             videoFrame.Document.GetElementById("loadingScreen")?.SetAttribute("className", "hidden");
             videoFrame.Document.GetElementById("endScreen")?.SetAttribute("className", "hidden");
             videoFrame.Document.GetElementById("helpScreen")?.SetAttribute("className", "hidden");
-
             videoFrame.Document.GetElementById(screenId)?.SetAttribute("className", "overlay");
+            
+            ShowPlayerControls();
             videoFrame.BringToFront();
             videoFrame.Visible = true;
         }
@@ -307,7 +309,7 @@ namespace YouTube.Forms
             if (enableAutoHide)
             {
                 controlsAutoHideCounter--;
-                if (controlsAutoHideCounter <= 0 && videoControlsPanel.Visible)
+                if (controlsAutoHideCounter <= 0 && videoControlsPanel.Visible && !pauseAutoHide)
                 {
                     HidePlayerControls();
                     suppressMouseUntil = DateTime.UtcNow.AddMilliseconds(300);
@@ -381,9 +383,12 @@ namespace YouTube.Forms
                     ShowVideoPlayer();
 
                     playerTimer.Start();
-                    seekBar.Enabled = true;
-                    seekBar.MaxValue = (int)player.currentMedia.duration;
-                    seekBar.Value = (int)player.Ctlcontrols.currentPosition;
+                    if (!seekBar.Enabled)
+                    {
+                        seekBar.Enabled = true;
+                        seekBar.MaxValue = player.currentMedia.duration;
+                        seekBar.Value = player.Ctlcontrols.currentPosition;
+                    }
                     break;
 
                 case WMPLib.WMPPlayState.wmppsPaused:
@@ -486,8 +491,6 @@ namespace YouTube.Forms
         private void playerSizeToggle_Click(object sender, EventArgs e)
         {
             LargeVideoLayout = !LargeVideoLayout;
-
-            playerSizeToggle.IconKey = LargeVideoLayout ? "WatchVideoLarge" : "WatchVideoNormal";
         }
 
         private void relatedFrame_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
@@ -503,14 +506,14 @@ namespace YouTube.Forms
         {
             if (!isFullscreen) return;
 
-            enableAutoHide = false;
+            pauseAutoHide = true;
         }
 
         private void videoControlsPanel_MouseLeave(object sender, EventArgs e)
         {
             if (!isFullscreen) return;
 
-            enableAutoHide = true;
+            pauseAutoHide = false;
             controlsAutoHideCounter = CONTROLS_AUTO_HIDE_TIMEOUT;
         }
 
@@ -575,6 +578,16 @@ namespace YouTube.Forms
                 case Keys.M:
                     player.settings.mute = !player.settings.mute;
                     UpdatePlayerControls();
+                    break;
+
+                case Keys.T:
+                    if (isFullscreen)
+                    {
+                        prevLargeLayout = true;
+                        SetFullScreen(false);
+                        break;
+                    }
+                    LargeVideoLayout = !LargeVideoLayout;
                     break;
 
                 case Keys.Up:
