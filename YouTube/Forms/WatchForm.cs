@@ -426,11 +426,13 @@ namespace YouTube.Forms
 
         private void playButton_Click(object sender, EventArgs e)
         {
+            playerInputCapture.Focus();
             PlayPause();
         }
 
         private void muteButton_Click(object sender, EventArgs e)
         {
+            playerInputCapture.Focus();
             if (player == null) return;
 
             player.settings.mute = !player.settings.mute;
@@ -440,7 +442,13 @@ namespace YouTube.Forms
 
         private void fullscreenButton_Click(object sender, EventArgs e)
         {
+            playerInputCapture.Focus();
             SetFullScreen(!isFullscreen);
+        }
+
+        private void seekBar_Click(object sender, EventArgs e)
+        {
+            playerInputCapture.Focus();
         }
 
         #endregion

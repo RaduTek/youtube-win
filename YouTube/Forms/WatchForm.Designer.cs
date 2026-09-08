@@ -129,6 +129,7 @@ namespace YouTube.Forms
             this.seekBar.Text = "exSeekBar1";
             this.seekBar.Value = 0D;
             this.seekBar.SeekFinished += new System.EventHandler<YouTube.ExControls.SeekEventArgs>(this.seekBar_SeekFinished);
+            this.seekBar.Click += new System.EventHandler(this.seekBar_Click);
             this.seekBar.MouseEnter += new System.EventHandler(this.videoControlsPanel_MouseEnter);
             this.seekBar.MouseLeave += new System.EventHandler(this.videoControlsPanel_MouseLeave);
             // 
