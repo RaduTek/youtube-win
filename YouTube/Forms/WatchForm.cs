@@ -196,13 +196,13 @@ namespace YouTube.Forms
                 if (value)
                 {
                     header.BringToFront();
-                    player.SendToBack();
+                    videoControlsPanel.BringToFront();
                     playerInputCapture.Focus();
                 }
                 else
                 {
                     header.SendToBack();
-                    player.BringToFront();
+                    videoControlsPanel.SendToBack();
                 }
             }
         }
@@ -282,14 +282,12 @@ namespace YouTube.Forms
             videoFrame.Document.GetElementById(screenId)?.SetAttribute("className", "overlay");
             
             ShowPlayerControls();
-            videoFrame.BringToFront();
             videoFrame.Visible = true;
         }
 
         private void ShowVideoPlayer()
         {
             videoFrame.Visible = false;
-            videoFrame.SendToBack();
         }
 
         #endregion
