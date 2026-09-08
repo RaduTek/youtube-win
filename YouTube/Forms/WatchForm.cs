@@ -623,6 +623,7 @@ namespace YouTube.Forms
 
         private void searchBox_Search(object sender, Controls.SearchBoxEventArgs e)
         {
+            searchBox.Text = "";
             Program.browseForm.Search(e.Text);
         }
 
