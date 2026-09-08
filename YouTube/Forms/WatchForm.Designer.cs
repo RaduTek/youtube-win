@@ -115,19 +115,19 @@ namespace YouTube.Forms
             // seekBar
             // 
             this.seekBar.BackColor = System.Drawing.Color.Transparent;
-            this.seekBar.BufferValue = 0;
+            this.seekBar.BufferValue = 0D;
             this.seekBar.Dock = System.Windows.Forms.DockStyle.Fill;
             this.seekBar.Enabled = false;
             this.seekBar.EnableTransparency = true;
             this.seekBar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.seekBar.Location = new System.Drawing.Point(0, 0);
-            this.seekBar.MaxValue = 100;
+            this.seekBar.MaxValue = 100D;
             this.seekBar.Name = "seekBar";
             this.seekBar.ShowLabels = true;
             this.seekBar.Size = new System.Drawing.Size(384, 30);
             this.seekBar.TabIndex = 0;
             this.seekBar.Text = "exSeekBar1";
-            this.seekBar.Value = 0;
+            this.seekBar.Value = 0D;
             this.seekBar.SeekFinished += new System.EventHandler<YouTube.ExControls.SeekEventArgs>(this.seekBar_SeekFinished);
             this.seekBar.MouseEnter += new System.EventHandler(this.videoControlsPanel_MouseEnter);
             this.seekBar.MouseLeave += new System.EventHandler(this.videoControlsPanel_MouseLeave);

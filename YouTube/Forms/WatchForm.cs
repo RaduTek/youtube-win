@@ -42,7 +42,7 @@ namespace YouTube.Forms
             videoFrame.BringToFront();
 
             playerTimer = new System.Windows.Forms.Timer();
-            playerTimer.Interval = 500;
+            playerTimer.Interval = 250;
             playerTimer.Tick += PlayerTimer_Tick;
         }
 
@@ -299,7 +299,7 @@ namespace YouTube.Forms
 
         private void PlayerTimer_Tick(object sender, EventArgs e)
         {
-            seekBar.Value = (int)player.Ctlcontrols.currentPosition;
+            seekBar.Value = player.Ctlcontrols.currentPosition;
             if (isFullscreen && enableAutoHide)
             {
                 controlsAutoHideCounter--;

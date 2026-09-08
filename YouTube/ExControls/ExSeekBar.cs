@@ -7,7 +7,7 @@ namespace YouTube.ExControls
 {
     public class SeekEventArgs : EventArgs
     {
-        public int Position { get; set; }
+        public double Position { get; set; }
     }
 
     public class ExSeekBar : ExControl
@@ -21,9 +21,9 @@ namespace YouTube.ExControls
             Value = 0; // calc initial rectangles
         }
 
-        private int maxValue = 100;
-        private int value = 0;
-        private int bufferValue = 50;
+        private double maxValue = 100;
+        private double value = 0;
+        private double bufferValue = 50;
         private int seekPosition = 0;
         private int leftMargin = 0, rightMargin = 0;
 
@@ -55,7 +55,7 @@ namespace YouTube.ExControls
         }
 
 
-        public int MaxValue
+        public double MaxValue
         {
             get { return maxValue; }
             set
@@ -64,14 +64,14 @@ namespace YouTube.ExControls
                 {
                     maxValue = value;
 
-                    totalTime = Utils.FormatDurationSeconds(maxValue);
+                    totalTime = Utils.FormatDurationSeconds((int)maxValue);
 
                     UpdateRectangles();
                 }
             }
         }
 
-        public int Value
+        public double Value
         {
             get { return value; }
             set
@@ -80,14 +80,14 @@ namespace YouTube.ExControls
                 {
                     this.value = value;
 
-                    currentTime = Utils.FormatDurationSeconds(this.value);
+                    currentTime = Utils.FormatDurationSeconds((int)(this.value));
 
                     UpdateRectangles();
                 }
             }
         }
 
-        public int BufferValue
+        public double BufferValue
         {
             get { return bufferValue; }
             set
@@ -99,17 +99,6 @@ namespace YouTube.ExControls
                     UpdateRectangles();
                 }
             }
-        }
-
-        
-        private int RealSeekValue
-        {
-            get { return (int)((seekPosition / (double)trackRect.Width) * maxValue); }
-        }
-
-        public int SeekValue
-        {
-            get { return seeking ? RealSeekValue : value; }
         }
 
         public bool Seeking
@@ -226,8 +215,10 @@ namespace YouTube.ExControls
 
             if (seeking)
             {
+                value = seekPosition / (double)trackRect.Width * maxValue;
+
                 if (SeekFinished != null)
-                    SeekFinished.Invoke(this, new SeekEventArgs() { Position = RealSeekValue });
+                    SeekFinished.Invoke(this, new SeekEventArgs() { Position = value });
 
                 seeking = false;
                 thumbImg = Hovering && thumbRect.Contains(e.Location) ? Properties.Resources.SeekBarThumb_Hover : Properties.Resources.SeekBarThumb_Normal;
