@@ -42,13 +42,14 @@ namespace YouTube.Forms
             this.detailsPanel = new System.Windows.Forms.Panel();
             this.detailsFrame = new YouTube.ExControls.ExWebBrowser();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.settingsButton = new YouTube.ExControls.ExButton();
             this.switchToBrowseButton = new YouTube.ExControls.ExButton();
             this.playerSizeToggle = new YouTube.ExControls.ExButton();
-            this.settingsButton = new YouTube.ExControls.ExButton();
             this.detailsSplitter = new System.Windows.Forms.Splitter();
             this.relatedPanel = new System.Windows.Forms.Panel();
             this.relatedFrame = new YouTube.ExControls.ExWebBrowser();
             this.header = new System.Windows.Forms.Panel();
+            this.searchBox = new YouTube.Controls.SearchBox();
             this.topLogo = new System.Windows.Forms.PictureBox();
             this.videoPanel.SuspendLayout();
             this.videoControlsPanel.SuspendLayout();
@@ -84,7 +85,6 @@ namespace YouTube.Forms
             this.videoFrame.TabIndex = 1;
             this.videoFrame.Visible = false;
             this.videoFrame.WebBrowserShortcutsEnabled = false;
-            this.videoFrame.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.videoFrame_DocumentCompleted);
             // 
             // videoControlsPanel
             // 
@@ -210,6 +210,24 @@ namespace YouTube.Forms
             this.detailsFrame.Visible = false;
             this.detailsFrame.WebBrowserShortcutsEnabled = false;
             // 
+            // settingsButton
+            // 
+            this.settingsButton.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.settingsButton.BackColor = System.Drawing.Color.Transparent;
+            this.settingsButton.BackKey = "Button";
+            this.settingsButton.BackMargins = new System.Windows.Forms.Padding(0, 0, 0, 0);
+            this.settingsButton.EnableTransparency = true;
+            this.settingsButton.Icon = ((System.Drawing.Image)(resources.GetObject("settingsButton.Icon")));
+            this.settingsButton.IconKey = "SettingsDark";
+            this.settingsButton.IconTransparencyKey = System.Drawing.Color.Magenta;
+            this.settingsButton.Location = new System.Drawing.Point(706, 10);
+            this.settingsButton.Name = "settingsButton";
+            this.settingsButton.Size = new System.Drawing.Size(30, 26);
+            this.settingsButton.TabIndex = 7;
+            this.settingsButton.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.toolTip.SetToolTip(this.settingsButton, "Settings");
+            this.settingsButton.Click += new System.EventHandler(this.settingsButton_Click);
+            // 
             // switchToBrowseButton
             // 
             this.switchToBrowseButton.Anchor = System.Windows.Forms.AnchorStyles.Right;
@@ -245,24 +263,6 @@ namespace YouTube.Forms
             this.playerSizeToggle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.toolTip.SetToolTip(this.playerSizeToggle, "Adjust Player Size");
             this.playerSizeToggle.Click += new System.EventHandler(this.playerSizeToggle_Click);
-            // 
-            // settingsButton
-            // 
-            this.settingsButton.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.settingsButton.BackColor = System.Drawing.Color.Transparent;
-            this.settingsButton.BackKey = "Button";
-            this.settingsButton.BackMargins = new System.Windows.Forms.Padding(0, 0, 0, 0);
-            this.settingsButton.EnableTransparency = true;
-            this.settingsButton.Icon = ((System.Drawing.Image)(resources.GetObject("settingsButton.Icon")));
-            this.settingsButton.IconKey = "SettingsDark";
-            this.settingsButton.IconTransparencyKey = System.Drawing.Color.Magenta;
-            this.settingsButton.Location = new System.Drawing.Point(706, 10);
-            this.settingsButton.Name = "settingsButton";
-            this.settingsButton.Size = new System.Drawing.Size(30, 26);
-            this.settingsButton.TabIndex = 7;
-            this.settingsButton.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.toolTip.SetToolTip(this.settingsButton, "Settings");
-            this.settingsButton.Click += new System.EventHandler(this.settingsButton_Click);
             // 
             // detailsSplitter
             // 
@@ -304,6 +304,7 @@ namespace YouTube.Forms
             // 
             this.header.BackgroundImage = global::YouTube.Properties.Resources.WatchHeader;
             this.header.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.header.Controls.Add(this.searchBox);
             this.header.Controls.Add(this.settingsButton);
             this.header.Controls.Add(this.switchToBrowseButton);
             this.header.Controls.Add(this.playerSizeToggle);
@@ -313,6 +314,18 @@ namespace YouTube.Forms
             this.header.Name = "header";
             this.header.Size = new System.Drawing.Size(784, 48);
             this.header.TabIndex = 0;
+            // 
+            // searchBox
+            // 
+            this.searchBox.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.searchBox.BackColor = System.Drawing.Color.Transparent;
+            this.searchBox.ButtonText = "Search";
+            this.searchBox.DarkTheme = true;
+            this.searchBox.Location = new System.Drawing.Point(242, 11);
+            this.searchBox.Name = "searchBox";
+            this.searchBox.Size = new System.Drawing.Size(300, 24);
+            this.searchBox.TabIndex = 8;
+            this.searchBox.Search += new System.EventHandler<YouTube.Controls.SearchBoxEventArgs>(this.searchBox_Search);
             // 
             // topLogo
             // 
@@ -380,5 +393,6 @@ namespace YouTube.Forms
         private ExControls.ExButton playerSizeToggle;
         private ExControls.ExButton switchToBrowseButton;
         private ExControls.ExButton settingsButton;
+        private Controls.SearchBox searchBox;
     }
 }

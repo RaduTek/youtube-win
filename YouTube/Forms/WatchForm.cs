@@ -580,12 +580,9 @@ namespace YouTube.Forms
             e.IsInputKey = true; // allow direction keys to raise KeyDown events
         }
 
-        private void videoFrame_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        private void searchBox_Search(object sender, Controls.SearchBoxEventArgs e)
         {
-            if (Settings.Default.AutoPlayVideo)
-            {
-                ShowCoverScreen("loadingScreen");
-            }
+            Program.browseForm.Search(e.Text);
         }
 
         private void watchToBrowseButton_Click(object sender, EventArgs e)
