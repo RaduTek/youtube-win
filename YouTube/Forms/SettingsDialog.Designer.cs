@@ -47,10 +47,17 @@
             this.videoQualityBox = new System.Windows.Forms.ComboBox();
             this.downloadsTab = new System.Windows.Forms.TabPage();
             this.playInBrowseCheck = new System.Windows.Forms.CheckBox();
+            this.aboutTab = new System.Windows.Forms.TabPage();
+            this.aboutTextLabel = new System.Windows.Forms.Label();
+            this.aboutLogo = new System.Windows.Forms.PictureBox();
+            this.aboutVersionLabel = new System.Windows.Forms.Label();
+            this.aboutDisclaimerLabel = new System.Windows.Forms.Label();
             this.tabControl.SuspendLayout();
             this.generalTab.SuspendLayout();
             this.videoPlayerTab.SuspendLayout();
             this.downloadsTab.SuspendLayout();
+            this.aboutTab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.aboutLogo)).BeginInit();
             this.SuspendLayout();
             // 
             // okButton
@@ -130,6 +137,7 @@
             this.tabControl.Controls.Add(this.generalTab);
             this.tabControl.Controls.Add(this.videoPlayerTab);
             this.tabControl.Controls.Add(this.downloadsTab);
+            this.tabControl.Controls.Add(this.aboutTab);
             this.tabControl.Location = new System.Drawing.Point(6, 7);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
@@ -260,6 +268,56 @@
             this.playInBrowseCheck.Text = "Continue playing the video while browsing";
             this.playInBrowseCheck.UseVisualStyleBackColor = true;
             // 
+            // aboutTab
+            // 
+            this.aboutTab.Controls.Add(this.aboutLogo);
+            this.aboutTab.Controls.Add(this.aboutTextLabel);
+            this.aboutTab.Controls.Add(this.aboutVersionLabel);
+            this.aboutTab.Controls.Add(this.aboutDisclaimerLabel);
+            this.aboutTab.Location = new System.Drawing.Point(4, 22);
+            this.aboutTab.Name = "aboutTab";
+            this.aboutTab.Padding = new System.Windows.Forms.Padding(3);
+            this.aboutTab.Size = new System.Drawing.Size(318, 186);
+            this.aboutTab.TabIndex = 3;
+            this.aboutTab.Text = "About";
+            this.aboutTab.UseVisualStyleBackColor = true;
+            // 
+            // aboutTextLabel
+            // 
+            this.aboutTextLabel.Location = new System.Drawing.Point(6, 52);
+            this.aboutTextLabel.Name = "aboutTextLabel";
+            this.aboutTextLabel.Size = new System.Drawing.Size(300, 63);
+            this.aboutTextLabel.TabIndex = 3;
+            this.aboutTextLabel.Text = "YouTube desktop client for BackTube, yt2009 and other YouTube Data API V2 servers" +
+    ".\r\n\r\nCreated by RaduTek.";
+            // 
+            // aboutLogo
+            // 
+            this.aboutLogo.Image = global::YouTube.Properties.Resources.BrowseHeaderLogo;
+            this.aboutLogo.Location = new System.Drawing.Point(9, 10);
+            this.aboutLogo.Name = "aboutLogo";
+            this.aboutLogo.Size = new System.Drawing.Size(80, 32);
+            this.aboutLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.aboutLogo.TabIndex = 4;
+            this.aboutLogo.TabStop = false;
+            // 
+            // aboutVersionLabel
+            // 
+            this.aboutVersionLabel.Location = new System.Drawing.Point(6, 117);
+            this.aboutVersionLabel.Name = "aboutVersionLabel";
+            this.aboutVersionLabel.Size = new System.Drawing.Size(300, 33);
+            this.aboutVersionLabel.TabIndex = 5;
+            this.aboutVersionLabel.Text = "Version Info";
+            // 
+            // aboutDisclaimerLabel
+            // 
+            this.aboutDisclaimerLabel.AutoSize = true;
+            this.aboutDisclaimerLabel.Location = new System.Drawing.Point(6, 159);
+            this.aboutDisclaimerLabel.Name = "aboutDisclaimerLabel";
+            this.aboutDisclaimerLabel.Size = new System.Drawing.Size(187, 13);
+            this.aboutDisclaimerLabel.TabIndex = 6;
+            this.aboutDisclaimerLabel.Text = "Not affiliated with YouTube or Google.";
+            // 
             // SettingsDialog
             // 
             this.AcceptButton = this.okButton;
@@ -285,6 +343,9 @@
             this.videoPlayerTab.PerformLayout();
             this.downloadsTab.ResumeLayout(false);
             this.downloadsTab.PerformLayout();
+            this.aboutTab.ResumeLayout(false);
+            this.aboutTab.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.aboutLogo)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -310,5 +371,10 @@
         private System.Windows.Forms.CheckBox largeControlsCheck;
         private System.Windows.Forms.CheckBox autoPlayCheck;
         private System.Windows.Forms.CheckBox playInBrowseCheck;
+        private System.Windows.Forms.TabPage aboutTab;
+        private System.Windows.Forms.PictureBox aboutLogo;
+        private System.Windows.Forms.Label aboutTextLabel;
+        private System.Windows.Forms.Label aboutVersionLabel;
+        private System.Windows.Forms.Label aboutDisclaimerLabel;
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Windows.Forms;
+using System.Deployment.Application;
 
 namespace YouTube
 {
@@ -14,6 +15,25 @@ namespace YouTube
         private void SettingsForm_Load(object sender, EventArgs e)
         {
             LoadSettings();
+
+            if (ApplicationDeployment.IsNetworkDeployed)
+            {
+                aboutVersionLabel.Text = "Version: " + ApplicationDeployment.CurrentDeployment.CurrentVersion + " (ClickOnce)";
+                ApplicationDeployment.CurrentDeployment.CheckForUpdateCompleted += CurrentDeployment_CheckForUpdateCompleted;
+                ApplicationDeployment.CurrentDeployment.CheckForUpdateAsync();
+            }
+            else
+            {
+                aboutVersionLabel.Text = "Version: " + Application.ProductVersion.ToString() + " (Standalone)";
+            }
+        }
+
+        private void CurrentDeployment_CheckForUpdateCompleted(object sender, CheckForUpdateCompletedEventArgs e)
+        {
+            if (e.UpdateAvailable)
+            {
+                aboutVersionLabel.Text += "\r\n Update is available: Version " + e.AvailableVersion + " will be installed on next launch.";
+            }
         }
 
         private void LoadSettings()
