@@ -38,6 +38,13 @@ namespace YouTube
             browseForm.FormClosing += BrowseForm_FormClosing;
             watchForm.FormClosing += WatchForm_FormClosing;
 
+            if (Settings.Default.WindowBounds.Width > 0)
+            {
+                browseForm.StartPosition = watchForm.StartPosition = FormStartPosition.Manual;
+                browseForm.DesktopBounds = watchForm.DesktopBounds = Settings.Default.WindowBounds;
+                browseForm.WindowState = watchForm.WindowState = Settings.Default.WindowState;
+            }
+
             if (startVideoId != null)
             {
                 Application.Run(watchForm);
@@ -50,33 +57,45 @@ namespace YouTube
 
         private static void BrowseForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            CloseBoth(watchForm);
+            CloseBoth(browseForm, watchForm);
         }
 
         private static void WatchForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            CloseBoth(browseForm);
+            CloseBoth(watchForm, browseForm);
         }
 
-        private static void CloseBoth(Form other)
+        private static void CloseBoth(Form current, Form other)
         {
             if (isClosingApp)
                 return;
             isClosingApp = true;
 
+            Settings.Default.WindowState = current.WindowState;
+            Settings.Default.WindowBounds = current.WindowState == FormWindowState.Maximized ? current.RestoreBounds : current.DesktopBounds;
+            Settings.Default.Save();
+
             if (other != null && !other.IsDisposed)
                 other.Close();
+        }
+
+        private static void SyncWindowState(Form current, Form target)
+        {
+            target.DesktopBounds = current.WindowState == FormWindowState.Maximized ? current.RestoreBounds : current.DesktopBounds;
+            target.WindowState = current.WindowState;
         }
 
         public static void SwitchView()
         {
             if (browseForm.Visible)
             {
+                SyncWindowState(browseForm, watchForm);
                 watchForm.Show();
                 browseForm.Hide();
             }
             else if (watchForm.Visible)
             {
+                SyncWindowState(watchForm, browseForm);
                 browseForm.Show();
                 watchForm.Hide();
             }
