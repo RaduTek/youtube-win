@@ -29,6 +29,7 @@ namespace YouTube
             videoQualityBox.SelectedItem = Settings.Default.VideoQuality;
             autoPlayCheck.Checked = Settings.Default.AutoPlayVideo;
             largeControlsCheck.Checked = Settings.Default.LargePlayerControls;
+            playInBrowseCheck.Checked = Settings.Default.PlayInBrowse;
 
             // Downloads
             downloadFolderText.Text = Settings.Default.DownloadFolder;
@@ -74,6 +75,7 @@ namespace YouTube
             Settings.Default.VideoQuality = (string)videoQualityBox.SelectedItem;
             Settings.Default.AutoPlayVideo = autoPlayCheck.Checked;
             Settings.Default.LargePlayerControls = largeControlsCheck.Checked;
+            Settings.Default.PlayInBrowse = playInBrowseCheck.Checked;
 
             // Downloads
             Settings.Default.DownloadFolder = downloadFolderText.Text;

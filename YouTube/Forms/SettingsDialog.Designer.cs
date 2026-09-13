@@ -42,10 +42,11 @@
             this.instanceTypeHintLabel = new System.Windows.Forms.Label();
             this.videoPlayerTab = new System.Windows.Forms.TabPage();
             this.largeControlsCheck = new System.Windows.Forms.CheckBox();
+            this.autoPlayCheck = new System.Windows.Forms.CheckBox();
             this.videoQualityLabel = new System.Windows.Forms.Label();
             this.videoQualityBox = new System.Windows.Forms.ComboBox();
             this.downloadsTab = new System.Windows.Forms.TabPage();
-            this.autoPlayCheck = new System.Windows.Forms.CheckBox();
+            this.playInBrowseCheck = new System.Windows.Forms.CheckBox();
             this.tabControl.SuspendLayout();
             this.generalTab.SuspendLayout();
             this.videoPlayerTab.SuspendLayout();
@@ -180,6 +181,7 @@
             // 
             // videoPlayerTab
             // 
+            this.videoPlayerTab.Controls.Add(this.playInBrowseCheck);
             this.videoPlayerTab.Controls.Add(this.largeControlsCheck);
             this.videoPlayerTab.Controls.Add(this.autoPlayCheck);
             this.videoPlayerTab.Controls.Add(this.videoQualityLabel);
@@ -201,6 +203,16 @@
             this.largeControlsCheck.TabIndex = 23;
             this.largeControlsCheck.Text = "Use large controls in full screen (for tablets)";
             this.largeControlsCheck.UseVisualStyleBackColor = true;
+            // 
+            // autoPlayCheck
+            // 
+            this.autoPlayCheck.AutoSize = true;
+            this.autoPlayCheck.Location = new System.Drawing.Point(11, 52);
+            this.autoPlayCheck.Name = "autoPlayCheck";
+            this.autoPlayCheck.Size = new System.Drawing.Size(104, 17);
+            this.autoPlayCheck.TabIndex = 24;
+            this.autoPlayCheck.Text = "Auto play videos";
+            this.autoPlayCheck.UseVisualStyleBackColor = true;
             // 
             // videoQualityLabel
             // 
@@ -238,15 +250,15 @@
             this.downloadsTab.Text = "Downloads";
             this.downloadsTab.UseVisualStyleBackColor = true;
             // 
-            // autoPlayCheck
+            // playInBrowseCheck
             // 
-            this.autoPlayCheck.AutoSize = true;
-            this.autoPlayCheck.Location = new System.Drawing.Point(11, 52);
-            this.autoPlayCheck.Name = "autoPlayCheck";
-            this.autoPlayCheck.Size = new System.Drawing.Size(104, 17);
-            this.autoPlayCheck.TabIndex = 24;
-            this.autoPlayCheck.Text = "Auto play videos";
-            this.autoPlayCheck.UseVisualStyleBackColor = true;
+            this.playInBrowseCheck.AutoSize = true;
+            this.playInBrowseCheck.Location = new System.Drawing.Point(11, 98);
+            this.playInBrowseCheck.Name = "playInBrowseCheck";
+            this.playInBrowseCheck.Size = new System.Drawing.Size(223, 17);
+            this.playInBrowseCheck.TabIndex = 25;
+            this.playInBrowseCheck.Text = "Continue playing the video while browsing";
+            this.playInBrowseCheck.UseVisualStyleBackColor = true;
             // 
             // SettingsDialog
             // 
@@ -297,5 +309,6 @@
         private System.Windows.Forms.ComboBox videoQualityBox;
         private System.Windows.Forms.CheckBox largeControlsCheck;
         private System.Windows.Forms.CheckBox autoPlayCheck;
+        private System.Windows.Forms.CheckBox playInBrowseCheck;
     }
 }

@@ -527,6 +527,8 @@ namespace YouTube.Forms
 
         private void settingsButton_Click(object sender, EventArgs e)
         {
+            player.Ctlcontrols.pause();
+
             new SettingsDialog().ShowDialog();
 
             // reload settings
@@ -535,9 +537,14 @@ namespace YouTube.Forms
 
         private void WatchForm_VisibleChanged(object sender, EventArgs e)
         {
-            if (!Visible)
+            if (Visible)
             {
-                player.Ctlcontrols.pause();
+                playerInputCapture.Focus();
+            }
+            else
+            {
+                if (!Settings.Default.PlayInBrowse)
+                    player.Ctlcontrols.pause();
             }
         }
 

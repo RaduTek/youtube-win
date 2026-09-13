@@ -118,5 +118,17 @@ namespace YouTube {
                 this["WindowState"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool PlayInBrowse {
+            get {
+                return ((bool)(this["PlayInBrowse"]));
+            }
+            set {
+                this["PlayInBrowse"] = value;
+            }
+        }
     }
 }
