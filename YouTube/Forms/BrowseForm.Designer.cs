@@ -38,12 +38,10 @@ namespace YouTube.Forms
             this.topLogo = new System.Windows.Forms.PictureBox();
             this.leftPanel = new System.Windows.Forms.Panel();
             this.guideFrame = new YouTube.ExControls.ExWebBrowser();
-            this.leftSplitter = new System.Windows.Forms.Splitter();
             this.middlePanel = new System.Windows.Forms.Panel();
             this.browseFrame = new YouTube.ExControls.ExWebBrowser();
             this.rightPanel = new System.Windows.Forms.Panel();
             this.queueFrame = new YouTube.ExControls.ExWebBrowser();
-            this.rightSplitter = new System.Windows.Forms.Splitter();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.header.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.topLogo)).BeginInit();
@@ -63,7 +61,7 @@ namespace YouTube.Forms
             this.header.Dock = System.Windows.Forms.DockStyle.Top;
             this.header.Location = new System.Drawing.Point(0, 0);
             this.header.Name = "header";
-            this.header.Size = new System.Drawing.Size(784, 48);
+            this.header.Size = new System.Drawing.Size(824, 48);
             this.header.TabIndex = 1;
             // 
             // searchBox
@@ -72,7 +70,7 @@ namespace YouTube.Forms
             this.searchBox.BackColor = System.Drawing.Color.Transparent;
             this.searchBox.ButtonText = "Search";
             this.searchBox.DarkTheme = false;
-            this.searchBox.Location = new System.Drawing.Point(242, 11);
+            this.searchBox.Location = new System.Drawing.Point(262, 11);
             this.searchBox.Name = "searchBox";
             this.searchBox.Size = new System.Drawing.Size(300, 24);
             this.searchBox.TabIndex = 7;
@@ -88,7 +86,7 @@ namespace YouTube.Forms
             this.settingsButton.Icon = ((System.Drawing.Image)(resources.GetObject("settingsButton.Icon")));
             this.settingsButton.IconKey = "SettingsLight";
             this.settingsButton.IconTransparencyKey = System.Drawing.Color.Magenta;
-            this.settingsButton.Location = new System.Drawing.Point(696, 8);
+            this.settingsButton.Location = new System.Drawing.Point(736, 8);
             this.settingsButton.Name = "settingsButton";
             this.settingsButton.Size = new System.Drawing.Size(30, 30);
             this.settingsButton.TabIndex = 6;
@@ -107,7 +105,7 @@ namespace YouTube.Forms
             this.switchToWatchButton.Icon = ((System.Drawing.Image)(resources.GetObject("switchToWatchButton.Icon")));
             this.switchToWatchButton.IconKey = "BrowseToWatch";
             this.switchToWatchButton.IconTransparencyKey = System.Drawing.Color.Magenta;
-            this.switchToWatchButton.Location = new System.Drawing.Point(732, 8);
+            this.switchToWatchButton.Location = new System.Drawing.Point(772, 8);
             this.switchToWatchButton.Name = "switchToWatchButton";
             this.switchToWatchButton.Size = new System.Drawing.Size(30, 30);
             this.switchToWatchButton.TabIndex = 5;
@@ -120,7 +118,7 @@ namespace YouTube.Forms
             this.topLogo.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.topLogo.BackColor = System.Drawing.Color.Transparent;
             this.topLogo.Image = global::YouTube.Properties.Resources.BrowseHeaderLogo;
-            this.topLogo.Location = new System.Drawing.Point(30, 7);
+            this.topLogo.Location = new System.Drawing.Point(35, 7);
             this.topLogo.Name = "topLogo";
             this.topLogo.Size = new System.Drawing.Size(80, 32);
             this.topLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -133,7 +131,7 @@ namespace YouTube.Forms
             this.leftPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.leftPanel.Location = new System.Drawing.Point(0, 48);
             this.leftPanel.Name = "leftPanel";
-            this.leftPanel.Size = new System.Drawing.Size(140, 433);
+            this.leftPanel.Size = new System.Drawing.Size(150, 473);
             this.leftPanel.TabIndex = 2;
             // 
             // guideFrame
@@ -144,26 +142,18 @@ namespace YouTube.Forms
             this.guideFrame.MinimumSize = new System.Drawing.Size(20, 20);
             this.guideFrame.Name = "guideFrame";
             this.guideFrame.ScriptErrorsSuppressed = true;
-            this.guideFrame.Size = new System.Drawing.Size(140, 433);
+            this.guideFrame.Size = new System.Drawing.Size(150, 473);
             this.guideFrame.TabIndex = 0;
             this.guideFrame.Visible = false;
             this.guideFrame.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.guideFrame_DocumentCompleted);
-            // 
-            // leftSplitter
-            // 
-            this.leftSplitter.Location = new System.Drawing.Point(140, 48);
-            this.leftSplitter.Name = "leftSplitter";
-            this.leftSplitter.Size = new System.Drawing.Size(3, 433);
-            this.leftSplitter.TabIndex = 3;
-            this.leftSplitter.TabStop = false;
             // 
             // middlePanel
             // 
             this.middlePanel.Controls.Add(this.browseFrame);
             this.middlePanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.middlePanel.Location = new System.Drawing.Point(143, 48);
+            this.middlePanel.Location = new System.Drawing.Point(150, 48);
             this.middlePanel.Name = "middlePanel";
-            this.middlePanel.Size = new System.Drawing.Size(458, 433);
+            this.middlePanel.Size = new System.Drawing.Size(494, 473);
             this.middlePanel.TabIndex = 4;
             // 
             // browseFrame
@@ -174,7 +164,7 @@ namespace YouTube.Forms
             this.browseFrame.MinimumSize = new System.Drawing.Size(20, 20);
             this.browseFrame.Name = "browseFrame";
             this.browseFrame.ScriptErrorsSuppressed = true;
-            this.browseFrame.Size = new System.Drawing.Size(458, 433);
+            this.browseFrame.Size = new System.Drawing.Size(494, 473);
             this.browseFrame.TabIndex = 0;
             this.browseFrame.Visible = false;
             // 
@@ -182,9 +172,9 @@ namespace YouTube.Forms
             // 
             this.rightPanel.Controls.Add(this.queueFrame);
             this.rightPanel.Dock = System.Windows.Forms.DockStyle.Right;
-            this.rightPanel.Location = new System.Drawing.Point(604, 48);
+            this.rightPanel.Location = new System.Drawing.Point(644, 48);
             this.rightPanel.Name = "rightPanel";
-            this.rightPanel.Size = new System.Drawing.Size(180, 433);
+            this.rightPanel.Size = new System.Drawing.Size(180, 473);
             this.rightPanel.TabIndex = 5;
             // 
             // queueFrame
@@ -195,36 +185,25 @@ namespace YouTube.Forms
             this.queueFrame.MinimumSize = new System.Drawing.Size(20, 20);
             this.queueFrame.Name = "queueFrame";
             this.queueFrame.ScriptErrorsSuppressed = true;
-            this.queueFrame.Size = new System.Drawing.Size(180, 433);
+            this.queueFrame.Size = new System.Drawing.Size(180, 473);
             this.queueFrame.TabIndex = 0;
             this.queueFrame.Visible = false;
-            // 
-            // rightSplitter
-            // 
-            this.rightSplitter.Dock = System.Windows.Forms.DockStyle.Right;
-            this.rightSplitter.Location = new System.Drawing.Point(601, 48);
-            this.rightSplitter.Name = "rightSplitter";
-            this.rightSplitter.Size = new System.Drawing.Size(3, 433);
-            this.rightSplitter.TabIndex = 6;
-            this.rightSplitter.TabStop = false;
             // 
             // BrowseForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
-            this.ClientSize = new System.Drawing.Size(784, 481);
+            this.ClientSize = new System.Drawing.Size(824, 521);
             this.Controls.Add(this.middlePanel);
-            this.Controls.Add(this.rightSplitter);
             this.Controls.Add(this.rightPanel);
-            this.Controls.Add(this.leftSplitter);
             this.Controls.Add(this.leftPanel);
             this.Controls.Add(this.header);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.Color.Black;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MinimumSize = new System.Drawing.Size(640, 420);
+            this.MinimumSize = new System.Drawing.Size(640, 400);
             this.Name = "BrowseForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "YouTube";
@@ -243,10 +222,8 @@ namespace YouTube.Forms
         private System.Windows.Forms.Panel header;
         private System.Windows.Forms.PictureBox topLogo;
         private System.Windows.Forms.Panel leftPanel;
-        private System.Windows.Forms.Splitter leftSplitter;
         private System.Windows.Forms.Panel middlePanel;
         private System.Windows.Forms.Panel rightPanel;
-        private System.Windows.Forms.Splitter rightSplitter;
         private ExControls.ExWebBrowser guideFrame;
         private ExControls.ExWebBrowser browseFrame;
         private ExControls.ExWebBrowser queueFrame;

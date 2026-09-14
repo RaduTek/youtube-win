@@ -166,7 +166,6 @@ namespace YouTube.Forms
             Utils.InitialSettings();
 
             rightPanel.Visible = false;
-            rightSplitter.Visible = false;
 
             Utils.LoadTemplate("guide", new Dictionary<string, string>(), guideFrame);
         }
