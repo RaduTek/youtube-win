@@ -100,16 +100,24 @@ namespace YouTube.Forms
             seekBar.Value = seekBar.BufferValue = 0;
             seekBar.MaxValue = video.Media.Duration.Seconds;
 
+            var ratingTotal = video.Rating.Likes + video.Rating.Dislikes;
+            var ratingP = video.Rating.Likes / ratingTotal * 100 - 0.1;
+            var ratingN = video.Rating.Dislikes / ratingTotal * 100 - 0.1;
+
             var description = new Dictionary<string, string>
             {
                 { "title", video.Title },
                 { "videoId", video.YouTubeId.Id },
                 { "description", video.Content },
-                { "upload_date", Utils.FormatRelativeDate(video.Published) },
+                { "upload_date", video.Published.ToLongDateString() },
                 { "viewcount", video.Statistics.ViewCount.ToString("N0") },
                 { "author", video.Author.Name },
                 { "thumbnail", "http://i.ytimg.com/vi/" + video.YouTubeId.Id + "/default.jpg" },
                 { "thumbnailHQ", "http://i.ytimg.com/vi/" + video.YouTubeId.Id + "/hqdefault.jpg" },
+                { "likes", video.Rating.Likes.ToString("N0") },
+                { "dislikes", video.Rating.Dislikes.ToString("N0") },
+                { "ratingP", ratingP.ToString("0.###") + "%" },
+                { "ratingN", ratingN.ToString("0.###") + "%" },
 
                 // cover screen only - show loading indicator first when auto play is enabled
                 { "startScreenClass", Settings.Default.AutoPlayVideo ? "hidden" : "overlay" },

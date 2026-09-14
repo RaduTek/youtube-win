@@ -46,6 +46,79 @@ p {
 	vertical-align: middle;
 }
 
+button {
+	outline: none;
+	display: inline-block;
+	border: 0;
+	margin: 0;
+	padding: 0;
+	height: 28px;
+	width: 92px;
+	background-image: url(Button92.png);
+	background-repeat: no-repeat;
+	text-align: center;
+	color: #222;
+	cursor: pointer;
+}
+button.iconbtn {
+	width: 28px;
+	background-image: url(Button28.png);
+}
+button.iconbtn .text {
+	display: none !important;
+}
+button:hover {
+	background-position-y: -28px;
+	color: #000;
+}
+button:active {
+	background-position-y: -56px;
+	color: #000;
+}
+
+button .icon {
+	display: inline-block;
+	vertical-align: middle;
+	width: 16px;
+	height: 16px;
+	overflow: hidden;
+	background-image: url(ButtonIcons.png);
+	cursor: pointer;
+}
+button:hover .icon {
+	background-position-x: -16px;
+}
+button.selected .icon {
+	background-position-x: -32px;
+}
+
+button .icon-download {
+	background-position-y: -16px;
+}
+button .icon-favorite {
+	background-position-y: -32px;
+}
+button .icon-subscribe {
+	background-position-y: -48px;
+}
+
+button .text, button .text-1, button .text-2 {
+	display: inline-block;
+	vertical-align: middle;
+	text-decoration: none;
+	margin: 0 6px;
+	cursor: pointer;
+}
+button .text-2 {
+	display: none;
+}
+button.selected .text-1 {
+	display: none;
+}
+button.selected .text-2 {
+	display: inline-block;
+}
+
 
 #loading {
 	position: absolute;
@@ -62,26 +135,128 @@ p {
 
 .videoDescriptionPanel {
 	background-color: #E7E7E7;
-}
-#description {
-	padding: 3px;
-	padding-top: 1px;
-}
-#description div {
-	margin: 4px 3px;
-}
-#videoMeta {
-	color: #777;
-}
-#videoMeta .rating {
-	float: right;
-}
-#videoTitle {
-	font-size: 14px;
-	/* font-weight: bold; */
-	margin-bottom: 6px;
+	overflow: hidden;
 }
 
+#videoTabs {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 32px;
+    background-color: #464646;
+	background: top repeat-x url(VideoTabsBack.png);
+	text-align: center;
+}
+#videoTabs a {
+	outline: none;
+    color: #ccc;
+    display: inline-block;
+    background-image: url(VideoTab.png);
+    background-position: top left;
+    background-repeat: no-repeat;
+    width: 115px;
+    padding: 5px 0 3px;
+    height: 16px;
+    margin-top: 3px;
+	font-size: 11px;
+}
+#videoTabs a:hover {
+    text-decoration: none;
+    background-image: url(VideoTabHover.png);
+}
+#videoTabs a.selected {
+    background-image: url(VideoTabSelected.png);
+}
+
+#commentsTab {
+    background-position: top right !important;
+}
+
+#tabContent {
+	position: absolute;
+	top: 30px;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	overflow-y: auto;
+}
+
+#detailsContent {
+	padding: 4px;
+}
+
+#videoStats {
+	float: right;
+	height: 130px;
+	background-image: url(DescriptionSeparator.png);
+	background-position: top left;
+	background-repeat: no-repeat;
+	padding: 4px 4px 4px 12px;
+	margin: 4px 8px 8px;
+	color: #111;
+}
+#videoStats .stat {
+	margin-bottom: 8px;
+}
+#videoStats .viewcount {
+	font-size: 16px;
+}
+#authorLink {
+	font-size: 12px;
+}
+
+#videoTitle {
+	font-size: 16px;
+	margin: 6px;
+}
+#videoMeta {
+	color: #555;
+	margin: 6px;
+}
+
+#videoActions {
+	margin: 6px;
+}
+#videoActions button {
+	margin: 2px 8px 2px 0;
+}
+
+#videoDescription {
+	margin: 6px;
+}
+
+.ratingBar {
+	background-color: #ddd;
+	border-bottom: 1px solid #ccc;
+	height: 3px;
+	overflow: hidden;
+	margin-bottom: 2px;
+}
+.ratingBar .positive {
+	float: left;
+	height: 3px;
+	background-color: #060;
+}
+.ratingBar .negative {
+	float: left;
+	height: 3px;
+	background-color: #b00;
+}
+
+.ratingText {
+	color: #777;
+}
+.ratingText span {
+	color: #111;
+}
+
+#subscribeBtn {
+	text-align: left;
+}
+#subscribeBtn .icon {
+	margin-left: 8px;
+}
 
 .videoItem {
 	overflow: hidden;

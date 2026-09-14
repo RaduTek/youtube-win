@@ -8,19 +8,64 @@
 </head>
 
 <body class="videoDescriptionPanel">
-	<div id="description">
-		<div id="videoTitle">__title__</div>
-		<div id="videoMeta">
-			<span class="rating r3 half"></span>
-			Posted by
-			<a href="javascript:window.external.VideoClick(-1, 'author')">__author__</a>
-			&bull;
-			<span>__upload_date__</span>
-			&bull;
-			<span>__viewcount__</span> views
+    <div id="videoTabs">
+        <a href="javascript:SelectTab(0)" id="detailsTab" class="selected">Details</a
+        ><a href="javascript:SelectTab(1)" id="commentsTab">Comments</a>
+    </div>
+
+	<div id="tabContent">
+		<div id="detailsContent">
+			<div id="videoStats">
+				<div class="stat"><span class="viewcount">__viewcount__</span> views</div>
+				<div class="stat">
+					<div class="ratingBar"><div class="positive" style="width: __ratingP__"></div><div class="negative" style="width: __ratingN__"></div></div>
+					<div class="ratingText"><span>__likes__</span> likes &nbsp; <span>__dislikes__</span> dislikes</div>
+				</div>
+				<div class="stat">
+					<a id="authorLink" href="javascript:window.external.ActionClick('videoDescription', 'authorLink')" title="View more from this channel">__author__</a>
+				</div>
+				<div class="stat">
+					<button id="subscribeBtn" onclick="subscribeClick()" class="Add this channel to your subscriptions"><span class="icon icon-subscribe"></span><span class="text-1">Subscribe</span><span class="text-2">Subscribed</span></button>
+				</div>
+			</div>
+			<div id="videoTitle">__title__</div>
+			<div id="videoMeta">Published <span>__upload_date__</span></div>
+			<div id="videoActions">
+				<button onclick="window.external.ActionClick('videoDescription', 'addFavorites')" title="Add to Favorites"><span class="icon icon-favorite"></span><span class="text">Favorites</span></button
+				><button onclick="window.external.ActionClick('videoDescription', 'download')" title="Download this video"><span class="icon icon-download"></span><span class="text">Download</span></button>
+			</div>
+			<div id="videoDescription">__description__</div>
 		</div>
-		<div id="videoDescription">__description__</div>
+
+		<div id="commentsContent" class="hidden"></div>
 	</div>
+	
+	<script>
+		var videoTabs = document.getElementById("videoTabs");
+		var tabContent = document.getElementById("tabContent");
+
+		function SelectTab(index) {
+			for (var i=0; i < videoTabs.children.length; i++) {
+				var tab = videoTabs.children[i];
+				var page = tabContent.children[i];
+
+				tab.className = (i == index) ? "selected" : "";
+				page.className = (i == index) ? "" : "hidden";
+			}
+		}
+
+		function subscribeClick() {
+			var subscribeBtn = document.getElementById("subscribeBtn");
+
+			if (subscribeBtn.className === "") {
+				subscribeBtn.className = "selected";
+				window.external.ActionClick('videoDescription', 'subscribe');
+			} else {
+				subscribeBtn.className = "";
+				window.external.ActionClick('videoDescription', 'unsubscribe');
+			}
+		}
+	</script>
 </body>
 
 </html>
