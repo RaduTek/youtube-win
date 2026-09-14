@@ -7,7 +7,7 @@
 	<link rel="stylesheet" href="__cssfile__" />
 </head>
 
-<body class="videoDescriptionPanel">
+<body class="videoDescriptionPanel" onclick="focusPlayer">
     <div id="videoTabs">
         <a href="javascript:SelectTab(0)" id="detailsTab" class="selected">Details</a
         ><a href="javascript:SelectTab(1)" id="commentsTab">Comments</a>
@@ -44,6 +44,10 @@
 		var videoTabs = document.getElementById("videoTabs");
 		var tabContent = document.getElementById("tabContent");
 
+		function focusPlayer() {
+			window.external.ActionClick('videoDescription', 'focusPlayer');
+		}
+
 		function SelectTab(index) {
 			for (var i=0; i < videoTabs.children.length; i++) {
 				var tab = videoTabs.children[i];
@@ -52,6 +56,8 @@
 				tab.className = (i == index) ? "selected" : "";
 				page.className = (i == index) ? "" : "hidden";
 			}
+
+			focusPlayer();
 		}
 
 		function subscribeClick() {

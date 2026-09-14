@@ -678,12 +678,9 @@ namespace YouTube.Forms
 
                 case "author":
                     break;
-
-                case "focusControls":
-                    playerInputCapture.Focus();
-                    break;
             }
-            return;
+
+            playerInputCapture.Focus();
         }
 
         private void FrameConn_OnVideoClick(object sender, VideoClickEventArgs e)
