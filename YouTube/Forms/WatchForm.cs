@@ -198,7 +198,7 @@ namespace YouTube.Forms
             set
             {
                 playerSizeToggle.IconKey = value ? "WatchVideoNormal" : "WatchVideoLarge";
-                detailsPanel.Visible = detailsSplitter.Visible = relatedPanel.Visible = !value;
+                detailsPanel.Visible = relatedPanel.Visible = !value;
                 enableAutoHide = value;
 
                 if (value)
@@ -211,6 +211,7 @@ namespace YouTube.Forms
                 {
                     header.SendToBack();
                     videoControlsPanel.SendToBack();
+                    AdjustPanelSizes();
                 }
             }
         }
@@ -547,7 +548,8 @@ namespace YouTube.Forms
         {
             if (Visible)
             {
-                playerInputCapture.Focus();
+                AdjustPanelSizes();
+                playerInputCapture.Focus(); 
             }
             else
             {
@@ -633,6 +635,22 @@ namespace YouTube.Forms
         private void playerInputCapture_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
             e.IsInputKey = true; // allow direction keys to raise KeyDown events
+        }
+
+        private void WatchForm_Resize(object sender, EventArgs e)
+        {
+            if (LargeVideoLayout) return;
+
+            AdjustPanelSizes();
+        }
+
+        private void AdjustPanelSizes()
+        {
+            var targetPlayerHeight = (int)Math.Floor(player.Width * 9.0 / 16);
+            var idealDetailsHeight = ClientRectangle.Height - header.Height - videoControlsPanel.Height - targetPlayerHeight;
+            var minDetailsPanelHeight = 150;
+
+            detailsPanel.Height = Math.Max(minDetailsPanelHeight, idealDetailsHeight);
         }
 
         private void searchBox_Search(object sender, Controls.SearchBoxEventArgs e)
