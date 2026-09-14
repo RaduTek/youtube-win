@@ -27,10 +27,10 @@
     <UpdateUrl>http://pub.radutek.uk/ClickOnce/</UpdateUrl>
     <ProductName>YouTube</ProductName>
     <PublisherName>YouTube for Windows</PublisherName>
-    <MinimumRequiredVersion>2.0.0.11</MinimumRequiredVersion>
+    <MinimumRequiredVersion>2.1.0.0</MinimumRequiredVersion>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>12</ApplicationRevision>
-    <ApplicationVersion>2.0.0.%2a</ApplicationVersion>
+    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationVersion>2.1.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>false</BootstrapperEnabled>
