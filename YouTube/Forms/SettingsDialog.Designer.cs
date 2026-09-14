@@ -41,15 +41,15 @@
             this.instanceTypeLabel = new System.Windows.Forms.Label();
             this.instanceTypeHintLabel = new System.Windows.Forms.Label();
             this.videoPlayerTab = new System.Windows.Forms.TabPage();
+            this.playInBrowseCheck = new System.Windows.Forms.CheckBox();
             this.largeControlsCheck = new System.Windows.Forms.CheckBox();
             this.autoPlayCheck = new System.Windows.Forms.CheckBox();
             this.videoQualityLabel = new System.Windows.Forms.Label();
             this.videoQualityBox = new System.Windows.Forms.ComboBox();
             this.downloadsTab = new System.Windows.Forms.TabPage();
-            this.playInBrowseCheck = new System.Windows.Forms.CheckBox();
             this.aboutTab = new System.Windows.Forms.TabPage();
-            this.aboutTextLabel = new System.Windows.Forms.Label();
             this.aboutLogo = new System.Windows.Forms.PictureBox();
+            this.aboutTextLabel = new System.Windows.Forms.Label();
             this.aboutVersionLabel = new System.Windows.Forms.Label();
             this.aboutDisclaimerLabel = new System.Windows.Forms.Label();
             this.tabControl.SuspendLayout();
@@ -202,6 +202,16 @@
             this.videoPlayerTab.Text = "Video Player";
             this.videoPlayerTab.UseVisualStyleBackColor = true;
             // 
+            // playInBrowseCheck
+            // 
+            this.playInBrowseCheck.AutoSize = true;
+            this.playInBrowseCheck.Location = new System.Drawing.Point(11, 98);
+            this.playInBrowseCheck.Name = "playInBrowseCheck";
+            this.playInBrowseCheck.Size = new System.Drawing.Size(223, 17);
+            this.playInBrowseCheck.TabIndex = 25;
+            this.playInBrowseCheck.Text = "Continue playing the video while browsing";
+            this.playInBrowseCheck.UseVisualStyleBackColor = true;
+            // 
             // largeControlsCheck
             // 
             this.largeControlsCheck.AutoSize = true;
@@ -258,16 +268,6 @@
             this.downloadsTab.Text = "Downloads";
             this.downloadsTab.UseVisualStyleBackColor = true;
             // 
-            // playInBrowseCheck
-            // 
-            this.playInBrowseCheck.AutoSize = true;
-            this.playInBrowseCheck.Location = new System.Drawing.Point(11, 98);
-            this.playInBrowseCheck.Name = "playInBrowseCheck";
-            this.playInBrowseCheck.Size = new System.Drawing.Size(223, 17);
-            this.playInBrowseCheck.TabIndex = 25;
-            this.playInBrowseCheck.Text = "Continue playing the video while browsing";
-            this.playInBrowseCheck.UseVisualStyleBackColor = true;
-            // 
             // aboutTab
             // 
             this.aboutTab.Controls.Add(this.aboutLogo);
@@ -282,15 +282,6 @@
             this.aboutTab.Text = "About";
             this.aboutTab.UseVisualStyleBackColor = true;
             // 
-            // aboutTextLabel
-            // 
-            this.aboutTextLabel.Location = new System.Drawing.Point(6, 52);
-            this.aboutTextLabel.Name = "aboutTextLabel";
-            this.aboutTextLabel.Size = new System.Drawing.Size(300, 63);
-            this.aboutTextLabel.TabIndex = 3;
-            this.aboutTextLabel.Text = "YouTube desktop client for BackTube, yt2009 and other YouTube Data API V2 servers" +
-    ".\r\n\r\nCreated by RaduTek.";
-            // 
             // aboutLogo
             // 
             this.aboutLogo.Image = global::YouTube.Properties.Resources.BrowseHeaderLogo;
@@ -301,11 +292,20 @@
             this.aboutLogo.TabIndex = 4;
             this.aboutLogo.TabStop = false;
             // 
+            // aboutTextLabel
+            // 
+            this.aboutTextLabel.Location = new System.Drawing.Point(6, 52);
+            this.aboutTextLabel.Name = "aboutTextLabel";
+            this.aboutTextLabel.Size = new System.Drawing.Size(300, 58);
+            this.aboutTextLabel.TabIndex = 3;
+            this.aboutTextLabel.Text = "YouTube desktop client for BackTube, yt2009 and other YouTube Data API V2 servers" +
+    ".\r\n\r\nCreated by RaduTek.";
+            // 
             // aboutVersionLabel
             // 
-            this.aboutVersionLabel.Location = new System.Drawing.Point(6, 117);
+            this.aboutVersionLabel.Location = new System.Drawing.Point(6, 113);
             this.aboutVersionLabel.Name = "aboutVersionLabel";
-            this.aboutVersionLabel.Size = new System.Drawing.Size(300, 33);
+            this.aboutVersionLabel.Size = new System.Drawing.Size(300, 43);
             this.aboutVersionLabel.TabIndex = 5;
             this.aboutVersionLabel.Text = "Version Info";
             // 

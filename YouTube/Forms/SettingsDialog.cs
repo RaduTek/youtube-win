@@ -32,7 +32,11 @@ namespace YouTube
         {
             if (e.UpdateAvailable)
             {
-                aboutVersionLabel.Text += "\r\n Update is available: Version " + e.AvailableVersion + " will be installed on next launch.";
+                aboutVersionLabel.Text += "\nVersion " + e.AvailableVersion + " will be installed on next launch.";
+            }
+            else
+            {
+                aboutVersionLabel.Text += "\nYou are running the latest version.";
             }
         }
 
@@ -125,7 +129,7 @@ namespace YouTube
 
             if (dd.ShowDialog() == DialogResult.OK)
             {
-                downloadFolderText.Text = "\"" + dd.SelectedPath + "\" %1";
+                downloadFolderText.Text = dd.SelectedPath;
             }
         }
 
