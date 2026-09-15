@@ -270,6 +270,8 @@ namespace YouTube.Forms
                 ShowPlayerControls();
 
                 LargeVideoLayout = prevLargeLayout;
+
+                AdjustPanelSizes();
             }
 
             header.Visible = !value;
@@ -648,9 +650,12 @@ namespace YouTube.Forms
         {
             var targetPlayerHeight = (int)Math.Floor(player.Width * 9.0 / 16);
             var idealDetailsHeight = ClientRectangle.Height - header.Height - videoControlsPanel.Height - targetPlayerHeight;
-            var minDetailsPanelHeight = 150;
+            using (var g = CreateGraphics())
+            {
+                var minDetailsPanelHeight = (int)(154 * g.DpiX / 96);
 
-            detailsPanel.Height = Math.Max(minDetailsPanelHeight, idealDetailsHeight);
+                detailsPanel.Height = Math.Max(minDetailsPanelHeight, idealDetailsHeight);
+            }
         }
 
         private void searchBox_Search(object sender, Controls.SearchBoxEventArgs e)
