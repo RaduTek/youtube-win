@@ -175,7 +175,7 @@ button.selected .text-2 {
 
 #tabContent {
 	position: absolute;
-	top: 30px;
+	top: 31px;
 	bottom: 0;
 	left: 0;
 	right: 0;
@@ -188,7 +188,6 @@ button.selected .text-2 {
 
 #videoStats {
 	float: right;
-	height: 130px;
 	background-image: url(DescriptionSeparator.png);
 	background-position: top left;
 	background-repeat: no-repeat;
