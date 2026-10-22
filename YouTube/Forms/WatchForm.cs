@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Net;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
@@ -18,6 +19,7 @@ namespace YouTube.Forms
             frameConn.OnActionClick += FrameConn_OnActionClick;
             videoFrame.ObjectForScripting = frameConn;
             detailsFrame.ObjectForScripting = frameConn;
+            detailsFrame.DocumentCompleted += detailsFrame_DocumentCompleted;
             relatedFrame.ObjectForScripting = frameConn;
 
             // dummy control to capture key inputs for the player
@@ -62,6 +64,8 @@ namespace YouTube.Forms
         private int controlsAutoHideCounter = CONTROLS_AUTO_HIDE_TIMEOUT;
 
         private Data.Feed relatedFeed;
+        private Dictionary<string, string> detailsValues;
+        private string commentsVideoId; // video whose comments were requested
 
         private WebFrameConnector frameConn;
 
@@ -74,16 +78,17 @@ namespace YouTube.Forms
         public void LoadVideo(string videoId)
         {
             video = DataApi.GetVideo(videoId);
-            ShowVideoData();
+            ShowVideoData(true);
         }
 
         public void LoadVideo(Data.Entry video)
         {
             this.video = video;
-            ShowVideoData();
+            ShowVideoData(false);
         }
 
-        private void ShowVideoData()
+        // detailed: the entry was already loaded from the video API, no need to fetch it again
+        private void ShowVideoData(bool detailed)
         {
             if (video == null) return;
 
@@ -100,22 +105,45 @@ namespace YouTube.Forms
             seekBar.Value = seekBar.BufferValue = 0;
             seekBar.MaxValue = video.Media.Duration.Seconds;
 
-            var ratingTotal = video.Rating.Likes + video.Rating.Dislikes;
-            var ratingP = video.Rating.Likes / ratingTotal * 100 - 0.1;
-            var ratingN = video.Rating.Dislikes / ratingTotal * 100 - 0.1;
+            var values = BuildVideoValues(video);
 
-            var description = new Dictionary<string, string>
+            // the details page is reloaded, so comments need to be loaded again
+            commentsVideoId = null;
+
+            // details content is filled in once the full video entry is loaded
+            detailsValues = detailed ? values : null;
+
+            Utils.LoadTemplate("videoCover", values, videoFrame);
+            Utils.LoadTemplate("videoDetails", values, detailsFrame);
+            Utils.LoadTemplate("videoRelated", new Dictionary<string, string>(), relatedFrame);
+
+            if (player != null) player.URL = DataApi.GetVideoUrl(video.YouTubeId.Id);
+
+            if (!detailed) LoadFullDetails(video);
+        }
+
+        private Dictionary<string, string> BuildVideoValues(Data.Entry video)
+        {
+            var likes = video.Rating?.Likes ?? 0;
+            var dislikes = video.Rating?.Dislikes ?? 0;
+            var ratingTotal = likes + dislikes;
+
+            // leave a small gap between the bars; no ratings -> empty bars
+            var ratingP = ratingTotal > 0 ? Math.Max(0, likes / ratingTotal * 100 - 0.1) : 0;
+            var ratingN = ratingTotal > 0 ? Math.Max(0, dislikes / ratingTotal * 100 - 0.1) : 0;
+
+            return new Dictionary<string, string>
             {
                 { "title", video.Title },
                 { "videoId", video.YouTubeId.Id },
-                { "description", video.Content },
+                { "description", (video.Content ?? "").Replace("\r\n", "\n").Replace("\n", "<br />") },
                 { "upload_date", video.Published.ToLongDateString() },
-                { "viewcount", video.Statistics.ViewCount.ToString("N0") },
+                { "viewcount", (video.Statistics?.ViewCount ?? 0).ToString("N0") },
                 { "author", video.Author.Name },
                 { "thumbnail", "http://i.ytimg.com/vi/" + video.YouTubeId.Id + "/default.jpg" },
                 { "thumbnailHQ", "http://i.ytimg.com/vi/" + video.YouTubeId.Id + "/hqdefault.jpg" },
-                { "likes", video.Rating.Likes.ToString("N0") },
-                { "dislikes", video.Rating.Dislikes.ToString("N0") },
+                { "likes", likes.ToString("N0") },
+                { "dislikes", dislikes.ToString("N0") },
                 { "ratingP", ratingP.ToString("0.###") + "%" },
                 { "ratingN", ratingN.ToString("0.###") + "%" },
 
@@ -123,12 +151,130 @@ namespace YouTube.Forms
                 { "startScreenClass", Settings.Default.AutoPlayVideo ? "hidden" : "overlay" },
                 { "loadingScreenClass", Settings.Default.AutoPlayVideo ? "overlay" : "hidden" },
             };
+        }
 
-            Utils.LoadTemplate("videoCover", description, videoFrame);
-            Utils.LoadTemplate("videoDescription", description, detailsFrame);
-            Utils.LoadTemplate("videoRelated", new Dictionary<string, string>(), relatedFrame);
+        // Search and related results carry only partial data, so fetch the full entry
+        private void LoadFullDetails(Data.Entry partial)
+        {
+            var videoId = partial.YouTubeId.Id;
 
-            if (player != null) player.URL = DataApi.GetVideoUrl(video.YouTubeId.Id);
+            ThreadPool.QueueUserWorkItem(delegate
+            {
+                Data.Entry full = null;
+
+                try
+                {
+                    full = DataApi.GetVideo(videoId);
+                }
+                catch (Exception)
+                {
+                    // fall back to the data we already have
+                }
+
+                Invoke(new MethodInvoker(delegate
+                {
+                    // another video was selected while loading
+                    if (video == null || video.YouTubeId.Id != videoId) return;
+
+                    if (full != null) video = full;
+
+                    detailsValues = BuildVideoValues(video);
+                    ShowVideoDetails();
+                }));
+            });
+        }
+
+        private void ShowVideoDetails()
+        {
+            if (detailsValues == null) return;
+
+            var slot = detailsFrame.Document?.GetElementById("detailsContent");
+            if (slot == null) return;
+
+            Utils.LoadTemplateSlot("videoDetailsContent", detailsValues, "detailsContent", detailsFrame);
+
+            // stop showing the loading indicator once content is in place
+            slot.SetAttribute("className", slot.GetAttribute("className").Replace("loading-32w", "").Trim());
+        }
+
+        private void LoadComments()
+        {
+            if (video == null) return;
+
+            var videoId = video.YouTubeId.Id;
+
+            // already loaded (or loading) for this video
+            if (commentsVideoId == videoId) return;
+
+            var slot = detailsFrame.Document?.GetElementById("commentsContent");
+            if (slot == null) return;
+
+            commentsVideoId = videoId;
+            slot.InnerHtml = "";
+            slot.SetAttribute("className", "loading-32w");
+
+            ThreadPool.QueueUserWorkItem(delegate
+            {
+                try
+                {
+                    var feed = DataApi.GetVideoComments(videoId);
+
+                    Invoke(new MethodInvoker(delegate
+                    {
+                        if (commentsVideoId != videoId) return;
+
+                        ShowComments(feed);
+                    }));
+                }
+                catch (Exception ex)
+                {
+                    Invoke(new MethodInvoker(delegate
+                    {
+                        if (commentsVideoId != videoId) return;
+
+                        // allow retrying by reopening the tab
+                        commentsVideoId = null;
+                        ShowCommentsMessage("Error: " + ex.Message);
+                    }));
+                }
+            });
+        }
+
+        private void ShowComments(Data.Feed feed)
+        {
+            if (feed.Entries == null || feed.Entries.Count == 0)
+            {
+                ShowCommentsMessage("No comments.");
+                return;
+            }
+
+            var valuesList = new List<Dictionary<string, string>>();
+
+            foreach (var comment in feed.Entries)
+            {
+                valuesList.Add(new Dictionary<string, string>
+                {
+                    { "content", Utils.HtmlText(comment.Content) },
+                    { "author", Utils.HtmlText(comment.Author?.Name) },
+                    { "likes", (comment.Rating?.Likes ?? 0).ToString("N0") },
+                    { "upload_date", Utils.FormatRelativeDate(comment.Published) }
+                });
+            }
+
+            var slot = detailsFrame.Document?.GetElementById("commentsContent");
+            if (slot == null) return;
+
+            Utils.LoadTemplateListSlot("videoComment", valuesList, "commentsContent", detailsFrame);
+            slot.SetAttribute("className", slot.GetAttribute("className").Replace("loading-32w", "").Trim());
+        }
+
+        private void ShowCommentsMessage(string message)
+        {
+            var slot = detailsFrame.Document?.GetElementById("commentsContent");
+            if (slot == null) return;
+
+            slot.SetAttribute("className", slot.GetAttribute("className").Replace("loading-32w", "").Trim());
+            slot.InnerText = message;
         }
 
         private void LoadRelated()
@@ -157,13 +303,13 @@ namespace YouTube.Forms
         private void ShowRelatedFeed(Data.Feed feed)
         {
             relatedFeed = feed;
-            var entriesHtml = new StringBuilder();
 
-            for (int i=0; i < feed.Entries.Count; i++)
+            var valuesList = new List<Dictionary<string, string>>();
+
+            for (int i = 0; i < feed.Entries.Count; i++)
             {
                 var entry = feed.Entries[i];
-
-                entriesHtml.AppendLine(Utils.CreateTemplateDoc("videoItem", new Dictionary<string, string>
+                valuesList.Add(new Dictionary<string, string>
                 {
                     { "index", i.ToString() },
                     { "title", entry.Title },
@@ -173,11 +319,12 @@ namespace YouTube.Forms
                     { "upload_date", Utils.FormatRelativeDate(entry.Published) },
                     { "viewcount", entry.Statistics.ViewCount.ToString("N0") },
                     { "thumbnail", "http://i.ytimg.com/vi/" + entry.YouTubeId.Id + "/default.jpg" }
-                }));
+                });
             }
 
+            Utils.LoadTemplateListSlot("videoItem", valuesList, "relatedItems", relatedFrame);
             relatedFrame.Document.GetElementById("loading").SetAttribute("className", "hidden");
-            relatedFrame.Document.GetElementById("relatedItems").InnerHtml = entriesHtml.ToString();
+            //relatedFrame.Document.GetElementById("relatedItems").InnerHtml = entriesHtml.ToString();
         }
 
         private void ShowRelatedError(string message)
@@ -512,6 +659,11 @@ namespace YouTube.Forms
             LargeVideoLayout = !LargeVideoLayout;
         }
 
+        private void detailsFrame_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        {
+            ShowVideoDetails();
+        }
+
         private void relatedFrame_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
             // Load related feed for initial video
@@ -679,6 +831,10 @@ namespace YouTube.Forms
 
                 case "replay":
                     player.Ctlcontrols.play();
+                    break;
+
+                case "loadComments":
+                    LoadComments();
                     break;
 
                 case "author":

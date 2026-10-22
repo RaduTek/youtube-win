@@ -320,7 +320,8 @@
     <None Include="Templates\videoItem.html" />
     <None Include="Templates\browseResults.html" />
     <None Include="Templates\videoRelated.html" />
-    <None Include="Templates\videoDescription.html" />
+    <None Include="Templates\videoDetails.html" />
+    <None Include="Templates\videoComment.html" />
     <None Include="Resources\WatchVideoLarge.png" />
     <None Include="Resources\WatchVideoLarge_Disabled.png" />
     <None Include="Resources\WatchVideoLarge_Hover.png" />
@@ -333,6 +334,7 @@
     <None Include="Resources\WatchToBrowse.png" />
     <None Include="Resources\WatchToBrowse_Hover.png" />
     <None Include="Resources\WatchToBrowse_Disabled.png" />
+    <Content Include="Templates\videoDetailsContent.html" />
     <Content Include="Youtube.ico" />
   </ItemGroup>
   <ItemGroup>

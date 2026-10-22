@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Net;
+using System.Text;
 
 namespace YouTube
 {
@@ -178,6 +179,20 @@ namespace YouTube
             }
         }
 
+        // Escapes user-written text for HTML and keeps line breaks.
+        // WebUtility/System.Web are not available in .NET Fx 2.0 (client), so escape manually.
+        public static string HtmlText(string text)
+        {
+            var encoded = (text ?? "")
+                .Replace("&", "&amp;")
+                .Replace("<", "&lt;")
+                .Replace(">", "&gt;")
+                .Replace("\"", "&quot;")
+                .Replace("'", "&#39;");
+
+            return encoded.Replace("\r\n", "\n").Replace("\n", "<br />");
+        }
+
         public static string CreateTemplateDoc(string templateName, Dictionary<string, string> values)
         {
             string template = Properties.Resources.ResourceManager.GetObject(templateName) as string;
@@ -194,6 +209,11 @@ namespace YouTube
             return template;
         }
 
+        public static void LoadTemplate(string templateName, System.Windows.Forms.WebBrowser browser)
+        {
+            LoadTemplate(templateName, new Dictionary<string, string>(), browser);
+        }
+
         public static void LoadTemplate(string templateName, Dictionary<string, string> values, System.Windows.Forms.WebBrowser browser)
         {
             var html = CreateTemplateDoc(templateName, values);
@@ -204,6 +224,30 @@ namespace YouTube
             browser.Refresh();
 
             browser.Visible = true;
+        }
+
+        public static void LoadTemplateSlot(string templateName, Dictionary<string, string> values, string templateSlot, System.Windows.Forms.WebBrowser browser)
+        {
+            var slot = browser.Document?.GetElementById(templateSlot);
+            if (slot == null) return;
+
+            var html = CreateTemplateDoc(templateName, values);
+            slot.InnerHtml = html;
+        }
+
+        public static void LoadTemplateListSlot(string templateName, List<Dictionary<string, string>> valuesList, string templateSlot, System.Windows.Forms.WebBrowser browser)
+        {
+            var slot = browser.Document?.GetElementById(templateSlot);
+            if (slot == null) return;
+
+            var html = new StringBuilder();
+
+            foreach (var values in valuesList)
+            {
+                html.AppendLine(CreateTemplateDoc(templateName, values));
+            }
+
+            slot.InnerHtml = html.ToString();
         }
 
         public static string GetVideoUrlID(string url)

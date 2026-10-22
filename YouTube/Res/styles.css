@@ -186,6 +186,26 @@ button.selected .text-2 {
 	padding: 4px;
 }
 
+#commentsContent {
+	padding: 4px;
+}
+
+.loading-32w {
+	min-height: 130px;
+	background-image: url(Loading32.gif);
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+.videoComment {
+	padding: 4px 2px;
+}
+.videoComment .commentInfo {
+	font-size: 9px;
+	color: #666;
+	margin-top: 3px;
+}
+
 #videoStats {
 	float: right;
 	background-image: url(DescriptionSeparator.png);
@@ -286,7 +306,7 @@ button.selected .text-2 {
 }
 
 
-.videoRelated {
+.watchSidebar {
 	background-color: #3C3C3C;
 	background-image: url(RelatedBack.png);
 	background-position: left;
@@ -295,7 +315,7 @@ button.selected .text-2 {
 	padding: 6px;
 	padding-left: 8px;
 }
-.videoRelated .videoItem {
+.watchSidebar .videoItem {
 	background-color: #fff;
 	background-image: url(RelatedItemBack.png);
 	background-position: bottom;
@@ -303,30 +323,30 @@ button.selected .text-2 {
 	height: 66px;
 	color: #111;
 }
-.videoRelated .videoItem .thumbnail {
+.watchSidebar .videoItem .thumbnail {
 	width: 100px;
 	height: 58px;
 	float: left;
 	margin-right: 2px;
 }
-.videoRelated .videoItem .thumbnail img {
+.watchSidebar .videoItem .thumbnail img {
 	position: absolute;
 	width: 104px;
 	top: -11px;
 	left: -2px;
 }
-.videoRelated .videoTitle {
+.watchSidebar .videoTitle {
 	margin: 3px 0;
 	font-size: 11px;
 	line-height: 12px;
 	max-height: 24px;
 	overflow: hidden;
 }
-.videoRelated .videoTitle a {
+.watchSidebar .videoTitle a {
 	color: #111;
 }
-.videoRelated .videoAuthor,
-.videoRelated .videoInfo {
+.watchSidebar .videoAuthor,
+.watchSidebar .videoInfo {
 	margin: 1px 0;
 	font-size: 9px;
 	color: #666;
@@ -335,7 +355,7 @@ button.selected .text-2 {
 	height: 12px;
 	max-height: 12px;
 }
-.videoRelated #loading {
+.watchSidebar #loading {
 	background-image: url(LoadingDark32.gif);
 }
 

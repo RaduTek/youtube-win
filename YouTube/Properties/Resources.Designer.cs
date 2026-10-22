@@ -808,21 +808,45 @@ namespace YouTube.Properties {
         ///	&lt;link rel=&quot;stylesheet&quot; href=&quot;__cssfile__&quot; /&gt;
         ///&lt;/head&gt;
         ///
-        ///&lt;body class=&quot;videoDescriptionPanel&quot;&gt;
-        ///	&lt;div id=&quot;description&quot;&gt;
-        ///		&lt;div id=&quot;videoTitle&quot;&gt;__title__&lt;/div&gt;
-        ///		&lt;div id=&quot;videoMeta&quot;&gt;
-        ///			&lt;span class=&quot;rating r3 half&quot;&gt;&lt;/span&gt;
-        ///			Posted by
-        ///			&lt;a href=&quot;javascript:window.external.VideoClick(-1, &apos;author&apos;)&quot;&gt;__author__&lt;/a&gt;
-        ///			&amp;bull;
-        ///			&lt;span&gt;__upload_date__&lt;/span&gt;
-        ///			&amp;bull;
-        ///			&lt;span&gt;_ [rest of string was truncated]&quot;;.
+        ///&lt;body class=&quot;videoDescriptionPanel&quot; onclick=&quot;focusPlayer&quot;&gt;
+        ///    &lt;div id=&quot;videoTabs&quot;&gt;
+        ///        &lt;a href=&quot;javascript:SelectTab(0)&quot; id=&quot;detailsTab&quot; class=&quot;selected&quot;&gt;Details&lt;/a
+        ///        &gt;&lt;a href=&quot;javascript:SelectTab(1)&quot; id=&quot;commentsTab&quot;&gt;Comments&lt;/a&gt;
+        ///    &lt;/div&gt;
+        ///
+        ///	&lt;div id=&quot;tabContent&quot;&gt;
+        ///		&lt;div id=&quot;detailsContent&quot; class=&quot;loading-3 [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string videoDescription {
+        internal static string videoDetails {
             get {
-                return ResourceManager.GetString("videoDescription", resourceCulture);
+                return ResourceManager.GetString("videoDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;div class=&quot;videoComment&quot;&gt;
+        ///	&lt;div class=&quot;commentText&quot;&gt;__content__&lt;/div&gt;
+        ///	&lt;div class=&quot;commentInfo&quot;&gt;...
+        /// </summary>
+        internal static string videoComment {
+            get {
+                return ResourceManager.GetString("videoComment", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;div id=&quot;videoStats&quot;&gt;
+        ///	&lt;div class=&quot;stat&quot;&gt;&lt;span class=&quot;viewcount&quot;&gt;__viewcount__&lt;/span&gt; views&lt;/div&gt;
+        ///	&lt;div class=&quot;stat&quot;&gt;
+        ///		&lt;div class=&quot;ratingBar&quot;&gt;&lt;div class=&quot;positive&quot; style=&quot;width: __ratingP__&quot;&gt;&lt;/div&gt;&lt;div class=&quot;negative&quot; style=&quot;width: __ratingN__&quot;&gt;&lt;/div&gt;&lt;/div&gt;
+        ///		&lt;div class=&quot;ratingText&quot;&gt;&lt;span&gt;__likes__&lt;/span&gt; likes &amp;nbsp; &lt;span&gt;__dislikes__&lt;/span&gt; dislikes&lt;/div&gt;
+        ///	&lt;/div&gt;
+        ///	&lt;div class=&quot;stat&quot;&gt;
+        ///		&lt;a id=&quot;authorLink&quot; href=&quot;javascript:window.external.ActionClick(&apos;videoDescription&apos;, &apos;authorLink&apos;)&quot; title=&quot;View m [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string videoDetailsContent {
+            get {
+                return ResourceManager.GetString("videoDetailsContent", resourceCulture);
             }
         }
         

@@ -319,9 +319,6 @@
   <data name="videoCover" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\templates\videocover.html;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
-  <data name="videoDescription" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\templates\videodescription.html;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
-  </data>
   <data name="videoItem" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\templates\videoitem.html;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
@@ -366,5 +363,14 @@
   </data>
   <data name="HeaderDarkButton_Pressed" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\HeaderDarkButton_Pressed.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="videoDetails" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\templates\videodetails.html;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="videoDetailsContent" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\templates\videodetailscontent.html;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="videoComment" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\templates\videocomment.html;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
 </root>

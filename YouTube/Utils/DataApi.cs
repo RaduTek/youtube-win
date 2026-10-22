@@ -92,6 +92,13 @@ namespace YouTube
             return GetFeed(url);
         }
 
+        public static Feed GetVideoComments(string videoId)
+        {
+            var url = GetFullUrl("feeds/api/videos/" + videoId + "/comments");
+
+            return GetFeed(url);
+        }
+
         public static Entry GetVideo(string videoId)
         {
             var url = GetFullUrl("feeds/api/videos/" + videoId);

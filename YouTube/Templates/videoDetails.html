@@ -1,0 +1,61 @@
+﻿<!<!DOCTYPE html>
+<html>
+
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=8" />
+	<title>Video Description</title>
+	<link rel="stylesheet" href="__cssfile__" />
+</head>
+
+<body class="videoDescriptionPanel" onclick="focusPlayer">
+    <div id="videoTabs">
+        <a href="javascript:SelectTab(0)" id="detailsTab" class="selected">Details</a
+        ><a href="javascript:SelectTab(1)" id="commentsTab">Comments</a>
+    </div>
+
+	<div id="tabContent">
+		<div id="detailsContent" class="loading-32w"></div>
+
+		<div id="commentsContent" class="hidden"></div>
+	</div>
+	
+	<script>
+		var videoTabs = document.getElementById("videoTabs");
+		var tabContent = document.getElementById("tabContent");
+
+		function focusPlayer() {
+			window.external.ActionClick('videoDescription', 'focusPlayer');
+		}
+
+		function SelectTab(index) {
+			for (var i=0; i < videoTabs.children.length; i++) {
+				var tab = videoTabs.children[i];
+				var page = tabContent.children[i];
+
+				tab.className = (i == index) ? "selected" : "";
+				page.className = (i == index) ? "" : "hidden";
+			}
+
+			// comments are loaded on demand, the first time the tab is opened
+			if (index == 1) {
+				window.external.ActionClick('videoDescription', 'loadComments');
+			}
+
+			focusPlayer();
+		}
+
+		function subscribeClick() {
+			var subscribeBtn = document.getElementById("subscribeBtn");
+
+			if (subscribeBtn.className === "") {
+				subscribeBtn.className = "selected";
+				window.external.ActionClick('videoDescription', 'subscribe');
+			} else {
+				subscribeBtn.className = "";
+				window.external.ActionClick('videoDescription', 'unsubscribe');
+			}
+		}
+	</script>
+</body>
+
+</html>
