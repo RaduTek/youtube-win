@@ -119,6 +119,8 @@ namespace YouTube.Forms
 
             if (player != null) player.URL = DataApi.GetVideoUrl(video.YouTubeId.Id);
 
+            LocalFeed.History.Add(video);
+
             if (!detailed) LoadFullDetails(video);
         }
 
@@ -146,6 +148,7 @@ namespace YouTube.Forms
                 { "dislikes", dislikes.ToString("N0") },
                 { "ratingP", ratingP.ToString("0.###") + "%" },
                 { "ratingN", ratingN.ToString("0.###") + "%" },
+                { "favoriteClass", LocalFeed.Favorites.Contains(video.YouTubeId.Id) ? "selected" : "" },
 
                 // cover screen only - show loading indicator first when auto play is enabled
                 { "startScreenClass", Settings.Default.AutoPlayVideo ? "hidden" : "overlay" },
@@ -176,7 +179,13 @@ namespace YouTube.Forms
                     // another video was selected while loading
                     if (video == null || video.YouTubeId.Id != videoId) return;
 
-                    if (full != null) video = full;
+                    if (full != null)
+                    {
+                        video = full;
+
+                        // replace the partial history entry with the full metadata
+                        LocalFeed.History.Add(video);
+                    }
 
                     detailsValues = BuildVideoValues(video);
                     ShowVideoDetails();
@@ -835,6 +844,16 @@ namespace YouTube.Forms
 
                 case "loadComments":
                     LoadComments();
+                    break;
+
+                case "addFavorites":
+                    if (video == null) break;
+
+                    var favorited = !LocalFeed.Favorites.Remove(video.YouTubeId.Id);
+                    if (favorited)
+                        LocalFeed.Favorites.Add(video);
+
+                    detailsFrame.Document?.GetElementById("favoriteBtn")?.SetAttribute("className", favorited ? "selected" : "");
                     break;
 
                 case "author":

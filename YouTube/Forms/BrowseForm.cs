@@ -20,6 +20,7 @@ namespace YouTube.Forms
             browseConn.OnActionClick += BrowseConn_OnActionClick;
             browseConn.OnVideoClick += BrowseConn_OnVideoClick;
             browseFrame.ObjectForScripting = browseConn;
+            browseFrame.DocumentCompleted += browseFrame_DocumentCompleted;
         }
 
 
@@ -27,6 +28,9 @@ namespace YouTube.Forms
         private Data.Feed browseFeed;
         private string nextFeedUrl;
         private bool loadingMore;
+        private Data.Feed pendingFeed; // feed waiting for the results page to load
+        private bool browsePageReady;
+        private int browseRequestId;
 
         public bool EnableWatchButton
         {
@@ -50,9 +54,14 @@ namespace YouTube.Forms
             {
                 case "search_results":
                     break;
+                case "internal_history":
+                    ShowLocalFeed(LocalFeed.History);
+                    break;
                 case "internal_favorites":
+                    ShowLocalFeed(LocalFeed.Favorites);
                     break;
                 case "internal_downloads":
+                    ShowLocalFeed(LocalFeed.Downloads);
                     break;
 
                 default:
@@ -90,14 +99,7 @@ namespace YouTube.Forms
                 return;
             }
 
-            browseFeed = null;
-            nextFeedUrl = null;
-            loadingMore = false;
-
-            Utils.LoadTemplate("browseResults", new Dictionary<string, string>
-            {
-                { "status", status }
-            }, browseFrame);
+            var requestId = LoadBrowsePage(status);
 
             ThreadPool.QueueUserWorkItem(delegate
             {
@@ -107,17 +109,62 @@ namespace YouTube.Forms
 
                     Invoke(new MethodInvoker(delegate
                     {
-                        ShowBrowseFeed(feed);
+                        // another feed was selected while loading
+                        if (requestId != browseRequestId) return;
+
+                        ShowBrowseFeedWhenReady(feed);
                     }));
                 }
                 catch (Exception ex)
                 {
                     Invoke(new MethodInvoker(delegate
                     {
+                        if (requestId != browseRequestId) return;
+
                         ShowBrowseError("Error: " + ex.Message);
                     }));
                 }
             });
+        }
+
+        private void ShowLocalFeed(LocalFeed store)
+        {
+            LoadBrowsePage(store.Feed.Title);
+
+            // snapshot, so changes to the store (e.g. history updated by watching) don't shift indexes
+            ShowBrowseFeedWhenReady(new Data.Feed
+            {
+                Title = store.Feed.Title,
+                Entries = new List<Data.Entry>(store.Feed.Entries)
+            });
+        }
+
+        // Loads an empty results page; returns an id identifying this request
+        private int LoadBrowsePage(string status)
+        {
+            browseFeed = null;
+            nextFeedUrl = null;
+            loadingMore = false;
+            pendingFeed = null;
+            browsePageReady = false;
+            browseRequestId++;
+
+            Utils.LoadTemplate("browseResults", new Dictionary<string, string>
+            {
+                { "status", status }
+            }, browseFrame);
+
+            return browseRequestId;
+        }
+
+        // The results page may still be loading (slow machines), so the feed is
+        // either shown right away or kept until browseFrame_DocumentCompleted
+        private void ShowBrowseFeedWhenReady(Data.Feed feed)
+        {
+            if (browsePageReady)
+                ShowBrowseFeed(feed);
+            else
+                pendingFeed = feed;
         }
 
         private void LoadMoreResults()
@@ -279,6 +326,20 @@ namespace YouTube.Forms
         private void guideFrame_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
             SelectGuideFeed("most_popular");
+        }
+
+        private void browseFrame_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        {
+            // may also complete for the intermediate blank document, wait for the results template
+            if (browseFrame.Document?.GetElementById("browseResultsItems") == null) return;
+
+            browsePageReady = true;
+
+            if (pendingFeed == null) return;
+
+            var feed = pendingFeed;
+            pendingFeed = null;
+            ShowBrowseFeed(feed);
         }
 
         private void browseToWatchButton_Click(object sender, EventArgs e)

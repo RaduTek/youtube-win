@@ -34,6 +34,22 @@ namespace YouTube.Data
 
         [XmlElement("statistics", Namespace = Xmlns.YouTube)]
         public YtStatistics Statistics { get; set; }
+
+        // Date the entry was added to a local feed (watched / favorited / downloaded)
+        [XmlElement("added", Namespace = Xmlns.Local)]
+        public DateTime Added { get; set; }
+
+        [XmlIgnore]
+        public bool AddedSpecified { get; set; }
+
+        // Local file path, used by the downloads feed
+        [XmlElement("localPath", Namespace = Xmlns.Local)]
+        public string LocalPath { get; set; }
+
+        public Entry Clone()
+        {
+            return (Entry)MemberwiseClone();
+        }
     }
 
     public class Author

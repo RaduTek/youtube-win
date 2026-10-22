@@ -113,6 +113,7 @@
     <Compile Include="Data\Feed.cs" />
     <Compile Include="Data\Media.cs" />
     <Compile Include="Utils\DownloadUtil.cs" />
+    <Compile Include="Utils\LocalFeed.cs" />
     <Compile Include="ExControls\ExButton.cs">
       <SubType>Component</SubType>
     </Compile>

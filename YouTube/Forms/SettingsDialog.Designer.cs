@@ -38,6 +38,7 @@
             this.tabControl = new System.Windows.Forms.TabControl();
             this.generalTab = new System.Windows.Forms.TabPage();
             this.detectInstanceButton = new System.Windows.Forms.Button();
+            this.clearHistoryButton = new System.Windows.Forms.Button();
             this.instanceTypeLabel = new System.Windows.Forms.Label();
             this.instanceTypeHintLabel = new System.Windows.Forms.Label();
             this.videoPlayerTab = new System.Windows.Forms.TabPage();
@@ -146,6 +147,7 @@
             // 
             // generalTab
             // 
+            this.generalTab.Controls.Add(this.clearHistoryButton);
             this.generalTab.Controls.Add(this.detectInstanceButton);
             this.generalTab.Controls.Add(this.instanceTypeLabel);
             this.generalTab.Controls.Add(this.instanceTypeHintLabel);
@@ -159,8 +161,19 @@
             this.generalTab.Text = "General";
             this.generalTab.UseVisualStyleBackColor = true;
             // 
+            // clearHistoryButton
+            //
+            this.clearHistoryButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.clearHistoryButton.Location = new System.Drawing.Point(10, 155);
+            this.clearHistoryButton.Name = "clearHistoryButton";
+            this.clearHistoryButton.Size = new System.Drawing.Size(100, 23);
+            this.clearHistoryButton.TabIndex = 20;
+            this.clearHistoryButton.Text = "Clear History";
+            this.clearHistoryButton.UseVisualStyleBackColor = true;
+            this.clearHistoryButton.Click += new System.EventHandler(this.clearHistoryButton_Click);
+            //
             // detectInstanceButton
-            // 
+            //
             this.detectInstanceButton.Location = new System.Drawing.Point(235, 53);
             this.detectInstanceButton.Name = "detectInstanceButton";
             this.detectInstanceButton.Size = new System.Drawing.Size(75, 23);
@@ -364,6 +377,7 @@
         private System.Windows.Forms.TabPage videoPlayerTab;
         private System.Windows.Forms.TabPage downloadsTab;
         private System.Windows.Forms.Button detectInstanceButton;
+        private System.Windows.Forms.Button clearHistoryButton;
         private System.Windows.Forms.Label instanceTypeLabel;
         private System.Windows.Forms.Label instanceTypeHintLabel;
         private System.Windows.Forms.Label videoQualityLabel;

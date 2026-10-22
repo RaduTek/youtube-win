@@ -138,8 +138,18 @@ namespace YouTube
             DetectInstance();
         }
 
+        private void clearHistoryButton_Click(object sender, EventArgs e)
+        {
+            var result = MessageBox.Show("Clear the list of watched videos?", "Clear History",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (result != DialogResult.Yes) return;
+
+            LocalFeed.History.Clear();
+        }
+
         private void DetectInstance()
-        { 
+        {
             instanceTypeLabel.Text = DataApi.GetInstanceType(instanceUrlText.Text);
 
             if (instanceTypeLabel.Text == "Unknown")
