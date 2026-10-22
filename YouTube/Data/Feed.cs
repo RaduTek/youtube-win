@@ -17,6 +17,19 @@ namespace YouTube.Data
 
         [XmlElement("link")]
         public List<Link> Links { get; set; }
+
+        public string GetNextUrl()
+        {
+            if (Links == null) return null;
+
+            foreach (var link in Links)
+            {
+                if (link.Relationship == "next" && !string.IsNullOrEmpty(link.Href))
+                    return link.Href;
+            }
+
+            return null;
+        }
     }
 
     public class Link

@@ -25,6 +25,8 @@ namespace YouTube.Forms
 
         private WebFrameConnector browseConn, guideConn;
         private Data.Feed browseFeed;
+        private string nextFeedUrl;
+        private bool loadingMore;
 
         public bool EnableWatchButton
         {
@@ -88,6 +90,10 @@ namespace YouTube.Forms
                 return;
             }
 
+            browseFeed = null;
+            nextFeedUrl = null;
+            loadingMore = false;
+
             Utils.LoadTemplate("browseResults", new Dictionary<string, string>
             {
                 { "status", status }
@@ -114,9 +120,76 @@ namespace YouTube.Forms
             });
         }
 
+        private void LoadMoreResults()
+        {
+            if (loadingMore || browseFeed == null || nextFeedUrl == null) return;
+
+            loadingMore = true;
+            var url = nextFeedUrl;
+            var feedAtRequest = browseFeed;
+
+            browseFrame.Document.GetElementById("browseResultsMore").SetAttribute("className", "hidden");
+            browseFrame.Document.GetElementById("loading").SetAttribute("className", "");
+
+            ThreadPool.QueueUserWorkItem(delegate
+            {
+                try
+                {
+                    var feed = DataApi.GetFeed(url);
+
+                    Invoke(new MethodInvoker(delegate
+                    {
+                        loadingMore = false;
+
+                        // Feed was replaced (new search/feed selected) while loading
+                        if (browseFeed != feedAtRequest) return;
+
+                        AppendBrowseFeed(feed);
+                    }));
+                }
+                catch (Exception ex)
+                {
+                    Invoke(new MethodInvoker(delegate
+                    {
+                        loadingMore = false;
+
+                        if (browseFeed != feedAtRequest) return;
+
+                        browseFrame.Document.GetElementById("loading").SetAttribute("className", "hidden");
+                        browseFrame.Document.GetElementById("browseResultsMore").SetAttribute("className", "");
+                        MessageBox.Show("Error loading more results: " + ex.Message);
+                    }));
+                }
+            });
+        }
+
+        private void AppendBrowseFeed(Data.Feed feed)
+        {
+            int startIndex = browseFeed.Entries.Count;
+
+            browseFeed.Entries.AddRange(feed.Entries);
+            nextFeedUrl = feed.GetNextUrl();
+
+            var items = browseFrame.Document.GetElementById("browseResultsItems");
+            items.InnerHtml += BuildEntriesHtml(feed, startIndex);
+
+            browseFrame.Document.GetElementById("loading").SetAttribute("className", "hidden");
+            browseFrame.Document.GetElementById("browseResultsMore").SetAttribute("className", nextFeedUrl == null ? "hidden" : "");
+        }
+
         private void ShowBrowseFeed(Data.Feed feed)
         {
             browseFeed = feed;
+            nextFeedUrl = feed.GetNextUrl();
+            loadingMore = false;
+
+            browseFrame.Document.GetElementById("loading").SetAttribute("className", "hidden");
+            browseFrame.Document.GetElementById("browseResultsItems").InnerHtml = BuildEntriesHtml(feed, 0);
+            browseFrame.Document.GetElementById("browseResultsMore").SetAttribute("className", nextFeedUrl == null ? "hidden" : "");
+        }
+
+        private string BuildEntriesHtml(Data.Feed feed, int startIndex)
+        {
             var entriesHtml = new StringBuilder();
 
             for (int i = 0; i < feed.Entries.Count; i++)
@@ -125,7 +198,7 @@ namespace YouTube.Forms
 
                 entriesHtml.AppendLine(Utils.CreateTemplateDoc("browseResultsItem", new Dictionary<string, string>
                 {
-                    { "index", i.ToString() },
+                    { "index", (startIndex + i).ToString() },
                     { "title", entry.Title },
                     { "videoId", entry.YouTubeId.Id },
                     { "author", entry.Author.Name },
@@ -137,9 +210,7 @@ namespace YouTube.Forms
                 }));
             }
 
-            browseFrame.Document.GetElementById("loading").SetAttribute("className", "hidden");
-            browseFrame.Document.GetElementById("browseResultsItems").InnerHtml = entriesHtml.ToString();
-            browseFrame.Document.GetElementById("browseResultsMore").SetAttribute("className", "");
+            return entriesHtml.ToString();
         }
 
         private void ShowBrowseError(string message)
@@ -187,6 +258,12 @@ namespace YouTube.Forms
 
         private void BrowseConn_OnActionClick(object sender, ActionClickEventArgs e)
         {
+            switch (e.Name)
+            {
+                case "loadMore":
+                    LoadMoreResults();
+                    break;
+            }
 
         }
 
