@@ -22,6 +22,35 @@
 
 	</div>
 	<div id="loading"></div>
+
+	<script>
+		// Thumbnail hover overlay. Handled on the container, so items added later ("Load more") work too.
+		var items = document.getElementById('browseResultsItems');
+
+		function findThumbnail(el) {
+			while (el && el !== items) {
+				if (el.className === 'thumbnail') return el;
+				el = el.parentNode;
+			}
+			return null;
+		}
+
+		function setOverlay(thumb, show) {
+			var overlay = thumb.getElementsByTagName('div')[0]; // .thumbnailOverlay
+			if (overlay) overlay.style.display = show ? 'block' : 'none';
+		}
+
+		items.attachEvent('onmouseover', function () {
+			var thumb = findThumbnail(event.srcElement);
+			if (thumb) setOverlay(thumb, true);
+		});
+
+		items.attachEvent('onmouseout', function () {
+			var thumb = findThumbnail(event.srcElement);
+			// ignore moves between children of the same thumbnail (overlay, buttons)
+			if (thumb && !(event.toElement && thumb.contains(event.toElement))) setOverlay(thumb, false);
+		});
+	</script>
 </body>
 
 </html>

@@ -508,6 +508,50 @@ button.selected .text-2 {
 	width: 120px;
 	margin-top: -12px;
 }
+#browseResultsItems .videoItem .thumbnail .thumbnailOverlay {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	z-index: 99;
+	display: none;
+	width: 100%;
+	height: 100%;
+	text-align: center;
+}
+#browseResultsItems .videoItem .thumbnail .thumbnailOverlayShade {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	width: 100%;
+	height: 100%;
+	z-index: -1;
+	background-color: #000;
+	zoom: 1;
+	filter: alpha(opacity=40);
+}
+#browseResultsItems .videoItem .thumbnail .thumbnailOverlay a {
+	display: inline-block;
+	vertical-align: middle;
+	width: 24px;
+	height: 24px;
+	margin: 0 12px;
+	background-repeat: no-repeat;
+}
+#browseResultsItems .videoItem .thumbnail .thumbnailPlay {
+	background-image: url(ThumbPlay.png);
+}
+#browseResultsItems .videoItem .thumbnail .thumbnailQueue {
+	background-image: url(ThumbQueue.png);
+}
+#browseResultsItems .videoItem .thumbnail .verticalAlign {
+	display: inline-block;
+	height: 100%;
+	vertical-align: middle;
+}
 #browseResultsItems .videoItem .videoTitle {
 	overflow: hidden;
 	font-size: 13px;

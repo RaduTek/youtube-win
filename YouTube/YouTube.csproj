@@ -245,6 +245,12 @@
     <Content Include="Res\PlayerThumbPlay.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Res\ThumbPlay.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Res\ThumbQueue.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="Resources\PlayerVolumeMax.png" />
     <None Include="Resources\PlayerVolumeMed.png" />
     <None Include="Resources\PlayerVolumeMin.png" />

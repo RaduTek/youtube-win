@@ -316,11 +316,20 @@ namespace YouTube.Forms
 
         private void BrowseConn_OnVideoClick(object sender, VideoClickEventArgs e)
         {
-            if (browseFeed == null || e.Index > browseFeed.Entries.Count) return;
+            if (browseFeed == null || e.Index >= browseFeed.Entries.Count) return;
 
             var video = browseFeed.Entries[e.Index];
 
-            WatchVideo(video);
+            switch (e.Name)
+            {
+                case "queue":
+                    // TODO: add to playback queue (not implemented yet)
+                    break;
+
+                default: // "title", "play"
+                    WatchVideo(video);
+                    break;
+            }
         }
 
         private void guideFrame_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
