@@ -128,9 +128,30 @@ namespace YouTube.Forms
                 AddToQueue(entry);
         }
 
+        // Thumbnail play button: starts a new queue with this video
+        public void PlayInNewQueue(Data.Entry entry)
+        {
+            if (ShowIfLoaded(entry)) return;
+
+            PlaybackQueue.Clear();
+            PlayQueueItem(PlaybackQueue.Add(entry));
+        }
+
+        // The video is already loaded (or waiting to be shown): switch to it instead of reloading it
+        private bool ShowIfLoaded(Data.Entry entry)
+        {
+            var current = video ?? pendingVideo;
+            if (current == null || current.YouTubeId.Id != entry.YouTubeId.Id) return false;
+
+            if (!Visible) Program.SwitchView();
+            return true;
+        }
+
         private void PlayQueueItem(int index)
         {
             if (index < 0 || index >= PlaybackQueue.Items.Count) return;
+
+            if (ShowIfLoaded(PlaybackQueue.Items[index])) return;
 
             LoadVideo(PlaybackQueue.Items[index]);
 
@@ -1265,7 +1286,7 @@ namespace YouTube.Forms
             {
                 case "title":
                 case "play":
-                    LoadVideo(video);
+                    PlayInNewQueue(video);
                     break;
 
                 case "queue":

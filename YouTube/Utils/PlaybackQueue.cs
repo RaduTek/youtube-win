@@ -59,6 +59,14 @@ namespace YouTube
             OnChanged();
         }
 
+        public static void Clear()
+        {
+            Items.Clear();
+            CurrentIndex = -1;
+            resumeIndex = -1;
+            OnChanged();
+        }
+
         public static int IndexOf(string videoId)
         {
             for (int i = 0; i < Items.Count; i++)

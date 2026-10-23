@@ -395,7 +395,12 @@ namespace YouTube.Forms
                     DownloadManager.Enqueue(video, false);
                     break;
 
-                default: // "title", "play"
+                case "title":
+                case "play":
+                    Program.watchForm.PlayInNewQueue(video);
+                    break;
+
+                default: // "author"
                     WatchVideo(video);
                     break;
             }
