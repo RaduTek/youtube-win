@@ -32,8 +32,10 @@ namespace YouTube
                 {
                     sw.WriteLine($"#EXTINF:{item.Duration},{item.Title}");
 
-                    if (File.Exists(item.FilePath))
-                        sw.WriteLine(tempPlaylist ? item.FilePath : item.Filename);
+                    var localPath = DownloadManager.GetLocalPath(item.VideoId);
+
+                    if (localPath != null)
+                        sw.WriteLine(tempPlaylist ? localPath : Path.GetFileName(localPath));
                     else
                         sw.WriteLine(item.VideoUrl);
                 }

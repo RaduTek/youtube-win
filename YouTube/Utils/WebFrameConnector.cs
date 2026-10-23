@@ -36,6 +36,12 @@ namespace YouTube
             return PlaybackQueue.IndexOf(videoId) >= 0;
         }
 
+        // queried by the thumbnail hover overlay to hide the download button
+        public bool IsDownloadable(string videoId)
+        {
+            return DownloadManager.GetLocalPath(videoId) == null && DownloadManager.Find(videoId) == null;
+        }
+
         public event EventHandler<ActionClickEventArgs> OnActionClick;
 
         public void ActionClick(string name, string data)

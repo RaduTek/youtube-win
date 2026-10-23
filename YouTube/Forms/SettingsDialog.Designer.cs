@@ -35,6 +35,7 @@
             this.downloadFolderLabel = new System.Windows.Forms.Label();
             this.downloadFolderText = new System.Windows.Forms.TextBox();
             this.downloadFolderOpenBtn = new System.Windows.Forms.Button();
+            this.downloadBeforePlayCheck = new System.Windows.Forms.CheckBox();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.generalTab = new System.Windows.Forms.TabPage();
             this.detectInstanceButton = new System.Windows.Forms.Button();
@@ -267,12 +268,23 @@
             this.videoQualityBox.Name = "videoQualityBox";
             this.videoQualityBox.Size = new System.Drawing.Size(82, 21);
             this.videoQualityBox.TabIndex = 21;
-            // 
+            //
+            // downloadBeforePlayCheck
+            //
+            this.downloadBeforePlayCheck.AutoSize = true;
+            this.downloadBeforePlayCheck.Location = new System.Drawing.Point(11, 58);
+            this.downloadBeforePlayCheck.Name = "downloadBeforePlayCheck";
+            this.downloadBeforePlayCheck.Size = new System.Drawing.Size(190, 17);
+            this.downloadBeforePlayCheck.TabIndex = 10;
+            this.downloadBeforePlayCheck.Text = "Download videos before playing";
+            this.downloadBeforePlayCheck.UseVisualStyleBackColor = true;
+            //
             // downloadsTab
-            // 
+            //
             this.downloadsTab.Controls.Add(this.downloadFolderLabel);
             this.downloadsTab.Controls.Add(this.downloadFolderText);
             this.downloadsTab.Controls.Add(this.downloadFolderOpenBtn);
+            this.downloadsTab.Controls.Add(this.downloadBeforePlayCheck);
             this.downloadsTab.Location = new System.Drawing.Point(4, 22);
             this.downloadsTab.Name = "downloadsTab";
             this.downloadsTab.Padding = new System.Windows.Forms.Padding(3);
@@ -385,6 +397,7 @@
         private System.Windows.Forms.CheckBox largeControlsCheck;
         private System.Windows.Forms.CheckBox autoPlayCheck;
         private System.Windows.Forms.CheckBox playInBrowseCheck;
+        private System.Windows.Forms.CheckBox downloadBeforePlayCheck;
         private System.Windows.Forms.TabPage aboutTab;
         private System.Windows.Forms.PictureBox aboutLogo;
         private System.Windows.Forms.Label aboutTextLabel;

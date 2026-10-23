@@ -23,6 +23,7 @@ namespace YouTube.Forms
             relatedFrame.ObjectForScripting = frameConn;
 
             PlaybackQueue.Changed += PlaybackQueue_Changed;
+            DownloadManager.Changed += DownloadManager_Changed;
 
             // dummy control to capture key inputs for the player
             playerInputCapture = new Control();
@@ -73,6 +74,8 @@ namespace YouTube.Forms
         private Data.Entry pendingVideo; // queued before the Watch window was ever shown, loaded on first show
         private bool historyPending; // preloaded video, added to history once it starts playing
         private bool advancingQueue; // moving on to the next queued video, skip the end screen
+        private bool waitingForDownload; // download before play: the video is set once its download finishes
+        private bool autoPlayWhenReady; // start playing when the download finishes
 
         private WebFrameConnector frameConn;
 
@@ -132,7 +135,10 @@ namespace YouTube.Forms
             LoadVideo(PlaybackQueue.Items[index]);
 
             // queue playback starts regardless of the auto play setting
-            player.Ctlcontrols.play();
+            if (waitingForDownload)
+                autoPlayWhenReady = true;
+            else
+                player.Ctlcontrols.play();
         }
 
         // detailed: the entry was already loaded from the video API, no need to fetch it again
@@ -156,7 +162,16 @@ namespace YouTube.Forms
 
             var values = BuildVideoValues(video);
 
-            if (preload)
+            var downloadFirst = Settings.Default.DownloadBeforePlay && DownloadManager.GetLocalPath(video.YouTubeId.Id) == null;
+
+            if (downloadFirst)
+            {
+                // show download progress until the video can be played from the local file
+                values["startScreenClass"] = "hidden";
+                values["loadingScreenClass"] = "hidden";
+                values["downloadScreenClass"] = "overlay";
+            }
+            else if (preload)
             {
                 // show the play button instead of the loading indicator
                 values["startScreenClass"] = "overlay";
@@ -173,12 +188,7 @@ namespace YouTube.Forms
             Utils.LoadTemplate("videoDetails", values, detailsFrame);
             ShowSidebar();
 
-            if (player != null)
-            {
-                player.settings.autoStart = !preload && Settings.Default.AutoPlayVideo;
-                player.URL = DataApi.GetVideoUrl(video.YouTubeId.Id);
-                player.settings.autoStart = Settings.Default.AutoPlayVideo;
-            }
+            if (player != null) StartPlayback(!preload && Settings.Default.AutoPlayVideo);
 
             historyPending = preload;
             if (!preload) LocalFeed.History.Add(video);
@@ -188,8 +198,147 @@ namespace YouTube.Forms
             if (!detailed) LoadFullDetails(video);
         }
 
+        // Plays the downloaded file if there is one, otherwise downloads it first (if enabled) or streams it
+        private void StartPlayback(bool autoPlay)
+        {
+            var videoId = video.YouTubeId.Id;
+            var localPath = DownloadManager.GetLocalPath(videoId);
+
+            waitingForDownload = false;
+            autoPlayWhenReady = autoPlay;
+
+            if (localPath != null)
+            {
+                SetPlayerUrl(localPath, autoPlay);
+            }
+            else if (Settings.Default.DownloadBeforePlay)
+            {
+                // set before clearing the player, so the resulting Stopped state doesn't show the end screen
+                waitingForDownload = true;
+                player.URL = "";
+
+                var item = DownloadManager.Enqueue(video, true);
+                if (item != null) ShowDownloadProgress(item);
+            }
+            else
+            {
+                SetPlayerUrl(DataApi.GetVideoUrl(videoId), autoPlay);
+            }
+        }
+
+        private void SetPlayerUrl(string url, bool autoPlay)
+        {
+            player.settings.autoStart = false;
+            player.URL = url;
+            player.settings.autoStart = Settings.Default.AutoPlayVideo;
+
+            if (autoPlay) player.Ctlcontrols.play();
+        }
+
+        // Download progress on the cover screen, while waiting to play a video that's being downloaded
+        private void ShowDownloadProgress(DownloadItem item)
+        {
+            var textEl = videoFrame.Document?.GetElementById("downloadText");
+            if (textEl == null) return;
+
+            switch (item.Status)
+            {
+                case DownloadStatus.Waiting:
+                    textEl.InnerText = "Waiting for other downloads...";
+                    break;
+
+                case DownloadStatus.Downloading:
+                    textEl.InnerText = "Downloading... " + item.Progress + "%";
+                    break;
+
+                case DownloadStatus.Cancelled:
+                case DownloadStatus.Error:
+                    textEl.InnerHtml = Utils.HtmlText(item.Status == DownloadStatus.Cancelled ? "Download cancelled." : "Download failed: " + item.Error)
+                        + " <a href=\"javascript:window.external.ActionClick('videoCover', 'retryDownload')\">Retry</a>";
+                    break;
+            }
+        }
+
+        private void GetDownloadButtonState(string videoId, out string cssClass, out string text, out string title)
+        {
+            var item = DownloadManager.Find(videoId);
+
+            if (DownloadManager.GetLocalPath(videoId) != null)
+            {
+                cssClass = "selected";
+                text = "Downloaded";
+                title = "Show the downloaded file";
+            }
+            else if (item != null && (item.Status == DownloadStatus.Waiting || item.Status == DownloadStatus.Downloading))
+            {
+                cssClass = "";
+                text = item.Status == DownloadStatus.Waiting ? "Waiting" : item.Progress + "%";
+                title = "Cancel download";
+            }
+            else
+            {
+                cssClass = "";
+                text = "Download";
+                title = "Download this video";
+            }
+        }
+
+        private void UpdateDownloadButton()
+        {
+            var button = detailsFrame.Document?.GetElementById("downloadBtn");
+            if (button == null || video == null) return;
+
+            string cssClass, text, title;
+            GetDownloadButtonState(video.YouTubeId.Id, out cssClass, out text, out title);
+
+            button.SetAttribute("className", cssClass);
+            button.SetAttribute("title", title);
+            detailsFrame.Document.GetElementById("downloadBtnText").InnerText = text;
+        }
+
+        // Download button: download, cancel, or show the downloaded file
+        private void DownloadButtonClick()
+        {
+            if (video == null) return;
+
+            var videoId = video.YouTubeId.Id;
+            var item = DownloadManager.Find(videoId);
+
+            if (DownloadManager.GetLocalPath(videoId) != null)
+                DownloadManager.OpenFileLocation(videoId);
+            else if (item != null && (item.Status == DownloadStatus.Waiting || item.Status == DownloadStatus.Downloading))
+                DownloadManager.Cancel(videoId);
+            else
+                DownloadManager.Enqueue(video, false);
+        }
+
+        private void DownloadManager_Changed(object sender, DownloadEventArgs e)
+        {
+            Utils.UpdateDownloadsButton(downloadsButton, toolTip);
+
+            if (video == null || e.VideoId != video.YouTubeId.Id) return;
+
+            UpdateDownloadButton();
+
+            if (!waitingForDownload) return;
+
+            if (e.Item.Status == DownloadStatus.Downloaded)
+            {
+                waitingForDownload = false;
+                ShowCoverScreen(autoPlayWhenReady ? "loadingScreen" : "startScreen");
+                SetPlayerUrl(DownloadManager.GetLocalPath(e.VideoId), autoPlayWhenReady);
+            }
+            else
+            {
+                ShowDownloadProgress(e.Item);
+            }
+        }
+
         private Dictionary<string, string> BuildVideoValues(Data.Entry video)
         {
+            string downloadClass, downloadText, downloadTitle;
+            GetDownloadButtonState(video.YouTubeId.Id, out downloadClass, out downloadText, out downloadTitle);
+
             var likes = video.Rating?.Likes ?? 0;
             var dislikes = video.Rating?.Dislikes ?? 0;
             var ratingTotal = likes + dislikes;
@@ -206,17 +355,21 @@ namespace YouTube.Forms
                 { "upload_date", video.Published.ToLongDateString() },
                 { "viewcount", (video.Statistics?.ViewCount ?? 0).ToString("N0") },
                 { "author", video.Author.Name },
-                { "thumbnail", "http://i.ytimg.com/vi/" + video.YouTubeId.Id + "/default.jpg" },
-                { "thumbnailHQ", "http://i.ytimg.com/vi/" + video.YouTubeId.Id + "/hqdefault.jpg" },
+                { "thumbnail", Utils.GetThumbnailUrl(video.YouTubeId.Id, false) },
+                { "thumbnailHQ", Utils.GetThumbnailUrl(video.YouTubeId.Id, true) },
                 { "likes", likes.ToString("N0") },
                 { "dislikes", dislikes.ToString("N0") },
                 { "ratingP", ratingP.ToString("0.###") + "%" },
                 { "ratingN", ratingN.ToString("0.###") + "%" },
                 { "favoriteClass", LocalFeed.Favorites.Contains(video.YouTubeId.Id) ? "selected" : "" },
+                { "downloadClass", downloadClass },
+                { "downloadText", downloadText },
+                { "downloadTitle", downloadTitle },
 
                 // cover screen only - show loading indicator first when auto play is enabled
                 { "startScreenClass", Settings.Default.AutoPlayVideo ? "hidden" : "overlay" },
                 { "loadingScreenClass", Settings.Default.AutoPlayVideo ? "overlay" : "hidden" },
+                { "downloadScreenClass", "hidden" },
             };
         }
 
@@ -300,7 +453,7 @@ namespace YouTube.Forms
                         ShowComments(feed);
                     }));
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     Invoke(new MethodInvoker(delegate
                     {
@@ -308,7 +461,7 @@ namespace YouTube.Forms
 
                         // allow retrying by reopening the tab
                         commentsVideoId = null;
-                        ShowCommentsMessage("Error: " + ex.Message);
+                        ShowCommentsMessage("Comments couldn't be loaded. Check your network connection and open the tab again to retry.");
                     }));
                 }
             });
@@ -387,13 +540,13 @@ namespace YouTube.Forms
                         ShowRelatedFeed(feed);
                     }));
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     Invoke(new MethodInvoker(delegate
                     {
                         if (video == null || video.YouTubeId.Id != videoId) return;
 
-                        ShowRelatedError("Error: " + ex.Message);
+                        ShowRelatedError("Related videos aren't available right now. Check your network connection.");
                     }));
                 }
             });
@@ -415,7 +568,7 @@ namespace YouTube.Forms
                     { "title", entry.Title },
                     { "author", entry.Author.Name },
                     { "duration", Utils.FormatDurationSeconds(entry.Media.Duration.Seconds) },
-                    { "thumbnail", "http://i.ytimg.com/vi/" + entry.YouTubeId.Id + "/default.jpg" },
+                    { "thumbnail", Utils.GetThumbnailUrl(entry.YouTubeId.Id, false) },
                     { "currentClass", i == PlaybackQueue.CurrentIndex ? "current" : "" }
                 });
             }
@@ -445,7 +598,7 @@ namespace YouTube.Forms
                     { "duration", Utils.FormatDurationSeconds(entry.Media.Duration.Seconds) },
                     { "upload_date", Utils.FormatRelativeDate(entry.Published) },
                     { "viewcount", entry.Statistics.ViewCount.ToString("N0") },
-                    { "thumbnail", "http://i.ytimg.com/vi/" + entry.YouTubeId.Id + "/default.jpg" }
+                    { "thumbnail", Utils.GetThumbnailUrl(entry.YouTubeId.Id, false) }
                 });
             }
 
@@ -564,6 +717,7 @@ namespace YouTube.Forms
             videoFrame.Document.GetElementById("loadingScreen")?.SetAttribute("className", "hidden");
             videoFrame.Document.GetElementById("endScreen")?.SetAttribute("className", "hidden");
             videoFrame.Document.GetElementById("helpScreen")?.SetAttribute("className", "hidden");
+            videoFrame.Document.GetElementById("downloadScreen")?.SetAttribute("className", "hidden");
             videoFrame.Document.GetElementById(screenId)?.SetAttribute("className", "overlay");
             
             ShowPlayerControls();
@@ -709,7 +863,7 @@ namespace YouTube.Forms
                     break;
 
                 case WMPLib.WMPPlayState.wmppsStopped:
-                    if (!advancingQueue) ShowCoverScreen("endScreen");
+                    if (!advancingQueue && !waitingForDownload) ShowCoverScreen("endScreen");
                     playerTimer.Stop();
                     break;
             }
@@ -823,10 +977,20 @@ namespace YouTube.Forms
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Could not load video: " + ex.Message, "YouTube", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    // offline: a downloaded video can still be played
+                    var downloaded = LocalFeed.Downloads.Find(InitialVideoId);
 
-                    // nothing to watch, go to Browse once this window is shown
-                    BeginInvoke(new MethodInvoker(Program.SwitchView));
+                    if (downloaded != null)
+                    {
+                        LoadVideo(downloaded);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Could not load video: " + ex.Message, "YouTube", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                        // nothing to watch, go to Browse once this window is shown
+                        BeginInvoke(new MethodInvoker(Program.SwitchView));
+                    }
                 }
             }
             else if (pendingVideo != null)
@@ -1024,6 +1188,11 @@ namespace YouTube.Forms
             Program.browseForm.Search(e.Text);
         }
 
+        private void downloadsButton_Click(object sender, EventArgs e)
+        {
+            Program.browseForm.ShowDownloads();
+        }
+
         private void watchToBrowseButton_Click(object sender, EventArgs e)
         {
             Program.SwitchView();
@@ -1043,6 +1212,18 @@ namespace YouTube.Forms
 
                 case "loadComments":
                     LoadComments();
+                    break;
+
+                case "download":
+                    DownloadButtonClick();
+                    break;
+
+                case "retryDownload":
+                    if (video != null && waitingForDownload)
+                    {
+                        var item = DownloadManager.Enqueue(video, true);
+                        if (item != null) ShowDownloadProgress(item);
+                    }
                     break;
 
                 case "addFavorites":

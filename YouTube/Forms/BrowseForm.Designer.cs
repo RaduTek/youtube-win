@@ -34,6 +34,7 @@ namespace YouTube.Forms
             this.header = new System.Windows.Forms.Panel();
             this.searchBox = new YouTube.Controls.SearchBox();
             this.settingsButton = new YouTube.ExControls.ExButton();
+            this.downloadsButton = new YouTube.ExControls.ExButton();
             this.switchToWatchButton = new YouTube.ExControls.ExButton();
             this.topLogo = new System.Windows.Forms.PictureBox();
             this.leftPanel = new System.Windows.Forms.Panel();
@@ -55,6 +56,7 @@ namespace YouTube.Forms
             this.header.BackgroundImage = global::YouTube.Properties.Resources.BrowseHeader;
             this.header.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.header.Controls.Add(this.searchBox);
+            this.header.Controls.Add(this.downloadsButton);
             this.header.Controls.Add(this.settingsButton);
             this.header.Controls.Add(this.switchToWatchButton);
             this.header.Controls.Add(this.topLogo);
@@ -93,9 +95,27 @@ namespace YouTube.Forms
             this.settingsButton.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.toolTip.SetToolTip(this.settingsButton, "Settings");
             this.settingsButton.Click += new System.EventHandler(this.settingsButton_Click);
-            // 
+            //
+            // downloadsButton
+            //
+            this.downloadsButton.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.downloadsButton.BackColor = System.Drawing.Color.Transparent;
+            this.downloadsButton.BackKey = "HeaderButton";
+            this.downloadsButton.BackMargins = new System.Windows.Forms.Padding(3);
+            this.downloadsButton.EnableTransparency = true;
+            this.downloadsButton.IconKey = "DownloadsLight";
+            this.downloadsButton.IconTransparencyKey = System.Drawing.Color.Magenta;
+            this.downloadsButton.Location = new System.Drawing.Point(700, 8);
+            this.downloadsButton.Name = "downloadsButton";
+            this.downloadsButton.Size = new System.Drawing.Size(30, 30);
+            this.downloadsButton.TabIndex = 8;
+            this.downloadsButton.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.downloadsButton.Visible = false;
+            this.toolTip.SetToolTip(this.downloadsButton, "Downloads");
+            this.downloadsButton.Click += new System.EventHandler(this.downloadsButton_Click);
+            //
             // switchToWatchButton
-            // 
+            //
             this.switchToWatchButton.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.switchToWatchButton.BackColor = System.Drawing.Color.Transparent;
             this.switchToWatchButton.BackKey = "HeaderButton";
@@ -230,6 +250,7 @@ namespace YouTube.Forms
         private ExControls.ExButton switchToWatchButton;
         private System.Windows.Forms.ToolTip toolTip;
         private ExControls.ExButton settingsButton;
+        private ExControls.ExButton downloadsButton;
         private Controls.SearchBox searchBox;
     }
 }

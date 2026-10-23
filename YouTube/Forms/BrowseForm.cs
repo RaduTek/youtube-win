@@ -21,6 +21,8 @@ namespace YouTube.Forms
             browseConn.OnVideoClick += BrowseConn_OnVideoClick;
             browseFrame.ObjectForScripting = browseConn;
             browseFrame.DocumentCompleted += browseFrame_DocumentCompleted;
+
+            DownloadManager.Changed += DownloadManager_Changed;
         }
 
 
@@ -31,6 +33,7 @@ namespace YouTube.Forms
         private Data.Feed pendingFeed; // feed waiting for the results page to load
         private bool browsePageReady;
         private int browseRequestId;
+        private LocalFeed currentLocalFeed; // local feed being shown, null for online feeds
 
         public bool EnableWatchButton
         {
@@ -127,9 +130,19 @@ namespace YouTube.Forms
             });
         }
 
+        public void ShowDownloads()
+        {
+            if (!Visible)
+                Program.SwitchView();
+
+            // selects the guide item, which loads the feed through SelectFeed
+            SelectGuideFeed("internal_downloads");
+        }
+
         private void ShowLocalFeed(LocalFeed store)
         {
             LoadBrowsePage(store.Feed.Title);
+            currentLocalFeed = store;
 
             // snapshot, so changes to the store (e.g. history updated by watching) don't shift indexes
             ShowBrowseFeedWhenReady(new Data.Feed
@@ -147,6 +160,7 @@ namespace YouTube.Forms
             loadingMore = false;
             pendingFeed = null;
             browsePageReady = false;
+            currentLocalFeed = null;
             browseRequestId++;
 
             Utils.LoadTemplate("browseResults", new Dictionary<string, string>
@@ -233,6 +247,42 @@ namespace YouTube.Forms
             browseFrame.Document.GetElementById("loading").SetAttribute("className", "hidden");
             browseFrame.Document.GetElementById("browseResultsItems").InnerHtml = BuildEntriesHtml(feed, 0);
             browseFrame.Document.GetElementById("browseResultsMore").SetAttribute("className", nextFeedUrl == null ? "hidden" : "");
+
+            if (currentLocalFeed == LocalFeed.Downloads)
+                RenderDownloads();
+        }
+
+        // Unfinished downloads, listed above the finished ones on the Downloads feed
+        private void RenderDownloads()
+        {
+            var valuesList = new List<Dictionary<string, string>>();
+
+            foreach (var item in DownloadManager.Items)
+            {
+                var id = item.VideoId;
+                string actions;
+
+                if (item.Status == DownloadStatus.Waiting || item.Status == DownloadStatus.Downloading)
+                    actions = DownloadAction("downloadCancel", id, "Cancel");
+                else
+                    actions = DownloadAction("downloadRetry", id, "Retry") + DownloadAction("downloadDismiss", id, "Remove");
+
+                valuesList.Add(new Dictionary<string, string>
+                {
+                    { "title", item.Entry.Title },
+                    { "thumbnail", Utils.GetThumbnailUrl(id, false) },
+                    { "status", Utils.HtmlText(item.StatusText) },
+                    { "statusClass", item.Status == DownloadStatus.Error ? "failed" : "" },
+                    { "actions", actions }
+                });
+            }
+
+            Utils.LoadTemplateListSlot("downloadItem", valuesList, "browseDownloads", browseFrame);
+        }
+
+        private static string DownloadAction(string action, string videoId, string text)
+        {
+            return "<a href=\"javascript:window.external.ActionClick('" + action + "','" + videoId + "')\">" + text + "</a>";
         }
 
         private string BuildEntriesHtml(Data.Feed feed, int startIndex)
@@ -253,7 +303,7 @@ namespace YouTube.Forms
                     { "duration", Utils.FormatDurationSeconds(entry.Media.Duration.Seconds) },
                     { "upload_date", Utils.FormatRelativeDate(entry.Published) },
                     { "viewcount", entry.Statistics.ViewCount.ToString("N0") },
-                    { "thumbnail", "http://i.ytimg.com/vi/" + entry.YouTubeId.Id + "/default.jpg" }
+                    { "thumbnail", Utils.GetThumbnailUrl(entry.YouTubeId.Id, false) }
                 }));
             }
 
@@ -310,6 +360,18 @@ namespace YouTube.Forms
                 case "loadMore":
                     LoadMoreResults();
                     break;
+
+                case "downloadCancel":
+                    DownloadManager.Cancel(e.Data);
+                    break;
+
+                case "downloadRetry":
+                    DownloadManager.Retry(e.Data);
+                    break;
+
+                case "downloadDismiss":
+                    DownloadManager.Dismiss(e.Data);
+                    break;
             }
 
         }
@@ -324,6 +386,10 @@ namespace YouTube.Forms
             {
                 case "queue":
                     Program.watchForm.ToggleQueued(video);
+                    break;
+
+                case "download":
+                    DownloadManager.Enqueue(video, false);
                     break;
 
                 default: // "title", "play"
@@ -349,6 +415,23 @@ namespace YouTube.Forms
             var feed = pendingFeed;
             pendingFeed = null;
             ShowBrowseFeed(feed);
+        }
+
+        private void DownloadManager_Changed(object sender, DownloadEventArgs e)
+        {
+            Utils.UpdateDownloadsButton(downloadsButton, toolTip);
+
+            if (currentLocalFeed != LocalFeed.Downloads || !browsePageReady) return;
+
+            if (e.Item.Status == DownloadStatus.Downloaded)
+                ShowLocalFeed(LocalFeed.Downloads); // moves it into the list of downloaded videos
+            else
+                RenderDownloads();
+        }
+
+        private void downloadsButton_Click(object sender, EventArgs e)
+        {
+            ShowDownloads();
         }
 
         private void browseToWatchButton_Click(object sender, EventArgs e)

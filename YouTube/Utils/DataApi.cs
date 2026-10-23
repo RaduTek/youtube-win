@@ -37,11 +37,15 @@ namespace YouTube
             }
         }
 
+        // fail reasonably fast when offline, instead of the 100 second default
+        private const int RequestTimeout = 15000;
+
         public static Feed GetFeed(string url)
         {
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
 
             request.Method = "GET";
+            request.Timeout = RequestTimeout;
 
             using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
             using (Stream stream = response.GetResponseStream())
@@ -58,6 +62,7 @@ namespace YouTube
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
 
             request.Method = "GET";
+            request.Timeout = RequestTimeout;
 
             using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
             using (Stream stream = response.GetResponseStream())

@@ -45,6 +45,7 @@ namespace YouTube.Forms
             this.detailsFrame = new YouTube.ExControls.ExWebBrowser();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.settingsButton = new YouTube.ExControls.ExButton();
+            this.downloadsButton = new YouTube.ExControls.ExButton();
             this.switchToBrowseButton = new YouTube.ExControls.ExButton();
             this.playerSizeToggle = new YouTube.ExControls.ExButton();
             this.relatedPanel = new System.Windows.Forms.Panel();
@@ -286,9 +287,27 @@ namespace YouTube.Forms
             this.switchToBrowseButton.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.toolTip.SetToolTip(this.switchToBrowseButton, "Switch to Browse");
             this.switchToBrowseButton.Click += new System.EventHandler(this.watchToBrowseButton_Click);
-            // 
+            //
+            // downloadsButton
+            //
+            this.downloadsButton.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.downloadsButton.BackColor = System.Drawing.Color.Transparent;
+            this.downloadsButton.BackKey = "HeaderDarkButton";
+            this.downloadsButton.BackMargins = new System.Windows.Forms.Padding(3);
+            this.downloadsButton.EnableTransparency = true;
+            this.downloadsButton.IconKey = "DownloadsDark";
+            this.downloadsButton.IconTransparencyKey = System.Drawing.Color.Magenta;
+            this.downloadsButton.Location = new System.Drawing.Point(658, 8);
+            this.downloadsButton.Name = "downloadsButton";
+            this.downloadsButton.Size = new System.Drawing.Size(30, 30);
+            this.downloadsButton.TabIndex = 14;
+            this.downloadsButton.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.downloadsButton.Visible = false;
+            this.toolTip.SetToolTip(this.downloadsButton, "Downloads");
+            this.downloadsButton.Click += new System.EventHandler(this.downloadsButton_Click);
+            //
             // playerSizeToggle
-            // 
+            //
             this.playerSizeToggle.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.playerSizeToggle.BackColor = System.Drawing.Color.Transparent;
             this.playerSizeToggle.BackKey = "HeaderDarkButton";
@@ -336,6 +355,7 @@ namespace YouTube.Forms
             this.header.BackgroundImage = global::YouTube.Properties.Resources.WatchHeader;
             this.header.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.header.Controls.Add(this.searchBox);
+            this.header.Controls.Add(this.downloadsButton);
             this.header.Controls.Add(this.settingsButton);
             this.header.Controls.Add(this.switchToBrowseButton);
             this.header.Controls.Add(this.playerSizeToggle);
@@ -425,6 +445,7 @@ namespace YouTube.Forms
         private ExControls.ExButton playerSizeToggle;
         private ExControls.ExButton switchToBrowseButton;
         private ExControls.ExButton settingsButton;
+        private ExControls.ExButton downloadsButton;
         private Controls.SearchBox searchBox;
     }
 }

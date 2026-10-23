@@ -142,5 +142,17 @@ namespace YouTube {
                 this["UpgradeRequired"] = value;
             }
         }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool DownloadBeforePlay {
+            get {
+                return ((bool)(this["DownloadBeforePlay"]));
+            }
+            set {
+                this["DownloadBeforePlay"] = value;
+            }
+        }
     }
 }

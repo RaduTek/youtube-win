@@ -57,6 +57,7 @@ namespace YouTube
 
             // Downloads
             downloadFolderText.Text = Settings.Default.DownloadFolder;
+            downloadBeforePlayCheck.Checked = Settings.Default.DownloadBeforePlay;
         }
 
         private void ValidateSettings()
@@ -103,6 +104,7 @@ namespace YouTube
 
             // Downloads
             Settings.Default.DownloadFolder = downloadFolderText.Text;
+            Settings.Default.DownloadBeforePlay = downloadBeforePlayCheck.Checked;
 
             Settings.Default.Save();
         }

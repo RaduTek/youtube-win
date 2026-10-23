@@ -137,6 +137,54 @@ namespace YouTube
             Process.Start(wmplayer, args);
         }
 
+        /// <summary>
+        /// Header downloads indicator: only visible while downloads are waiting or in progress
+        /// </summary>
+        public static void UpdateDownloadsButton(ExControls.ExButton button, System.Windows.Forms.ToolTip toolTip)
+        {
+            var count = DownloadManager.ActiveCount;
+
+            button.Visible = count > 0;
+            if (count == 0) return;
+
+            var text = "Downloading " + count + (count == 1 ? " video" : " videos");
+
+            var current = DownloadManager.Current;
+            if (current != null && current.Status == DownloadStatus.Downloading)
+                text += ", " + current.Progress + "%";
+
+            if (toolTip.GetToolTip(button) != text)
+                toolTip.SetToolTip(button, text);
+        }
+
+        public static string ThumbnailFolder
+        {
+            get { return Path.Combine(LocalFeed.DataFolder, "thumbs"); }
+        }
+
+        public static string GetThumbnailCachePath(string videoId, bool hq)
+        {
+            return Path.Combine(ThumbnailFolder, videoId + (hq ? "_hq" : "") + ".jpg");
+        }
+
+        public static string GetThumbnailWebUrl(string videoId, bool hq)
+        {
+            return "http://i.ytimg.com/vi/" + videoId + (hq ? "/hqdefault.jpg" : "/default.jpg");
+        }
+
+        /// <summary>
+        /// Thumbnail URL for templates: the locally cached copy (downloaded videos) if there is one
+        /// </summary>
+        public static string GetThumbnailUrl(string videoId, bool hq)
+        {
+            var cachePath = GetThumbnailCachePath(videoId, hq);
+
+            if (File.Exists(cachePath))
+                return "file://" + cachePath.Replace('\\', '/');
+
+            return GetThumbnailWebUrl(videoId, hq);
+        }
+
         public static string FormatDurationSeconds(int seconds)
         {
             TimeSpan duration = TimeSpan.FromSeconds(seconds);

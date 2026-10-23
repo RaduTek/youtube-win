@@ -359,6 +359,13 @@ button.selected .text-2 {
 .videoItem .thumbnail .queued .thumbnailRemove {
 	display: inline-block;
 }
+.videoItem .thumbnail .thumbnailDownload {
+	background-image: url(ThumbDownload.png);
+}
+/* video already downloaded or downloading (set from common.js) */
+.videoItem .thumbnail .noDownload .thumbnailDownload {
+	display: none;
+}
 
 
 .watchSidebar {
@@ -594,6 +601,30 @@ button.selected .text-2 {
 	background-repeat: no-repeat;
 }
 
+.videoCover #downloadBox {
+	display: inline-block;
+	vertical-align: middle;
+	padding: 8px 12px;
+	background: #000;
+	filter: alpha(opacity=80);
+	color: #fff;
+}
+.videoCover #downloadIcon {
+	display: inline-block;
+	width: 16px;
+	height: 16px;
+	margin-right: 6px;
+	vertical-align: middle;
+	background-image: url(LoadingDark16.gif);
+	background-repeat: no-repeat;
+}
+.videoCover #downloadText {
+	vertical-align: middle;
+}
+.videoCover #downloadText a {
+	color: #9cf;
+}
+
 .videoCover #helpScreen {
 	text-align: left;
 }
@@ -637,6 +668,50 @@ button.selected .text-2 {
 #browseResultsItems .videoItem .thumbnail img {
 	width: 120px;
 	margin-top: -12px;
+}
+/* unfinished downloads, on the Downloads feed */
+.downloadItem {
+	overflow: hidden;
+	height: 50px;
+	margin-bottom: 6px;
+	padding: 4px;
+	background-color: #fff;
+	border: 1px solid #e2e2e2;
+}
+.downloadItem .thumbnail {
+	float: left;
+	width: 66px;
+	height: 50px;
+	margin-right: 8px;
+	overflow: hidden;
+	background-color: #000;
+}
+.downloadItem .thumbnail img {
+	width: 66px;
+	margin-top: -6px;
+}
+.downloadItem .downloadTitle {
+	font-size: 12px;
+	overflow: hidden;
+	max-height: 15px;
+	margin-bottom: 3px;
+}
+.downloadItem .downloadStatus {
+	color: #777;
+	overflow: hidden;
+	max-height: 13px;
+	margin-bottom: 3px;
+}
+.downloadItem.failed .downloadStatus {
+	color: #b00;
+}
+.downloadItem .downloadActions a {
+	margin-right: 8px;
+}
+
+/* three buttons (play, queue, download) have to fit the thumbnail */
+#browseResultsItems .videoItem .thumbnail .thumbnailOverlay a {
+	margin: 0 6px;
 }
 #browseResultsItems .videoItem .videoTitle {
 	overflow: hidden;

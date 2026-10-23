@@ -263,6 +263,9 @@
     <Content Include="Res\ThumbRemove.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Res\ThumbDownload.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Res\common.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -330,6 +333,12 @@
     <None Include="Resources\SettingsDark.png" />
     <None Include="Resources\SettingsDark_Hover.png" />
     <None Include="Resources\SettingsDark_Pressed.png" />
+    <None Include="Resources\DownloadsDark.png" />
+    <None Include="Resources\DownloadsDark_Hover.png" />
+    <None Include="Resources\DownloadsDark_Pressed.png" />
+    <None Include="Resources\DownloadsLight.png" />
+    <None Include="Resources\DownloadsLight_Hover.png" />
+    <None Include="Resources\DownloadsLight_Pressed.png" />
     <None Include="Resources\SettingsLight.png" />
     <None Include="Resources\SettingsLight_Hover.png" />
     <None Include="Resources\SettingsLight_Pressed.png" />
@@ -345,6 +354,7 @@
     <None Include="Templates\videoDetails.html" />
     <None Include="Templates\videoComment.html" />
     <None Include="Templates\videoQueueItem.html" />
+    <None Include="Templates\downloadItem.html" />
     <None Include="Resources\WatchVideoLarge.png" />
     <None Include="Resources\WatchVideoLarge_Disabled.png" />
     <None Include="Resources\WatchVideoLarge_Hover.png" />

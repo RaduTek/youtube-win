@@ -476,6 +476,66 @@ namespace YouTube.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap DownloadsDark {
+            get {
+                object obj = ResourceManager.GetObject("DownloadsDark", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap DownloadsDark_Hover {
+            get {
+                object obj = ResourceManager.GetObject("DownloadsDark_Hover", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap DownloadsDark_Pressed {
+            get {
+                object obj = ResourceManager.GetObject("DownloadsDark_Pressed", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap DownloadsLight {
+            get {
+                object obj = ResourceManager.GetObject("DownloadsLight", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap DownloadsLight_Hover {
+            get {
+                object obj = ResourceManager.GetObject("DownloadsLight_Hover", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap DownloadsLight_Pressed {
+            get {
+                object obj = ResourceManager.GetObject("DownloadsLight_Pressed", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap PlayerPlay_Hover {
             get {
                 object obj = ResourceManager.GetObject("PlayerPlay_Hover", resourceCulture);
@@ -843,6 +903,15 @@ namespace YouTube.Properties {
             }
         }
         
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;div class=&quot;downloadItem __statusClass__&quot;&gt;...
+        /// </summary>
+        internal static string downloadItem {
+            get {
+                return ResourceManager.GetString("downloadItem", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Looks up a localized string similar to &lt;div class=&quot;videoItem queueItem __currentClass__&quot;&gt;
         ///	&lt;div class=&quot;queueIndex&quot;&gt;__number__&lt;/div&gt;...

@@ -205,6 +205,24 @@
   <data name="PlayerPrev" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\PlayerPrev.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="DownloadsDark" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DownloadsDark.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DownloadsDark_Hover" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DownloadsDark_Hover.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DownloadsDark_Pressed" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DownloadsDark_Pressed.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DownloadsLight" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DownloadsLight.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DownloadsLight_Hover" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DownloadsLight_Hover.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DownloadsLight_Pressed" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DownloadsLight_Pressed.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="SeekBarThumb_Normal" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\SeekBarThumb_Normal.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -375,6 +393,9 @@
   </data>
   <data name="videoDetailsContent" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\templates\videodetailscontent.html;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="downloadItem" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\templates\downloaditem.html;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
   <data name="videoQueueItem" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\templates\videoqueueitem.html;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
