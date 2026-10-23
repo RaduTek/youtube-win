@@ -306,14 +306,144 @@ button.selected .text-2 {
 }
 
 
+/* Thumbnail hover overlay (play / queue / remove buttons) */
+.videoItem .thumbnail .thumbnailOverlay {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	z-index: 99;
+	display: none;
+	width: 100%;
+	height: 100%;
+	text-align: center;
+}
+.videoItem .thumbnail .thumbnailOverlayShade {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	width: 100%;
+	height: 100%;
+	z-index: -1;
+	background-color: #000;
+	zoom: 1;
+	filter: alpha(opacity=40);
+}
+.videoItem .thumbnail .thumbnailOverlay a {
+	display: inline-block;
+	vertical-align: middle;
+	width: 24px;
+	height: 24px;
+	margin: 0 12px;
+	background-repeat: no-repeat;
+}
+.videoItem .thumbnail .thumbnailPlay {
+	background-image: url(ThumbPlay.png);
+}
+.videoItem .thumbnail .thumbnailQueue {
+	background-image: url(ThumbQueue.png);
+}
+.videoItem .thumbnail .thumbnailRemove {
+	background-image: url(ThumbRemove.png);
+}
+/* overlays with both queue buttons: show add, or remove when queued (set from common.js) */
+.videoItem .thumbnail .queueToggle .thumbnailRemove {
+	display: none;
+}
+.videoItem .thumbnail .queued .thumbnailQueue {
+	display: none;
+}
+.videoItem .thumbnail .queued .thumbnailRemove {
+	display: inline-block;
+}
+
+
 .watchSidebar {
 	background-color: #3C3C3C;
 	background-image: url(RelatedBack.png);
 	background-position: left;
 	background-repeat: repeat-y;
 	color: #ddd;
+	overflow: hidden;
+}
+
+/* Sidebar tabs, cloned from #videoTabs */
+#sidebarTabs {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 32px;
+    background-color: #464646;
+	background: top repeat-x url(SidebarTabsBack.png);
+	text-align: center;
+}
+#sidebarTabs a {
+	outline: none;
+    color: #ccc;
+    display: inline-block;
+    background-image: url(VideoTab.png);
+    background-position: top left;
+    background-repeat: no-repeat;
+    width: 115px;
+    padding: 5px 0 3px;
+    height: 16px;
+    margin-top: 3px;
+	font-size: 11px;
+}
+#sidebarTabs a:hover {
+    text-decoration: none;
+    background-image: url(VideoTabHover.png);
+}
+#sidebarTabs a.selected {
+    background-image: url(VideoTabSelected.png);
+}
+
+#queueTab {
+    background-position: top right !important;
+}
+
+#sidebarContent {
+	position: absolute;
+	top: 31px;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	overflow-y: auto;
+}
+
+#relatedPage,
+#queuePage {
 	padding: 6px;
 	padding-left: 8px;
+}
+
+#queueEmpty {
+	color: #aaa;
+}
+
+.watchSidebar .videoItem .thumbnail .thumbnailOverlay a {
+	margin: 0 8px;
+}
+
+.watchSidebar .queueItem .queueIndex {
+	float: left;
+	width: 24px;
+	height: 58px;
+	line-height: 58px;
+	text-align: center;
+	font-size: 18px;
+	font-weight: bold;
+	color: #888;
+}
+.watchSidebar .queueItem.current {
+	background-image: url(QueueCurrentItemBack.png);
+}
+.watchSidebar .queueItem.current .queueIndex {
+	color: #c00;
 }
 .watchSidebar .videoItem {
 	background-color: #fff;
@@ -507,50 +637,6 @@ button.selected .text-2 {
 #browseResultsItems .videoItem .thumbnail img {
 	width: 120px;
 	margin-top: -12px;
-}
-#browseResultsItems .videoItem .thumbnail .thumbnailOverlay {
-	position: absolute;
-	top: 0;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	z-index: 99;
-	display: none;
-	width: 100%;
-	height: 100%;
-	text-align: center;
-}
-#browseResultsItems .videoItem .thumbnail .thumbnailOverlayShade {
-	position: absolute;
-	top: 0;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	width: 100%;
-	height: 100%;
-	z-index: -1;
-	background-color: #000;
-	zoom: 1;
-	filter: alpha(opacity=40);
-}
-#browseResultsItems .videoItem .thumbnail .thumbnailOverlay a {
-	display: inline-block;
-	vertical-align: middle;
-	width: 24px;
-	height: 24px;
-	margin: 0 12px;
-	background-repeat: no-repeat;
-}
-#browseResultsItems .videoItem .thumbnail .thumbnailPlay {
-	background-image: url(ThumbPlay.png);
-}
-#browseResultsItems .videoItem .thumbnail .thumbnailQueue {
-	background-image: url(ThumbQueue.png);
-}
-#browseResultsItems .videoItem .thumbnail .verticalAlign {
-	display: inline-block;
-	height: 100%;
-	vertical-align: middle;
 }
 #browseResultsItems .videoItem .videoTitle {
 	overflow: hidden;

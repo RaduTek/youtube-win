@@ -5,20 +5,34 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=8" />
 	<title>Related videos</title>
 	<link rel="stylesheet" href="__cssfile__" />
+	<script src="__jsfile__"></script>
 </head>
 
 <body class="watchSidebar">
-	<!-- <div id="sidebarTabs">
-		<a href="javascript:SelectTab(0)" id="relatedTab">Related</a
+	<div id="sidebarTabs">
+		<a href="javascript:SelectTab(0)" id="relatedTab" class="selected">Related</a
 		><a href="javascript:SelectTab(1)" id="queueTab">Queue</a>
-	</div> -->
-
-	<p>Related videos</p>
-
-	<div id="relatedItems">
 	</div>
 
-	<div id="loading"></div>
+	<div id="sidebarContent">
+		<div id="relatedPage">
+			<div id="relatedItems"></div>
+			<div id="loading"></div>
+		</div>
+
+		<div id="queuePage" class="hidden">
+			<p id="queueEmpty">The queue is empty. Use the + button on a video thumbnail to add videos.</p>
+			<div id="queueItems"></div>
+		</div>
+	</div>
+
+	<script>
+		function SelectTab(index) {
+			SelectTabIn('sidebarTabs', 'sidebarContent', index);
+		}
+
+		AttachThumbnailHover(document.getElementById('sidebarContent'));
+	</script>
 </body>
 
 </html>

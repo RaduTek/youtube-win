@@ -323,7 +323,7 @@ namespace YouTube.Forms
             switch (e.Name)
             {
                 case "queue":
-                    // TODO: add to playback queue (not implemented yet)
+                    Program.watchForm.ToggleQueued(video);
                     break;
 
                 default: // "title", "play"

@@ -452,7 +452,27 @@ namespace YouTube.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-        
+
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap PlayerNext {
+            get {
+                object obj = ResourceManager.GetObject("PlayerNext", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap PlayerPrev {
+            get {
+                object obj = ResourceManager.GetObject("PlayerPrev", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
@@ -823,6 +843,16 @@ namespace YouTube.Properties {
             }
         }
         
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;div class=&quot;videoItem queueItem __currentClass__&quot;&gt;
+        ///	&lt;div class=&quot;queueIndex&quot;&gt;__number__&lt;/div&gt;...
+        /// </summary>
+        internal static string videoQueueItem {
+            get {
+                return ResourceManager.GetString("videoQueueItem", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Looks up a localized string similar to &lt;div class=&quot;videoComment&quot;&gt;
         ///	&lt;div class=&quot;commentText&quot;&gt;__content__&lt;/div&gt;

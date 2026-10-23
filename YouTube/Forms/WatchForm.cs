@@ -22,6 +22,8 @@ namespace YouTube.Forms
             detailsFrame.DocumentCompleted += detailsFrame_DocumentCompleted;
             relatedFrame.ObjectForScripting = frameConn;
 
+            PlaybackQueue.Changed += PlaybackQueue_Changed;
+
             // dummy control to capture key inputs for the player
             playerInputCapture = new Control();
             playerInputCapture.PreviewKeyDown += playerInputCapture_PreviewKeyDown;
@@ -67,6 +69,11 @@ namespace YouTube.Forms
         private Dictionary<string, string> detailsValues;
         private string commentsVideoId; // video whose comments were requested
 
+        private bool sidebarLoaded, sidebarReady; // sidebar template written / document loaded
+        private Data.Entry pendingVideo; // queued before the Watch window was ever shown, loaded on first show
+        private bool historyPending; // preloaded video, added to history once it starts playing
+        private bool advancingQueue; // moving on to the next queued video, skip the end screen
+
         private WebFrameConnector frameConn;
 
         #endregion
@@ -75,27 +82,69 @@ namespace YouTube.Forms
 
         public string InitialVideoId { get; set; }
 
+        // the Watch window is only reachable once there is a video to show
+        public bool HasVideo
+        {
+            get { return video != null || pendingVideo != null; }
+        }
+
         public void LoadVideo(string videoId)
         {
+            pendingVideo = null;
             video = DataApi.GetVideo(videoId);
-            ShowVideoData(true);
+            ShowVideoData(true, false);
         }
 
         public void LoadVideo(Data.Entry video)
         {
+            pendingVideo = null;
             this.video = video;
-            ShowVideoData(false);
+            ShowVideoData(false, false);
+        }
+
+        public void AddToQueue(Data.Entry entry)
+        {
+            PlaybackQueue.Add(entry);
+
+            // nothing loaded since app start: make it the current video, without switching view or playing
+            if (!HasVideo)
+            {
+                pendingVideo = entry;
+                Program.browseForm.EnableWatchButton = true;
+            }
+        }
+
+        // Thumbnail queue button: adds the video, or removes it if already queued
+        public void ToggleQueued(Data.Entry entry)
+        {
+            var index = PlaybackQueue.IndexOf(entry.YouTubeId.Id);
+
+            if (index >= 0)
+                PlaybackQueue.Remove(index);
+            else
+                AddToQueue(entry);
+        }
+
+        private void PlayQueueItem(int index)
+        {
+            if (index < 0 || index >= PlaybackQueue.Items.Count) return;
+
+            LoadVideo(PlaybackQueue.Items[index]);
+
+            // queue playback starts regardless of the auto play setting
+            player.Ctlcontrols.play();
         }
 
         // detailed: the entry was already loaded from the video API, no need to fetch it again
-        private void ShowVideoData(bool detailed)
+        // preload: load in the background, without switching to this window or starting playback
+        private void ShowVideoData(bool detailed, bool preload)
         {
             if (video == null) return;
 
             Program.browseForm.EnableWatchButton = true;
             playerInputCapture.Focus();
 
-            if (!Visible)
+            if (!Visible && !preload)
             {
                 Program.SwitchView();
             }
@@ -107,6 +156,13 @@ namespace YouTube.Forms
 
             var values = BuildVideoValues(video);
 
+            if (preload)
+            {
+                // show the play button instead of the loading indicator
+                values["startScreenClass"] = "overlay";
+                values["loadingScreenClass"] = "hidden";
+            }
+
             // the details page is reloaded, so comments need to be loaded again
             commentsVideoId = null;
 
@@ -115,11 +171,19 @@ namespace YouTube.Forms
 
             Utils.LoadTemplate("videoCover", values, videoFrame);
             Utils.LoadTemplate("videoDetails", values, detailsFrame);
-            Utils.LoadTemplate("videoRelated", new Dictionary<string, string>(), relatedFrame);
+            ShowSidebar();
 
-            if (player != null) player.URL = DataApi.GetVideoUrl(video.YouTubeId.Id);
+            if (player != null)
+            {
+                player.settings.autoStart = !preload && Settings.Default.AutoPlayVideo;
+                player.URL = DataApi.GetVideoUrl(video.YouTubeId.Id);
+                player.settings.autoStart = Settings.Default.AutoPlayVideo;
+            }
 
-            LocalFeed.History.Add(video);
+            historyPending = preload;
+            if (!preload) LocalFeed.History.Add(video);
+
+            PlaybackQueue.SetCurrent(video.YouTubeId.Id);
 
             if (!detailed) LoadFullDetails(video);
         }
@@ -184,7 +248,8 @@ namespace YouTube.Forms
                         video = full;
 
                         // replace the partial history entry with the full metadata
-                        LocalFeed.History.Add(video);
+                        if (LocalFeed.History.Contains(videoId))
+                            LocalFeed.History.Add(video);
                     }
 
                     detailsValues = BuildVideoValues(video);
@@ -286,16 +351,39 @@ namespace YouTube.Forms
             slot.InnerText = message;
         }
 
+        // The sidebar page is loaded once and kept, so the selected tab and the queue list survive video changes
+        private void ShowSidebar()
+        {
+            if (!sidebarLoaded)
+            {
+                sidebarLoaded = true;
+                Utils.LoadTemplate("videoRelated", new Dictionary<string, string>(), relatedFrame);
+                return; // related videos are loaded in relatedFrame_DocumentCompleted
+            }
+
+            if (!sidebarReady) return;
+
+            relatedFeed = null;
+            relatedFrame.Document.GetElementById("relatedItems").InnerHtml = "";
+            relatedFrame.Document.GetElementById("loading").SetAttribute("className", "");
+            LoadRelated();
+        }
+
         private void LoadRelated()
         {
+            var videoId = video.YouTubeId.Id;
+
             ThreadPool.QueueUserWorkItem(delegate
             {
                 try
                 {
-                    var feed = DataApi.GetRelatedVideos(video.YouTubeId.Id);
+                    var feed = DataApi.GetRelatedVideos(videoId);
 
                     Invoke(new MethodInvoker(delegate
                     {
+                        // another video was selected while loading
+                        if (video == null || video.YouTubeId.Id != videoId) return;
+
                         ShowRelatedFeed(feed);
                     }));
                 }
@@ -303,10 +391,40 @@ namespace YouTube.Forms
                 {
                     Invoke(new MethodInvoker(delegate
                     {
+                        if (video == null || video.YouTubeId.Id != videoId) return;
+
                         ShowRelatedError("Error: " + ex.Message);
                     }));
                 }
             });
+        }
+
+        private void RenderQueue()
+        {
+            if (!sidebarReady) return;
+
+            var valuesList = new List<Dictionary<string, string>>();
+
+            for (int i = 0; i < PlaybackQueue.Items.Count; i++)
+            {
+                var entry = PlaybackQueue.Items[i];
+                valuesList.Add(new Dictionary<string, string>
+                {
+                    { "index", i.ToString() },
+                    { "number", (i + 1).ToString() },
+                    { "title", entry.Title },
+                    { "author", entry.Author.Name },
+                    { "duration", Utils.FormatDurationSeconds(entry.Media.Duration.Seconds) },
+                    { "thumbnail", "http://i.ytimg.com/vi/" + entry.YouTubeId.Id + "/default.jpg" },
+                    { "currentClass", i == PlaybackQueue.CurrentIndex ? "current" : "" }
+                });
+            }
+
+            Utils.LoadTemplateListSlot("videoQueueItem", valuesList, "queueItems", relatedFrame);
+
+            var count = PlaybackQueue.Items.Count;
+            relatedFrame.Document.GetElementById("queueTab").InnerText = count > 0 ? "Queue (" + count + ")" : "Queue";
+            relatedFrame.Document.GetElementById("queueEmpty").SetAttribute("className", count > 0 ? "hidden" : "");
         }
 
         private void ShowRelatedFeed(Data.Feed feed)
@@ -546,11 +664,19 @@ namespace YouTube.Forms
             {
                 //case WMPLib.WMPPlayState.wmppsBuffering:
                 case WMPLib.WMPPlayState.wmppsTransitioning:
+                    advancingQueue = false;
                     ShowCoverScreen("loadingScreen");
                     break;
 
                 case WMPLib.WMPPlayState.wmppsPlaying:
+                    advancingQueue = false;
                     ShowVideoPlayer();
+
+                    if (historyPending)
+                    {
+                        historyPending = false;
+                        LocalFeed.History.Add(video);
+                    }
 
                     playerTimer.Start();
                     if (!seekBar.Enabled)
@@ -565,8 +691,25 @@ namespace YouTube.Forms
                     playerTimer.Stop();
                     break;
 
+                case WMPLib.WMPPlayState.wmppsMediaEnded:
+                    // only fires when playback reaches the end (unlike Stopped, which also follows
+                    // a user stop, URL change or error), so this is where the queue advances
+                    var next = PlaybackQueue.GetNextIndex();
+                    if (next >= 0)
+                    {
+                        advancingQueue = true;
+
+                        // WMP doesn't support changing the media from within PlayStateChange
+                        var entry = PlaybackQueue.Items[next];
+                        BeginInvoke(new MethodInvoker(delegate
+                        {
+                            PlayQueueItem(PlaybackQueue.IndexOf(entry.YouTubeId.Id));
+                        }));
+                    }
+                    break;
+
                 case WMPLib.WMPPlayState.wmppsStopped:
-                    ShowCoverScreen("endScreen");
+                    if (!advancingQueue) ShowCoverScreen("endScreen");
                     playerTimer.Stop();
                     break;
             }
@@ -610,6 +753,33 @@ namespace YouTube.Forms
             }
         }
 
+        // Prev / next are only shown while playing from the queue, when there is an item before / after the current one
+        private void UpdateQueueButtons()
+        {
+            var index = PlaybackQueue.CurrentIndex;
+
+            SuspendLayout();
+            prevButton.Visible = index > 0;
+            nextButton.Visible = index >= 0 && index < PlaybackQueue.Items.Count - 1;
+            ResumeLayout();
+        }
+
+        private void prevButton_Click(object sender, EventArgs e)
+        {
+            playerInputCapture.Focus();
+
+            if (PlaybackQueue.CurrentIndex > 0)
+                PlayQueueItem(PlaybackQueue.CurrentIndex - 1);
+        }
+
+        private void nextButton_Click(object sender, EventArgs e)
+        {
+            playerInputCapture.Focus();
+
+            if (PlaybackQueue.CurrentIndex >= 0)
+                PlayQueueItem(PlaybackQueue.CurrentIndex + 1);
+        }
+
         private void playButton_Click(object sender, EventArgs e)
         {
             playerInputCapture.Focus();
@@ -647,7 +817,24 @@ namespace YouTube.Forms
 
             if (InitialVideoId != null)
             {
-                LoadVideo(InitialVideoId);
+                try
+                {
+                    LoadVideo(InitialVideoId);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Could not load video: " + ex.Message, "YouTube", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                    // nothing to watch, go to Browse once this window is shown
+                    BeginInvoke(new MethodInvoker(Program.SwitchView));
+                }
+            }
+            else if (pendingVideo != null)
+            {
+                // video queued from Browse before this window was first shown
+                video = pendingVideo;
+                pendingVideo = null;
+                ShowVideoData(false, true);
             }
         }
 
@@ -675,11 +862,23 @@ namespace YouTube.Forms
 
         private void relatedFrame_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
-            // Load related feed for initial video
+            // may also complete for the intermediate blank document, and only the first load matters
+            if (sidebarReady || relatedFrame.Document?.GetElementById("relatedItems") == null) return;
+
+            sidebarReady = true;
+            RenderQueue();
+
+            // Load related feed for the current video
             if (video != null)
             {
                 LoadRelated();
             }
+        }
+
+        private void PlaybackQueue_Changed(object sender, EventArgs e)
+        {
+            RenderQueue();
+            UpdateQueueButtons();
         }
 
         private void videoControlsPanel_MouseEnter(object sender, EventArgs e)
@@ -865,13 +1064,32 @@ namespace YouTube.Forms
 
         private void FrameConn_OnVideoClick(object sender, VideoClickEventArgs e)
         {
+            switch (e.Name)
+            {
+                case "queuePlay":
+                    PlayQueueItem(e.Index);
+                    return;
+
+                case "queueRemove":
+                    PlaybackQueue.Remove(e.Index);
+                    return;
+            }
+
+            // related videos
             if (relatedFeed == null || e.Index >= relatedFeed.Entries.Count) return;
 
             var video = relatedFeed.Entries[e.Index];
 
-            if (e.Name == "title")
+            switch (e.Name)
             {
-                LoadVideo(video);
+                case "title":
+                case "play":
+                    LoadVideo(video);
+                    break;
+
+                case "queue":
+                    ToggleQueued(video);
+                    break;
             }
         }
 

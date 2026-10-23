@@ -30,6 +30,12 @@ namespace YouTube
                 OnVideoClick.Invoke(null, new VideoClickEventArgs() { Index = index, Name = name });
         }
 
+        // queried by the thumbnail hover overlay to show the add / remove queue button
+        public bool IsQueued(string videoId)
+        {
+            return PlaybackQueue.IndexOf(videoId) >= 0;
+        }
+
         public event EventHandler<ActionClickEventArgs> OnActionClick;
 
         public void ActionClick(string name, string data)

@@ -203,8 +203,10 @@ namespace YouTube
             }
 
             var cssfile = "file://" + Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Res\\styles.css").Replace('\\', '/');
+            var jsfile = "file://" + Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Res\\common.js").Replace('\\', '/');
 
             template = template.Replace("__cssfile__", cssfile);
+            template = template.Replace("__jsfile__", jsfile);
 
             return template;
         }

@@ -39,6 +39,8 @@ namespace YouTube.Forms
             this.fullscreenButton = new YouTube.ExControls.ExButton();
             this.muteButton = new YouTube.ExControls.ExButton();
             this.playButton = new YouTube.ExControls.ExButton();
+            this.prevButton = new YouTube.ExControls.ExButton();
+            this.nextButton = new YouTube.ExControls.ExButton();
             this.detailsPanel = new System.Windows.Forms.Panel();
             this.detailsFrame = new YouTube.ExControls.ExWebBrowser();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
@@ -91,7 +93,9 @@ namespace YouTube.Forms
             this.videoControlsPanel.Controls.Add(this.seekBarPanel);
             this.videoControlsPanel.Controls.Add(this.fullscreenButton);
             this.videoControlsPanel.Controls.Add(this.muteButton);
+            this.videoControlsPanel.Controls.Add(this.nextButton);
             this.videoControlsPanel.Controls.Add(this.playButton);
+            this.videoControlsPanel.Controls.Add(this.prevButton);
             this.videoControlsPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.videoControlsPanel.Location = new System.Drawing.Point(0, 313);
             this.videoControlsPanel.Name = "videoControlsPanel";
@@ -168,9 +172,45 @@ namespace YouTube.Forms
             this.muteButton.Click += new System.EventHandler(this.muteButton_Click);
             this.muteButton.MouseEnter += new System.EventHandler(this.videoControlsPanel_MouseEnter);
             this.muteButton.MouseLeave += new System.EventHandler(this.videoControlsPanel_MouseLeave);
-            // 
+            //
+            // prevButton
+            //
+            this.prevButton.BackKey = "PlayerButton";
+            this.prevButton.BackMargins = new System.Windows.Forms.Padding(2);
+            this.prevButton.Dock = System.Windows.Forms.DockStyle.Left;
+            this.prevButton.EnableTransparency = true;
+            this.prevButton.IconKey = "PlayerPrev";
+            this.prevButton.IconTransparencyKey = System.Drawing.Color.Magenta;
+            this.prevButton.Location = new System.Drawing.Point(0, 0);
+            this.prevButton.Name = "prevButton";
+            this.prevButton.Size = new System.Drawing.Size(40, 30);
+            this.prevButton.TabIndex = 12;
+            this.prevButton.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.prevButton.Visible = false;
+            this.prevButton.Click += new System.EventHandler(this.prevButton_Click);
+            this.prevButton.MouseEnter += new System.EventHandler(this.videoControlsPanel_MouseEnter);
+            this.prevButton.MouseLeave += new System.EventHandler(this.videoControlsPanel_MouseLeave);
+            //
+            // nextButton
+            //
+            this.nextButton.BackKey = "PlayerButton";
+            this.nextButton.BackMargins = new System.Windows.Forms.Padding(2);
+            this.nextButton.Dock = System.Windows.Forms.DockStyle.Left;
+            this.nextButton.EnableTransparency = true;
+            this.nextButton.IconKey = "PlayerNext";
+            this.nextButton.IconTransparencyKey = System.Drawing.Color.Magenta;
+            this.nextButton.Location = new System.Drawing.Point(50, 0);
+            this.nextButton.Name = "nextButton";
+            this.nextButton.Size = new System.Drawing.Size(40, 30);
+            this.nextButton.TabIndex = 13;
+            this.nextButton.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.nextButton.Visible = false;
+            this.nextButton.Click += new System.EventHandler(this.nextButton_Click);
+            this.nextButton.MouseEnter += new System.EventHandler(this.videoControlsPanel_MouseEnter);
+            this.nextButton.MouseLeave += new System.EventHandler(this.videoControlsPanel_MouseLeave);
+            //
             // playButton
-            // 
+            //
             this.playButton.BackKey = "PlayerButton";
             this.playButton.BackMargins = new System.Windows.Forms.Padding(2);
             this.playButton.Dock = System.Windows.Forms.DockStyle.Left;
@@ -376,6 +416,8 @@ namespace YouTube.Forms
         private ExControls.ExWebBrowser relatedFrame;
         private ExControls.ExWebBrowser videoFrame;
         private ExControls.ExButton playButton;
+        private ExControls.ExButton prevButton;
+        private ExControls.ExButton nextButton;
         private ExControls.ExButton muteButton;
         private ExControls.ExButton fullscreenButton;
         private ExControls.ExPanel seekBarPanel;

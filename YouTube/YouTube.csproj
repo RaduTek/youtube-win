@@ -114,6 +114,7 @@
     <Compile Include="Data\Media.cs" />
     <Compile Include="Utils\DownloadUtil.cs" />
     <Compile Include="Utils\LocalFeed.cs" />
+    <Compile Include="Utils\PlaybackQueue.cs" />
     <Compile Include="ExControls\ExButton.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -202,6 +203,12 @@
     <Content Include="Res\DescriptionSeparator.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Res\QueueCurrentItemBack.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Res\SidebarTabsBack.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Res\VideoTab.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -235,6 +242,8 @@
     </Content>
     <None Include="Resources\PlayerPause.png" />
     <None Include="Resources\PlayerPlay.png" />
+    <None Include="Resources\PlayerNext.png" />
+    <None Include="Resources\PlayerPrev.png" />
     <None Include="Resources\PlayerButton_Hover.png" />
     <None Include="Resources\PlayerButton_Normal.png" />
     <None Include="Resources\PlayerButton_Pressed.png" />
@@ -249,6 +258,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Res\ThumbQueue.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Res\ThumbRemove.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Res\common.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Resources\PlayerVolumeMax.png" />
@@ -329,6 +344,7 @@
     <None Include="Templates\videoRelated.html" />
     <None Include="Templates\videoDetails.html" />
     <None Include="Templates\videoComment.html" />
+    <None Include="Templates\videoQueueItem.html" />
     <None Include="Resources\WatchVideoLarge.png" />
     <None Include="Resources\WatchVideoLarge_Disabled.png" />
     <None Include="Resources\WatchVideoLarge_Hover.png" />

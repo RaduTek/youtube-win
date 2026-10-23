@@ -2,9 +2,10 @@
 	<div class="thumbnail">
 		<img src="__thumbnail__" />
 		<span class="videoDuration">__duration__</span>
-		<div class="thumbnailOverlay">
+		<div class="thumbnailOverlay queueToggle" videoid="__videoId__">
 			<a class="thumbnailPlay" href="javascript:window.external.VideoClick(__index__,'play')" title="Play Video"></a
-			><a class="thumbnailQueue" href="javascript:window.external.VideoClick(__index__,'queue')" title="Add to Queue"></a>
+			><a class="thumbnailQueue" href="javascript:window.external.VideoClick(__index__,'queue')" onclick="ToggleQueueButton(this)" title="Add to Queue"></a
+			><a class="thumbnailRemove" href="javascript:window.external.VideoClick(__index__,'queue')" onclick="ToggleQueueButton(this)" title="Remove from Queue"></a>
 			<span class="verticalAlign"></span>
 			<div class="thumbnailOverlayShade"></div>
 		</div>

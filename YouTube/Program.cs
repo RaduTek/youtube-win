@@ -96,6 +96,9 @@ namespace YouTube
         {
             if (browseForm.Visible)
             {
+                // the Watch window is only reachable once a video was loaded or queued
+                if (!watchForm.HasVideo) return;
+
                 SyncWindowState(browseForm, watchForm);
                 watchForm.Show();
                 browseForm.Hide();
