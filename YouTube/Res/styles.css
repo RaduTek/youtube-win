@@ -669,6 +669,15 @@ button.selected .text-2 {
 	width: 120px;
 	margin-top: -12px;
 }
+.browsePage .browseSectionTitle {
+	margin: 10px 0 6px;
+	padding-bottom: 3px;
+	border-bottom: 1px solid #ddd;
+	font-size: 13px;
+	font-weight: bold;
+	color: #333;
+}
+
 /* unfinished downloads, on the Downloads feed */
 .downloadItem {
 	overflow: hidden;

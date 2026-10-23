@@ -278,6 +278,9 @@ namespace YouTube.Forms
             }
 
             Utils.LoadTemplateListSlot("downloadItem", valuesList, "browseDownloads", browseFrame);
+
+            // the In Progress section is only shown while there are unfinished downloads
+            browseFrame.Document.GetElementById("browseDownloadsSection")?.SetAttribute("className", valuesList.Count > 0 ? "" : "hidden");
         }
 
         private static string DownloadAction(string action, string videoId, string text)
