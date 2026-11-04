@@ -24,6 +24,7 @@ namespace YouTube.Forms
 
             DownloadManager.Changed += DownloadManager_Changed;
             history.Changed += History_Changed;
+            LocalFeed.Subscriptions.Changed += Subscriptions_Changed;
         }
 
         // A feed (standard or local, by guide name) or a search, for the back history
@@ -393,6 +394,27 @@ namespace YouTube.Forms
             guideFrame.Document.InvokeScript("SelectFeed", new string[] { feedName });
         }
 
+        // Subscribed channels, listed in the guide sidebar; the section is hidden while there are none
+        private void RenderSubscriptions()
+        {
+            var guideDoc = guideFrame.Document;
+            var slot = guideDoc?.GetElementById("guideSubscriptions");
+            if (slot == null) return;
+
+            var channels = new List<Data.Entry>(LocalFeed.Subscriptions.Feed.Entries);
+            channels.Sort((a, b) => string.Compare(a.Title, b.Title, StringComparison.CurrentCultureIgnoreCase));
+
+            var html = new StringBuilder();
+            foreach (var channel in channels)
+            {
+                var name = Utils.HtmlText(channel.Title);
+                html.AppendLine("<a href=\"javascript:void(0)\" title=\"" + name + "\"><span class=\"feedicon channel\"></span><span class=\"text\">" + name + "</span></a>");
+            }
+
+            slot.InnerHtml = html.ToString();
+            guideDoc.GetElementById("guideSubscriptionsSection")?.SetAttribute("className", channels.Count > 0 ? "" : "hidden");
+        }
+
         #endregion
 
         #region Events
@@ -474,6 +496,12 @@ namespace YouTube.Forms
         private void guideFrame_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
             SelectGuideFeed("most_popular");
+            RenderSubscriptions();
+        }
+
+        private void Subscriptions_Changed(object sender, EventArgs e)
+        {
+            RenderSubscriptions();
         }
 
         private void browseFrame_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)

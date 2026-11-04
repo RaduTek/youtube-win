@@ -43,18 +43,6 @@
 
 			focusPlayer();
 		}
-
-		function subscribeClick() {
-			var subscribeBtn = document.getElementById("subscribeBtn");
-
-			if (subscribeBtn.className === "") {
-				subscribeBtn.className = "selected";
-				window.external.ActionClick('videoDescription', 'subscribe');
-			} else {
-				subscribeBtn.className = "";
-				window.external.ActionClick('videoDescription', 'unsubscribe');
-			}
-		}
 	</script>
 </body>
 

@@ -363,6 +363,34 @@ namespace YouTube.Forms
             }
         }
 
+        private static string GetChannelId(Data.Entry video)
+        {
+            var author = video.Author;
+            return string.IsNullOrEmpty(author.UserId) ? author.Name : author.UserId;
+        }
+
+        // Subscribe button: adds the video's channel to the Subscriptions feed, or removes it
+        private void SubscribeButtonClick()
+        {
+            if (video == null) return;
+
+            var channelId = GetChannelId(video);
+            var subscribed = !LocalFeed.Subscriptions.Remove(channelId);
+
+            if (subscribed)
+            {
+                LocalFeed.Subscriptions.Add(new Data.Entry
+                {
+                    Id = channelId,
+                    Title = video.Author.Name,
+                    Author = video.Author,
+                    YouTubeId = new Data.YouTubeId { Id = channelId }
+                });
+            }
+
+            detailsFrame.Document?.GetElementById("subscribeBtn")?.SetAttribute("className", subscribed ? "selected" : "");
+        }
+
         private Dictionary<string, string> BuildVideoValues(Data.Entry video)
         {
             string downloadClass, downloadText, downloadTitle;
@@ -391,6 +419,7 @@ namespace YouTube.Forms
                 { "ratingP", ratingP.ToString("0.###") + "%" },
                 { "ratingN", ratingN.ToString("0.###") + "%" },
                 { "favoriteClass", LocalFeed.Favorites.Contains(video.YouTubeId.Id) ? "selected" : "" },
+                { "subscribeClass", LocalFeed.Subscriptions.Contains(GetChannelId(video)) ? "selected" : "" },
                 { "downloadClass", downloadClass },
                 { "downloadText", downloadText },
                 { "downloadTitle", downloadTitle },
@@ -1287,6 +1316,10 @@ namespace YouTube.Forms
                         LocalFeed.Favorites.Add(video);
 
                     detailsFrame.Document?.GetElementById("favoriteBtn")?.SetAttribute("className", favorited ? "selected" : "");
+                    break;
+
+                case "subscribe":
+                    SubscribeButtonClick();
                     break;
 
                 case "author":

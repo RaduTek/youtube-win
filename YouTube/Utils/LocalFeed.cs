@@ -16,6 +16,9 @@ namespace YouTube
         public static readonly LocalFeed Favorites = new LocalFeed("favorites", "Favorites", 0);
         public static readonly LocalFeed Downloads = new LocalFeed("downloads", "Downloads", 0);
 
+        // Channels rather than videos: one entry per channel, keyed by the channel id in YouTubeId
+        public static readonly LocalFeed Subscriptions = new LocalFeed("subscriptions", "Subscriptions", 0);
+
         public static string DataFolder
         {
             get { return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "YouTube"); }
