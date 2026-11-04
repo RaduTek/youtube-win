@@ -366,13 +366,13 @@ namespace YouTube.Forms
                 {
                     { "index", (startIndex + i).ToString() },
                     { "title", entry.Title },
-                    { "videoId", entry.YouTubeId.Id },
+                    { "videoId", entry.VideoId },
                     { "author", entry.Author.Name },
                     { "description", entry.Content },
                     { "duration", Utils.FormatDurationSeconds(entry.Media.Duration.Seconds) },
                     { "upload_date", Utils.FormatRelativeDate(entry.Published) },
                     { "viewcount", entry.Statistics.ViewCount.ToString("N0") },
-                    { "thumbnail", Utils.GetThumbnailUrl(entry.YouTubeId.Id, false) }
+                    { "thumbnail", Utils.GetThumbnailUrl(entry.VideoId, false) }
                 }));
             }
 

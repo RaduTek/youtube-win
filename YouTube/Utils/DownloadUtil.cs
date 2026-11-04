@@ -25,7 +25,7 @@ namespace YouTube
 
         public string VideoId
         {
-            get { return Entry.YouTubeId.Id; }
+            get { return Entry.VideoId; }
         }
 
         public DownloadStatus Status { get; set; }
@@ -104,7 +104,7 @@ namespace YouTube
         /// </summary>
         public static DownloadItem Enqueue(Entry entry, bool first)
         {
-            var videoId = entry.YouTubeId.Id;
+            var videoId = entry.VideoId;
 
             if (GetLocalPath(videoId) != null) return null;
 

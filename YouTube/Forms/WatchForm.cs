@@ -125,7 +125,7 @@ namespace YouTube.Forms
         // Thumbnail queue button: adds the video, or removes it if already queued
         public void ToggleQueued(Data.Entry entry)
         {
-            var index = PlaybackQueue.IndexOf(entry.YouTubeId.Id);
+            var index = PlaybackQueue.IndexOf(entry.VideoId);
 
             if (index >= 0)
                 PlaybackQueue.Remove(index);
@@ -148,11 +148,11 @@ namespace YouTube.Forms
             loadingQueueMore = false;
             PlaybackQueue.ReplaceWithFeed(feedEntries, nextUrl);
 
-            var index = PlaybackQueue.IndexOf(entry.YouTubeId.Id);
+            var index = PlaybackQueue.IndexOf(entry.VideoId);
             if (index < 0) index = PlaybackQueue.Add(entry);
 
             if (ShowIfLoaded(entry))
-                PlaybackQueue.SetCurrent(entry.YouTubeId.Id);
+                PlaybackQueue.SetCurrent(entry.VideoId);
             else
                 PlayQueueItem(index);
         }
@@ -233,7 +233,7 @@ namespace YouTube.Forms
         private bool ShowIfLoaded(Data.Entry entry)
         {
             var current = video ?? pendingVideo;
-            if (current == null || current.YouTubeId.Id != entry.YouTubeId.Id) return false;
+            if (current == null || current.VideoId != entry.VideoId) return false;
 
             if (!Visible) Program.SwitchView();
             return true;
@@ -275,7 +275,7 @@ namespace YouTube.Forms
 
             var values = BuildVideoValues(video);
 
-            var downloadFirst = Settings.Default.DownloadBeforePlay && DownloadManager.GetLocalPath(video.YouTubeId.Id) == null;
+            var downloadFirst = Settings.Default.DownloadBeforePlay && DownloadManager.GetLocalPath(video.VideoId) == null;
 
             if (downloadFirst)
             {
@@ -304,13 +304,13 @@ namespace YouTube.Forms
             if (player != null) StartPlayback(!preload && Settings.Default.AutoPlayVideo);
 
             // back history; reloading the same video doesn't add an entry
-            if (!navigatingBack && (history.Current == null || history.Current.YouTubeId.Id != video.YouTubeId.Id))
+            if (!navigatingBack && (history.Current == null || history.Current.VideoId != video.VideoId))
                 history.Push(video);
 
             historyPending = preload;
             if (!preload) LocalFeed.History.Add(video);
 
-            PlaybackQueue.SetCurrent(video.YouTubeId.Id);
+            PlaybackQueue.SetCurrent(video.VideoId);
 
             if (!detailed) LoadFullDetails(video);
         }
@@ -318,7 +318,7 @@ namespace YouTube.Forms
         // Plays the downloaded file if there is one, otherwise downloads it first (if enabled) or streams it
         private void StartPlayback(bool autoPlay)
         {
-            var videoId = video.YouTubeId.Id;
+            var videoId = video.VideoId;
             var localPath = DownloadManager.GetLocalPath(videoId);
 
             waitingForDownload = false;
@@ -406,7 +406,7 @@ namespace YouTube.Forms
             if (button == null || video == null) return;
 
             string cssClass, text, title;
-            GetDownloadButtonState(video.YouTubeId.Id, out cssClass, out text, out title);
+            GetDownloadButtonState(video.VideoId, out cssClass, out text, out title);
 
             button.SetAttribute("className", cssClass);
             button.SetAttribute("title", title);
@@ -418,7 +418,7 @@ namespace YouTube.Forms
         {
             if (video == null) return;
 
-            var videoId = video.YouTubeId.Id;
+            var videoId = video.VideoId;
             var item = DownloadManager.Find(videoId);
 
             if (DownloadManager.GetLocalPath(videoId) != null)
@@ -433,7 +433,7 @@ namespace YouTube.Forms
         {
             Utils.UpdateDownloadsButton(downloadsButton, toolTip);
 
-            if (video == null || e.VideoId != video.YouTubeId.Id) return;
+            if (video == null || e.VideoId != video.VideoId) return;
 
             UpdateDownloadButton();
 
@@ -472,7 +472,7 @@ namespace YouTube.Forms
                     Id = channelId,
                     Title = video.Author.Name,
                     Author = video.Author,
-                    YouTubeId = new Data.YouTubeId { Id = channelId }
+                    Media = new Data.MediaGroup { VideoId = new Data.YouTubeVideoId { Id = channelId } }
                 });
             }
 
@@ -482,7 +482,7 @@ namespace YouTube.Forms
         private Dictionary<string, string> BuildVideoValues(Data.Entry video)
         {
             string downloadClass, downloadText, downloadTitle;
-            GetDownloadButtonState(video.YouTubeId.Id, out downloadClass, out downloadText, out downloadTitle);
+            GetDownloadButtonState(video.VideoId, out downloadClass, out downloadText, out downloadTitle);
 
             var likes = video.Rating?.Likes ?? 0;
             var dislikes = video.Rating?.Dislikes ?? 0;
@@ -495,18 +495,18 @@ namespace YouTube.Forms
             return new Dictionary<string, string>
             {
                 { "title", video.Title },
-                { "videoId", video.YouTubeId.Id },
+                { "videoId", video.VideoId },
                 { "description", (video.Content ?? "").Replace("\r\n", "\n").Replace("\n", "<br />") },
                 { "upload_date", video.Published.ToLongDateString() },
                 { "viewcount", (video.Statistics?.ViewCount ?? 0).ToString("N0") },
                 { "author", video.Author.Name },
-                { "thumbnail", Utils.GetThumbnailUrl(video.YouTubeId.Id, false) },
-                { "thumbnailHQ", Utils.GetThumbnailUrl(video.YouTubeId.Id, true) },
+                { "thumbnail", Utils.GetThumbnailUrl(video.VideoId, false) },
+                { "thumbnailHQ", Utils.GetThumbnailUrl(video.VideoId, true) },
                 { "likes", likes.ToString("N0") },
                 { "dislikes", dislikes.ToString("N0") },
                 { "ratingP", ratingP.ToString("0.###") + "%" },
                 { "ratingN", ratingN.ToString("0.###") + "%" },
-                { "favoriteClass", LocalFeed.Favorites.Contains(video.YouTubeId.Id) ? "selected" : "" },
+                { "favoriteClass", LocalFeed.Favorites.Contains(video.VideoId) ? "selected" : "" },
                 { "subscribeClass", LocalFeed.Subscriptions.Contains(GetChannelId(video)) ? "selected" : "" },
                 { "downloadClass", downloadClass },
                 { "downloadText", downloadText },
@@ -522,7 +522,7 @@ namespace YouTube.Forms
         // Search and related results carry only partial data, so fetch the full entry
         private void LoadFullDetails(Data.Entry partial)
         {
-            var videoId = partial.YouTubeId.Id;
+            var videoId = partial.VideoId;
 
             ThreadPool.QueueUserWorkItem(delegate
             {
@@ -540,7 +540,7 @@ namespace YouTube.Forms
                 Invoke(new MethodInvoker(delegate
                 {
                     // another video was selected while loading
-                    if (video == null || video.YouTubeId.Id != videoId) return;
+                    if (video == null || video.VideoId != videoId) return;
 
                     if (full != null)
                     {
@@ -574,7 +574,7 @@ namespace YouTube.Forms
         {
             if (video == null) return;
 
-            var videoId = video.YouTubeId.Id;
+            var videoId = video.VideoId;
 
             // already loaded (or loading) for this video
             if (commentsVideoId == videoId) return;
@@ -670,7 +670,7 @@ namespace YouTube.Forms
 
         private void LoadRelated()
         {
-            var videoId = video.YouTubeId.Id;
+            var videoId = video.VideoId;
 
             ThreadPool.QueueUserWorkItem(delegate
             {
@@ -681,7 +681,7 @@ namespace YouTube.Forms
                     Invoke(new MethodInvoker(delegate
                     {
                         // another video was selected while loading
-                        if (video == null || video.YouTubeId.Id != videoId) return;
+                        if (video == null || video.VideoId != videoId) return;
 
                         ShowRelatedFeed(feed);
                     }));
@@ -690,7 +690,7 @@ namespace YouTube.Forms
                 {
                     Invoke(new MethodInvoker(delegate
                     {
-                        if (video == null || video.YouTubeId.Id != videoId) return;
+                        if (video == null || video.VideoId != videoId) return;
 
                         ShowRelatedError("Related videos aren't available right now. Check your network connection.");
                     }));
@@ -714,7 +714,7 @@ namespace YouTube.Forms
                     { "title", entry.Title },
                     { "author", entry.Author.Name },
                     { "duration", Utils.FormatDurationSeconds(entry.Media.Duration.Seconds) },
-                    { "thumbnail", Utils.GetThumbnailUrl(entry.YouTubeId.Id, false) },
+                    { "thumbnail", Utils.GetThumbnailUrl(entry.VideoId, false) },
                     { "currentClass", i == PlaybackQueue.CurrentIndex ? "current" : "" }
                 });
             }
@@ -743,12 +743,12 @@ namespace YouTube.Forms
                 {
                     { "index", i.ToString() },
                     { "title", entry.Title },
-                    { "videoId", entry.YouTubeId.Id },
+                    { "videoId", entry.VideoId },
                     { "author", entry.Author.Name },
                     { "duration", Utils.FormatDurationSeconds(entry.Media.Duration.Seconds) },
                     { "upload_date", Utils.FormatRelativeDate(entry.Published) },
                     { "viewcount", entry.Statistics.ViewCount.ToString("N0") },
-                    { "thumbnail", Utils.GetThumbnailUrl(entry.YouTubeId.Id, false) }
+                    { "thumbnail", Utils.GetThumbnailUrl(entry.VideoId, false) }
                 });
             }
 
@@ -1398,7 +1398,7 @@ namespace YouTube.Forms
                 case "addFavorites":
                     if (video == null) break;
 
-                    var favorited = !LocalFeed.Favorites.Remove(video.YouTubeId.Id);
+                    var favorited = !LocalFeed.Favorites.Remove(video.VideoId);
                     if (favorited)
                         LocalFeed.Favorites.Add(video);
 

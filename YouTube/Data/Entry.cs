@@ -23,9 +23,6 @@ namespace YouTube.Data
         [XmlElement("author", Namespace = Xmlns.Atom)]
         public Author Author { get; set; }
 
-        [XmlElement("youTubeId", Namespace = Xmlns.Atom)]
-        public YouTubeId YouTubeId { get; set; }
-
         [XmlElement("group", Namespace = Xmlns.Media)]
         public MediaGroup Media { get; set; }
 
@@ -46,6 +43,13 @@ namespace YouTube.Data
         [XmlElement("localPath", Namespace = Xmlns.Local)]
         public string LocalPath { get; set; }
 
+        // The video id (or channel id for subscriptions), from the yt:videoid tag of the media group
+        [XmlIgnore]
+        public string VideoId
+        {
+            get { return Media != null && Media.VideoId != null ? Media.VideoId.Id : null; }
+        }
+
         public Entry Clone()
         {
             return (Entry)MemberwiseClone();
@@ -62,15 +66,6 @@ namespace YouTube.Data
 
         [XmlElement("userId", Namespace = Xmlns.YouTube)]
         public string UserId { get; set; }
-    }
-
-    public class YouTubeId
-    {
-        [XmlAttribute("id")]
-        public string Id { get; set; }
-
-        [XmlText]
-        public string Value { get; set; }
     }
 
     public class YtRating

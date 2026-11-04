@@ -26,7 +26,7 @@ namespace YouTube
         /// </summary>
         public static int Add(Entry entry)
         {
-            var index = IndexOf(entry.YouTubeId.Id);
+            var index = IndexOf(entry.VideoId);
             if (index >= 0) return index;
 
             Items.Add(entry.Clone());
@@ -84,7 +84,7 @@ namespace YouTube
 
             foreach (var entry in entries)
             {
-                if (IndexOf(entry.YouTubeId.Id) < 0)
+                if (IndexOf(entry.VideoId) < 0)
                     Items.Add(entry.Clone());
             }
 
@@ -99,7 +99,7 @@ namespace YouTube
         {
             foreach (var entry in feed.Entries)
             {
-                if (IndexOf(entry.YouTubeId.Id) < 0)
+                if (IndexOf(entry.VideoId) < 0)
                     Items.Add(entry.Clone());
             }
 
@@ -111,7 +111,7 @@ namespace YouTube
         {
             for (int i = 0; i < Items.Count; i++)
             {
-                if (Items[i].YouTubeId.Id == videoId)
+                if (Items[i].VideoId == videoId)
                     return i;
             }
 
