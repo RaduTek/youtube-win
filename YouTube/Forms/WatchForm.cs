@@ -74,6 +74,7 @@ namespace YouTube.Forms
         private bool sidebarLoaded, sidebarReady; // sidebar template written / document loaded
         private Data.Entry pendingVideo; // queued before the Watch window was ever shown, loaded on first show
         private bool historyPending; // preloaded video, added to history once it starts playing
+        private bool loadingQueueMore; // next page of the queue's feed is being loaded
         private bool advancingQueue; // moving on to the next queued video, skip the end screen
         private bool waitingForDownload; // download before play: the video is set once its download finishes
         private bool autoPlayWhenReady; // start playing when the download finishes
@@ -139,6 +140,93 @@ namespace YouTube.Forms
 
             PlaybackQueue.Clear();
             PlayQueueItem(PlaybackQueue.Add(entry));
+        }
+
+        // Play button on a feed item: the queue becomes the feed, continuing with nextUrl when its end is reached
+        public void PlayFromFeed(Data.Entry entry, IEnumerable<Data.Entry> feedEntries, string nextUrl)
+        {
+            loadingQueueMore = false;
+            PlaybackQueue.ReplaceWithFeed(feedEntries, nextUrl);
+
+            var index = PlaybackQueue.IndexOf(entry.YouTubeId.Id);
+            if (index < 0) index = PlaybackQueue.Add(entry);
+
+            if (ShowIfLoaded(entry))
+                PlaybackQueue.SetCurrent(entry.YouTubeId.Id);
+            else
+                PlayQueueItem(index);
+        }
+
+        // Loads the next page of the queue's feed; done(true) when new items were appended
+        private void LoadMoreQueue(Action<bool> done)
+        {
+            var url = PlaybackQueue.NextUrl;
+            if (url == null || loadingQueueMore)
+            {
+                if (done != null) done(false);
+                return;
+            }
+
+            loadingQueueMore = true;
+            RenderQueue();
+
+            ThreadPool.QueueUserWorkItem(delegate
+            {
+                Data.Feed feed = null;
+                try
+                {
+                    feed = DataApi.GetFeed(url);
+                }
+                catch (Exception)
+                {
+                }
+
+                Invoke(new MethodInvoker(delegate
+                {
+                    // the queue was replaced while loading
+                    if (!loadingQueueMore || PlaybackQueue.NextUrl != url) return;
+
+                    loadingQueueMore = false;
+
+                    var before = PlaybackQueue.Items.Count;
+                    if (feed != null && feed.Entries != null)
+                        PlaybackQueue.AppendFeed(feed);
+                    else
+                        RenderQueue();
+
+                    if (done != null) done(PlaybackQueue.Items.Count > before);
+                }));
+            });
+        }
+
+        // Plays the item after the current one, loading the next page of the feed first if the loaded part has ended
+        private void PlayNextInQueue()
+        {
+            var next = PlaybackQueue.GetNextIndex();
+            if (next >= 0)
+            {
+                PlayQueueItem(next);
+                return;
+            }
+
+            LoadMoreQueue(delegate(bool added)
+            {
+                // pages that only held queued videos: keep going
+                if (!added && PlaybackQueue.NextUrl != null)
+                {
+                    PlayNextInQueue();
+                    return;
+                }
+
+                var index = PlaybackQueue.GetNextIndex();
+                if (index >= 0)
+                    PlayQueueItem(index);
+                else
+                {
+                    advancingQueue = false;
+                    ShowCoverScreen("endScreen");
+                }
+            });
         }
 
         // The video is already loaded (or waiting to be shown): switch to it instead of reloading it
@@ -636,6 +724,10 @@ namespace YouTube.Forms
             var count = PlaybackQueue.Items.Count;
             relatedFrame.Document.GetElementById("queueTab").InnerText = count > 0 ? "Queue (" + count + ")" : "Queue";
             relatedFrame.Document.GetElementById("queueEmpty").SetAttribute("className", count > 0 ? "hidden" : "");
+
+            var hasMore = PlaybackQueue.NextUrl != null;
+            relatedFrame.Document.GetElementById("queueMore").SetAttribute("className", hasMore && !loadingQueueMore ? "" : "hidden");
+            relatedFrame.Document.GetElementById("queueLoading").SetAttribute("className", loadingQueueMore ? "" : "hidden");
         }
 
         private void ShowRelatedFeed(Data.Feed feed)
@@ -906,17 +998,12 @@ namespace YouTube.Forms
                 case WMPLib.WMPPlayState.wmppsMediaEnded:
                     // only fires when playback reaches the end (unlike Stopped, which also follows
                     // a user stop, URL change or error), so this is where the queue advances
-                    var next = PlaybackQueue.GetNextIndex();
-                    if (next >= 0)
+                    if (PlaybackQueue.GetNextIndex() >= 0 || PlaybackQueue.NextUrl != null)
                     {
                         advancingQueue = true;
 
                         // WMP doesn't support changing the media from within PlayStateChange
-                        var entry = PlaybackQueue.Items[next];
-                        BeginInvoke(new MethodInvoker(delegate
-                        {
-                            PlayQueueItem(PlaybackQueue.IndexOf(entry.YouTubeId.Id));
-                        }));
+                        BeginInvoke(new MethodInvoker(PlayNextInQueue));
                     }
                     break;
 
@@ -972,7 +1059,7 @@ namespace YouTube.Forms
 
             SuspendLayout();
             prevButton.Visible = index > 0;
-            nextButton.Visible = index >= 0 && index < PlaybackQueue.Items.Count - 1;
+            nextButton.Visible = index >= 0 && (index < PlaybackQueue.Items.Count - 1 || PlaybackQueue.NextUrl != null);
             ResumeLayout();
         }
 
@@ -989,7 +1076,7 @@ namespace YouTube.Forms
             playerInputCapture.Focus();
 
             if (PlaybackQueue.CurrentIndex >= 0)
-                PlayQueueItem(PlaybackQueue.CurrentIndex + 1);
+                PlayNextInQueue();
         }
 
         private void playButton_Click(object sender, EventArgs e)
@@ -1340,6 +1427,10 @@ namespace YouTube.Forms
                 case "queueRemove":
                     PlaybackQueue.Remove(e.Index);
                     return;
+
+                case "queueLoadMore":
+                    LoadMoreQueue(null);
+                    return;
             }
 
             // related videos
@@ -1351,7 +1442,7 @@ namespace YouTube.Forms
             {
                 case "title":
                 case "play":
-                    PlayInNewQueue(video);
+                    PlayFromFeed(video, relatedFeed.Entries, relatedFeed.GetNextUrl());
                     break;
 
                 case "queue":

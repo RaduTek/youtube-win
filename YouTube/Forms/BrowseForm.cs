@@ -484,7 +484,7 @@ namespace YouTube.Forms
 
                 case "title":
                 case "play":
-                    Program.watchForm.PlayInNewQueue(video);
+                    Program.watchForm.PlayFromFeed(video, browseFeed.Entries, nextFeedUrl);
                     break;
 
                 default: // "author"

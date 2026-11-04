@@ -743,9 +743,14 @@ button.selected .text-2 {
 	overflow: hidden;
 	max-height: 13px;
 }
-#browseResultsMore {
+#browseResultsMore,
+#queueMore {
 	text-align: center;
 	padding: 4px 0;
+}
+
+.watchSidebar #queueLoading {
+	background-image: url(LoadingDark32.gif);
 }
 
 

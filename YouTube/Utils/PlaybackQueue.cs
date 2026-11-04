@@ -64,6 +64,46 @@ namespace YouTube
             Items.Clear();
             CurrentIndex = -1;
             resumeIndex = -1;
+            NextUrl = null;
+            OnChanged();
+        }
+
+        /// <summary>
+        /// URL of the next page of the feed the queue was filled from, null when there is none.
+        /// </summary>
+        public static string NextUrl { get; private set; }
+
+        /// <summary>
+        /// Replaces the queue with the entries of a feed; more can be loaded through NextUrl.
+        /// </summary>
+        public static void ReplaceWithFeed(IEnumerable<Entry> entries, string nextUrl)
+        {
+            Items.Clear();
+            CurrentIndex = -1;
+            resumeIndex = -1;
+
+            foreach (var entry in entries)
+            {
+                if (IndexOf(entry.YouTubeId.Id) < 0)
+                    Items.Add(entry.Clone());
+            }
+
+            NextUrl = nextUrl;
+            OnChanged();
+        }
+
+        /// <summary>
+        /// Appends the entries of a feed page (skipping queued ones) and takes over its continuation.
+        /// </summary>
+        public static void AppendFeed(Feed feed)
+        {
+            foreach (var entry in feed.Entries)
+            {
+                if (IndexOf(entry.YouTubeId.Id) < 0)
+                    Items.Add(entry.Clone());
+            }
+
+            NextUrl = feed.GetNextUrl();
             OnChanged();
         }
 
