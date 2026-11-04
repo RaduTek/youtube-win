@@ -115,6 +115,7 @@
     <Compile Include="Utils\DownloadUtil.cs" />
     <Compile Include="Utils\LocalFeed.cs" />
     <Compile Include="Utils\PlaybackQueue.cs" />
+    <Compile Include="Utils\NavigationHistory.cs" />
     <Compile Include="ExControls\ExButton.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -367,6 +368,14 @@
     <None Include="Resources\WatchToBrowse.png" />
     <None Include="Resources\WatchToBrowse_Hover.png" />
     <None Include="Resources\WatchToBrowse_Disabled.png" />
+    <None Include="Resources\BackLight.png" />
+    <None Include="Resources\BackLight_Hover.png" />
+    <None Include="Resources\BackLight_Pressed.png" />
+    <None Include="Resources\BackLight_Disabled.png" />
+    <None Include="Resources\BackDark.png" />
+    <None Include="Resources\BackDark_Hover.png" />
+    <None Include="Resources\BackDark_Pressed.png" />
+    <None Include="Resources\BackDark_Disabled.png" />
     <Content Include="Templates\videoDetailsContent.html" />
     <Content Include="Youtube.ico" />
   </ItemGroup>

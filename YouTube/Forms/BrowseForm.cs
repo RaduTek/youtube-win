@@ -23,7 +23,29 @@ namespace YouTube.Forms
             browseFrame.DocumentCompleted += browseFrame_DocumentCompleted;
 
             DownloadManager.Changed += DownloadManager_Changed;
+            history.Changed += History_Changed;
         }
+
+        // A feed (standard or local, by guide name) or a search, for the back history
+        private class BrowseLocation
+        {
+            public bool IsSearch;
+            public string Name; // feed name or search query
+
+            public override bool Equals(object obj)
+            {
+                var other = obj as BrowseLocation;
+                return other != null && other.IsSearch == IsSearch && other.Name == Name;
+            }
+
+            public override int GetHashCode()
+            {
+                return (Name ?? "").GetHashCode() ^ IsSearch.GetHashCode();
+            }
+        }
+
+        private readonly NavigationHistory<BrowseLocation> history = new NavigationHistory<BrowseLocation>();
+        private bool navigatingBack;
 
 
         private WebFrameConnector browseConn, guideConn;
@@ -53,6 +75,10 @@ namespace YouTube.Forms
 
         private void SelectFeed(string feedName)
         {
+            // "search_results" only highlights the guide item, the search itself is recorded in LoadSearchFeed
+            if (feedName != "search_results")
+                RecordLocation(false, feedName);
+
             switch (feedName)
             {
                 case "search_results":
@@ -87,8 +113,47 @@ namespace YouTube.Forms
             LoadSearchFeed(query);
         }
 
+        private void RecordLocation(bool isSearch, string name)
+        {
+            if (navigatingBack) return;
+
+            var location = new BrowseLocation { IsSearch = isSearch, Name = name };
+
+            // selecting the same feed again doesn't add an entry
+            if (location.Equals(history.Current)) return;
+
+            history.Push(location);
+        }
+
+        private void GoBack()
+        {
+            if (!history.CanGoBack) return;
+
+            var location = history.GoBack();
+
+            navigatingBack = true;
+            try
+            {
+                if (location.IsSearch)
+                {
+                    searchBox.Text = location.Name;
+                    LoadSearchFeed(location.Name);
+                }
+                else
+                {
+                    // highlights the guide item, the guide then loads the feed through SelectFeed
+                    SelectGuideFeed(location.Name);
+                }
+            }
+            finally
+            {
+                navigatingBack = false;
+            }
+        }
+
         private void LoadSearchFeed(string query)
         {
+            RecordLocation(true, query);
             SelectGuideFeed("search_results");
 
             LoadFeed(DataApi.SearchFeedUrl(query), "Search results for <b>" + query + "</b>");
@@ -440,6 +505,16 @@ namespace YouTube.Forms
         private void downloadsButton_Click(object sender, EventArgs e)
         {
             ShowDownloads();
+        }
+
+        private void History_Changed(object sender, EventArgs e)
+        {
+            backButton.Enabled = history.CanGoBack;
+        }
+
+        private void backButton_Click(object sender, EventArgs e)
+        {
+            GoBack();
         }
 
         private void browseToWatchButton_Click(object sender, EventArgs e)

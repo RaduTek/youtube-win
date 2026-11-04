@@ -46,6 +46,7 @@ namespace YouTube.Forms
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.settingsButton = new YouTube.ExControls.ExButton();
             this.downloadsButton = new YouTube.ExControls.ExButton();
+            this.backButton = new YouTube.ExControls.ExButton();
             this.switchToBrowseButton = new YouTube.ExControls.ExButton();
             this.playerSizeToggle = new YouTube.ExControls.ExButton();
             this.relatedPanel = new System.Windows.Forms.Panel();
@@ -359,6 +360,7 @@ namespace YouTube.Forms
             this.header.Controls.Add(this.settingsButton);
             this.header.Controls.Add(this.switchToBrowseButton);
             this.header.Controls.Add(this.playerSizeToggle);
+            this.header.Controls.Add(this.backButton);
             this.header.Controls.Add(this.topLogo);
             this.header.Dock = System.Windows.Forms.DockStyle.Top;
             this.header.Location = new System.Drawing.Point(0, 0);
@@ -377,13 +379,31 @@ namespace YouTube.Forms
             this.searchBox.Size = new System.Drawing.Size(300, 24);
             this.searchBox.TabIndex = 8;
             this.searchBox.Search += new System.EventHandler<YouTube.Controls.SearchBoxEventArgs>(this.searchBox_Search);
-            // 
+            //
+            // backButton
+            //
+            this.backButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.backButton.BackColor = System.Drawing.Color.Transparent;
+            this.backButton.BackKey = "HeaderDarkButton";
+            this.backButton.BackMargins = new System.Windows.Forms.Padding(3);
+            this.backButton.Enabled = false;
+            this.backButton.EnableTransparency = true;
+            this.backButton.IconKey = "BackDark";
+            this.backButton.IconTransparencyKey = System.Drawing.Color.Magenta;
+            this.backButton.Location = new System.Drawing.Point(10, 8);
+            this.backButton.Name = "backButton";
+            this.backButton.Size = new System.Drawing.Size(30, 30);
+            this.backButton.TabIndex = 15;
+            this.backButton.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.toolTip.SetToolTip(this.backButton, "Back");
+            this.backButton.Click += new System.EventHandler(this.backButton_Click);
+            //
             // topLogo
-            // 
+            //
             this.topLogo.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.topLogo.BackColor = System.Drawing.Color.Transparent;
             this.topLogo.Image = global::YouTube.Properties.Resources.WatchHeaderLogo;
-            this.topLogo.Location = new System.Drawing.Point(35, 7);
+            this.topLogo.Location = new System.Drawing.Point(45, 7);
             this.topLogo.Name = "topLogo";
             this.topLogo.Size = new System.Drawing.Size(80, 32);
             this.topLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -446,6 +466,7 @@ namespace YouTube.Forms
         private ExControls.ExButton switchToBrowseButton;
         private ExControls.ExButton settingsButton;
         private ExControls.ExButton downloadsButton;
+        private ExControls.ExButton backButton;
         private Controls.SearchBox searchBox;
     }
 }

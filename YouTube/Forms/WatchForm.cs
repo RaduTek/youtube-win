@@ -24,6 +24,7 @@ namespace YouTube.Forms
 
             PlaybackQueue.Changed += PlaybackQueue_Changed;
             DownloadManager.Changed += DownloadManager_Changed;
+            history.Changed += History_Changed;
 
             // dummy control to capture key inputs for the player
             playerInputCapture = new Control();
@@ -76,6 +77,9 @@ namespace YouTube.Forms
         private bool advancingQueue; // moving on to the next queued video, skip the end screen
         private bool waitingForDownload; // download before play: the video is set once its download finishes
         private bool autoPlayWhenReady; // start playing when the download finishes
+
+        private readonly NavigationHistory<Data.Entry> history = new NavigationHistory<Data.Entry>(); // watched videos, for Back
+        private bool navigatingBack;
 
         private WebFrameConnector frameConn;
 
@@ -210,6 +214,10 @@ namespace YouTube.Forms
             ShowSidebar();
 
             if (player != null) StartPlayback(!preload && Settings.Default.AutoPlayVideo);
+
+            // back history; reloading the same video doesn't add an entry
+            if (!navigatingBack && (history.Current == null || history.Current.YouTubeId.Id != video.YouTubeId.Id))
+                history.Push(video);
 
             historyPending = preload;
             if (!preload) LocalFeed.History.Add(video);
@@ -1212,6 +1220,30 @@ namespace YouTube.Forms
         private void downloadsButton_Click(object sender, EventArgs e)
         {
             Program.browseForm.ShowDownloads();
+        }
+
+        private void History_Changed(object sender, EventArgs e)
+        {
+            backButton.Enabled = history.CanGoBack;
+        }
+
+        // Back to the previous video, without changing the queue
+        private void backButton_Click(object sender, EventArgs e)
+        {
+            playerInputCapture.Focus();
+            if (!history.CanGoBack) return;
+
+            var previous = history.GoBack();
+
+            navigatingBack = true;
+            try
+            {
+                LoadVideo(previous);
+            }
+            finally
+            {
+                navigatingBack = false;
+            }
         }
 
         private void watchToBrowseButton_Click(object sender, EventArgs e)
