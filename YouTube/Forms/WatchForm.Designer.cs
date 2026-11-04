@@ -390,7 +390,7 @@ namespace YouTube.Forms
             this.backButton.EnableTransparency = true;
             this.backButton.IconKey = "BackDark";
             this.backButton.IconTransparencyKey = System.Drawing.Color.Magenta;
-            this.backButton.Location = new System.Drawing.Point(10, 8);
+            this.backButton.Location = new System.Drawing.Point(18, 8);
             this.backButton.Name = "backButton";
             this.backButton.Size = new System.Drawing.Size(30, 30);
             this.backButton.TabIndex = 15;
@@ -403,7 +403,7 @@ namespace YouTube.Forms
             this.topLogo.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.topLogo.BackColor = System.Drawing.Color.Transparent;
             this.topLogo.Image = global::YouTube.Properties.Resources.WatchHeaderLogo;
-            this.topLogo.Location = new System.Drawing.Point(45, 7);
+            this.topLogo.Location = new System.Drawing.Point(60, 7);
             this.topLogo.Name = "topLogo";
             this.topLogo.Size = new System.Drawing.Size(80, 32);
             this.topLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
