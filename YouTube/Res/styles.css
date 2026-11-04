@@ -832,3 +832,6 @@ button.selected .text-2 {
 .feedicon.trending {
 	background-position-y: -180px;
 }
+.feedicon.history {
+	background-position-y: -200px;
+}
